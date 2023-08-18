@@ -1,6 +1,15 @@
-# TLHOP Project - Shodan
+# TLHOP Library
 
-The project TLHOP (Thread-Limiting Holistic Open Platform) is a technical-scientific project signed between the Centro de Estudos, Resposta e Tratamento de Incidentes de Segurança no Brasil (CERT.br) and the Universidade Federal de Minas Gerais (UFMG) to understand and analyze the network security of the Brazilian internet.
+<h3 align="center">A library designed to process IoT search engines like Shodan for Big Data scenarios.</h3>
+
+<p align="center"><b>
+    <a href="https://lucasmsp.github.io/tlhop-library">Documentation</a> •
+    <a href="https://github.com/lucasmsp/tlhop-library/blob/main/RELEASE_NOTES">Releases</a>
+</b>
+
+</p>
+
+This library is developed by TLHOP (Thread-Limiting Holistic Open Platform) project Team, a technical-scientific project signed between the Centro de Estudos, Resposta e Tratamento de Incidentes de Segurança no Brasil (CERT.br) and the Universidade Federal de Minas Gerais (UFMG) to understand and analyze the network security of the Brazilian Internet.
 
 In this project's repository, we developed a robust and scalable execution environment using Apache Spark, capable of executing complex queries on large volumes of data in a semi-iterative way from a programmable interface. We have developed several techniques to debug Shodan's data and aggregated external databases (such as Whois, CAIDA ASes rankings and the NVD) to complement the information collected by Shodan. Our initial data analysis identified interesting security properties in Brazilian networks.
 

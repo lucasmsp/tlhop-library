@@ -1,0 +1,1170 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tlhop.crawlers.rdap &#8212; TLHOP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tlhop/crawlers/rdap';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">TLHOP</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tlhop.crawlers.rdap</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tlhop.crawlers.rdap</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>                                                
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">urllib3</span>
+<span class="kn">import</span> <span class="nn">ipaddress</span>
+<span class="kn">import</span> <span class="nn">textdistance</span>
+<span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">req</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">intervaltree</span> <span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">IntervalTree</span>
+
+<span class="kn">from</span> <span class="nn">tlhop.library</span> <span class="kn">import</span> <span class="n">cleaning_text_udf</span>
+
+<span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">(</span><span class="n">urllib3</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InsecureRequestWarning</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="RDAP"><a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.rdap.RDAP">[docs]</a><span class="k">class</span> <span class="nc">RDAP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    RDAP Dataset</span>
+<span class="sd">        </span>
+<span class="sd">    Description: RDAP is a protocol that delivers registration data like WHOIS, this dataset is </span>
+<span class="sd">                 generated from a list of &lt;IPs, orgs&gt;. Each IP will be requested in an ordered RDAP url list.</span>
+<span class="sd">    Download url: https://rdap.registro.br/ip/&lt;ip&gt;, https://rdap-bootstrap.arin.net/bootstrap/ip/&lt;ip&gt;,</span>
+<span class="sd">                  https://rdap.org/ip/&lt;ip&gt;, https://rdap.db.ripe.net/ip/&lt;ip&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ERROR_MESSAGE_000</span> <span class="o">=</span> <span class="s2">&quot;[ERROR] This crawler requires an environment variable &#39;TLHOP_DATASETS_PATH&#39; containing a folder path to be used as storage to all TLHOP datasets.&quot;</span>
+    <span class="n">_ERROR_MESSAGE_001</span> <span class="o">=</span> <span class="s2">&quot;None active Spark session was found. Please start a new Spark session before use DataSets API.&quot;</span>
+    
+    <span class="n">_WARN_MESSAGE_000</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;[WARN] Destination output already exists (&#39;</span><span class="si">{}</span><span class="s2">&#39;) but RELEASE file is &quot;</span> <span class="o">+</span>
+        <span class="s2">&quot;missing. Desconsidering previous files, if they exists.&quot;</span><span class="p">)</span>
+    <span class="n">_WARN_MESSAGE_001</span> <span class="o">=</span> <span class="s2">&quot;[WARN] Mentioned file &#39;</span><span class="si">{}</span><span class="s2">&#39; in RELEASE was not found. Maybe the last execution was interrupted.&quot;</span>
+    
+    <span class="n">_INFO_MESSAGE_001</span> <span class="o">=</span> <span class="s2">&quot;[INFO] Last crawling timestamp: </span><span class="si">{}</span><span class="s2">&quot;</span>
+    <span class="n">_INFO_MESSAGE_002</span> <span class="o">=</span> <span class="s2">&quot;[INFO] Generating new consolided file.&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;rdap/&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="s2">&quot;rdap_data.json&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="s2">&quot;rdap_log.log&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;tree&quot;</span><span class="p">:</span> <span class="s2">&quot;interval_tree.pickle&quot;</span><span class="p">,</span> 
+          <span class="s2">&quot;parquet&quot;</span><span class="p">:</span> <span class="s2">&quot;rdap.parquet&quot;</span>
+        <span class="p">}</span>
+
+        <span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TLHOP_DATASETS_PATH&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">root_path</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_path</span> <span class="o">=</span> <span class="p">(</span><span class="n">root_path</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;//&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_path</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_folder</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_001</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_status</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">_check_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;RELEASE&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;RELEASE&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">filename_parquet</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+                <span class="n">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="s2">&quot;scan_&quot;</span> <span class="o">+</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_folder</span> <span class="o">+</span> <span class="n">filename_parquet</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_WARN_MESSAGE_001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timestamp</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">filename_parquet</span><span class="p">))</span>
+                        
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_WARN_MESSAGE_000</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="RDAP.describe"><a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.rdap.RDAP.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to describe some informations about the dataset: </span>
+<span class="sd">        description, reference and fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        # RDAP Dataset</span>
+<span class="s2">        </span>
+<span class="s2">        - Description: RDAP is a protocol that delivers registration data like WHOIS, this dataset is </span>
+<span class="s2">          generated from a list of &lt;IPs, orgs&gt;. Each IP will be requested in an ordered RDAP url list.</span>
+<span class="s2">        - Download url: https://rdap.registro.br/ip/&lt;ip&gt;, https://rdap-bootstrap.arin.net/bootstrap/ip/&lt;ip&gt;,</span>
+<span class="s2">                        https://rdap.org/ip/&lt;ip&gt;, https://rdap.db.ripe.net/ip/&lt;ip&gt;</span>
+<span class="s2">        - Schema:</span>
+<span class="s2">             |-- block_id: long</span>
+<span class="s2">             |-- country: string</span>
+<span class="s2">             |-- whois_shodan_original: string</span>
+<span class="s2">             |-- reference: string</span>
+<span class="s2">             |-- status: array</span>
+<span class="s2">             |    |-- element: string</span>
+<span class="s2">             |-- type: string</span>
+<span class="s2">             |-- AS: string</span>
+<span class="s2">             |-- whois_legal_representative: string</span>
+<span class="s2">             |-- whois_identifier: string</span>
+<span class="s2">             |-- whois_identifier_type: string</span>
+<span class="s2">             |-- registrant_name: string</span>
+<span class="s2">             |-- registrant_email: string</span>
+<span class="s2">             |-- registrant_address: string</span>
+<span class="s2">             |-- registrant_registration: date</span>
+<span class="s2">             |-- registrant_last_changed: date</span>
+<span class="s2">             |-- administrative_name: string</span>
+<span class="s2">             |-- administrative_email: string</span>
+<span class="s2">             |-- administrative_address: string</span>
+<span class="s2">             |-- administrative_registration: date</span>
+<span class="s2">             |-- administrative_last_changed: date</span>
+<span class="s2">             |-- technical_name: string</span>
+<span class="s2">             |-- technical_email: string</span>
+<span class="s2">             |-- technical_address: string</span>
+<span class="s2">             |-- technical_registration: date</span>
+<span class="s2">             |-- technical_last_changed: date</span>
+<span class="s2">             |-- abuse_name: string</span>
+<span class="s2">             |-- abuse_email: string</span>
+<span class="s2">             |-- abuse_address: string</span>
+<span class="s2">             |-- abuse_registration: date</span>
+<span class="s2">             |-- abuse_last_changed: date</span>
+<span class="s2">             |-- start_ip_str: string</span>
+<span class="s2">             |-- end_ip_str: string</span>
+<span class="s2">             |-- ip_start: long</span>
+<span class="s2">             |-- ip_end: long</span>
+<span class="s2">             |-- whois_org: string</span>
+<span class="s2">             |-- whois_address: string</span>
+<span class="s2">             |-- registration: date</span>
+<span class="s2">             |-- last_changed: date</span>
+<span class="s2">             |-- reverseDelegations: string</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="RDAP.download"><a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.rdap.RDAP.download">[docs]</a>    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_ip_list</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">range_ips</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resume</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">use_selenium</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">historical_data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the dataset. </span>
+<span class="sd">        </span>
+<span class="sd">        :params target_ip_list: A list of ip (integer format) and its organization to be crawled. The organization name is only used to </span>
+<span class="sd">         avoid multiple requests over a subnet. As the IP network to be searched is already known, we skip its request unless the organization</span>
+<span class="sd">         passed by parameter is different from the one previously identified;</span>
+<span class="sd">        :params append: True to increment an previous execution with new rdap requests, otherwise it will remove previous dataset (default, True);</span>
+<span class="sd">        :params range_ips: The path of a file containing the range of IPs (int format) to be considered. For instance, if we have a list of the</span>
+<span class="sd">         brazilian IPs, we can force the application only to request IPs in this range.</span>
+<span class="sd">         Each line contains a interval in format &lt;IP begin&gt;-&lt;IP end&gt;, separated by line. </span>
+<span class="sd">         Any IP not in this range will not be crawled;</span>
+<span class="sd">        :params resume: True to resume the crawler, starting from the last probed IP (default, False);</span>
+<span class="sd">        :params timeout: A timeout in seconds between each RDAP request to avoid IP blocking (default is 9 seconds);</span>
+<span class="sd">        :params historical_data: If we are using historical data (old relations between IP and org) the changes over time are not captured </span>
+<span class="sd">         (we can only crawler the current state of an IP registration), because of that, is possible that responsible organizations may be changed. </span>
+<span class="sd">         Due our implementation, we crawler RDAP to each organization change, creating multiple collisions (same IP interval but different organizations).</span>
+<span class="sd">         If historical_data is True (default), we will only keep the most recent RDAP record. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">mask3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>   
+        <span class="n">start_line</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">olders_scan_folder</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="s2">&quot;scan_*&quot;</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">resume</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">olders_scan_folder</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">olders_scan_folder</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Starting a new execution.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="s2">&quot;scan_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">)</span>
+
+        <span class="n">current_logfile_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s1">&#39;log&#39;</span><span class="p">]</span>
+        <span class="n">output_json_data_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">]</span>
+        <span class="n">output_parquet_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s2">&quot;parquet&quot;</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">resume</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">current_logfile_name</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">current_logfile_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="n">last_line</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="n">start_line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">last_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">16</span><span class="p">:])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Resuming previous execution from line </span><span class="si">{</span><span class="n">start_line</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">IntervalTree</span><span class="p">()</span>
+        <span class="n">last_block_id</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="n">olders_tree_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="s2">&quot;scan_*/interval_tree.pickle&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">append</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">olders_tree_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">older_tree_path</span> <span class="o">=</span> <span class="n">olders_tree_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_tree</span><span class="p">(</span><span class="n">older_tree_path</span><span class="p">)</span>
+            <span class="n">last_block_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_last_blockID</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>                
+            
+        <span class="n">tree_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s2">&quot;tree&quot;</span><span class="p">]</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_json_data_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">logfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">current_logfile_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">range_ips</span><span class="p">:</span>
+            <span class="n">range_ips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">range_ips</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+            <span class="n">range_ips</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;start_ip_int&quot;</span><span class="p">,</span> <span class="s2">&quot;end_ip_int&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">use_selenium</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+            <span class="kn">from</span> <span class="nn">selenium.webdriver.firefox.service</span> <span class="kn">import</span> <span class="n">Service</span> <span class="k">as</span> <span class="n">FirefoxService</span>
+            <span class="kn">from</span> <span class="nn">webdriver_manager.firefox</span> <span class="kn">import</span> <span class="n">GeckoDriverManager</span>
+            <span class="kn">from</span> <span class="nn">selenium.webdriver.firefox.options</span> <span class="kn">import</span> <span class="n">Options</span>
+
+            <span class="n">options</span> <span class="o">=</span> <span class="n">Options</span><span class="p">()</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--headless&quot;</span><span class="p">)</span>
+            
+            <span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="n">FirefoxService</span><span class="p">(</span><span class="n">GeckoDriverManager</span><span class="p">()</span><span class="o">.</span><span class="n">install</span><span class="p">()),</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">browser</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">target_ip_list</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">start_line</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Position </span><span class="si">{}</span><span class="s2"> - Current block_id </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">last_block_id</span><span class="p">))</span>
+
+                <span class="n">ip_int</span><span class="p">,</span> <span class="n">org_clean</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                <span class="n">ip_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ip_int</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_IP_in_range</span><span class="p">(</span><span class="n">ip_int</span><span class="p">,</span> <span class="n">range_ips</span><span class="p">):</span>
+                    <span class="n">elem</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">ip_int</span><span class="p">]</span>
+                    <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">n_elems</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+
+                    <span class="c1"># checking if already exists a subnet to this IP</span>
+                    <span class="k">if</span> <span class="n">n_elems</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">n_elems</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">x</span> <span class="o">=</span> <span class="n">elem</span>
+                        <span class="n">min_range</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;n_ips&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;n_ips&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">min_range</span><span class="p">:</span> 
+                                <span class="n">org</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;org&#39;</span><span class="p">]</span>
+                                <span class="k">if</span> <span class="n">org</span> <span class="o">==</span> <span class="n">org_clean</span><span class="p">:</span>
+                                    <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Position </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. Found previous element to </span><span class="si">{</span><span class="n">ip_int</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">org_clean</span><span class="si">}</span><span class="s2"> (nº ips: </span><span class="si">{</span><span class="n">min_range</span><span class="si">}</span><span class="s2">) (</span><span class="si">{</span><span class="n">n_elems</span><span class="si">}</span><span class="s2"> overlap)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                                    <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span> 
+                        <span class="n">ip_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="n">ip_int</span><span class="p">))</span>
+                        <span class="n">current_mask3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;\.\d+$&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ip_str</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">mask3</span> <span class="o">!=</span> <span class="n">current_mask3</span><span class="p">:</span>
+                            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_rdap</span><span class="p">(</span><span class="n">ip_str</span><span class="p">,</span> <span class="n">browser</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">use_selenium</span><span class="o">=</span><span class="n">use_selenium</span><span class="p">)</span>
+                            <span class="n">mask3</span> <span class="o">=</span> <span class="n">current_mask3</span>
+                            <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+                                <span class="n">current_datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                                <span class="n">last_block_id</span> <span class="o">+=</span> <span class="mi">1</span>
+                                <span class="k">if</span> <span class="s2">&quot;cidr0_cidrs&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                                    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cidr0_cidrs&quot;</span><span class="p">]:</span>
+                                        <span class="n">startAddress</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;v4prefix&quot;</span><span class="p">]</span>
+                                        <span class="n">mask</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">]</span>
+                                        <span class="n">endAddress</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Network</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">startAddress</span><span class="p">,</span> <span class="n">mask</span><span class="p">))][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                                        <span class="n">last_block_1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">(</span><span class="n">startAddress</span><span class="p">))</span>
+                                        <span class="n">last_block_2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">(</span><span class="n">endAddress</span><span class="p">))</span>
+                                        <span class="n">n_ips</span> <span class="o">=</span> <span class="n">last_block_2</span> <span class="o">-</span> <span class="n">last_block_1</span> <span class="o">+</span><span class="mi">1</span>
+                                        <span class="n">tree</span><span class="p">[</span><span class="n">last_block_1</span><span class="p">:</span><span class="n">last_block_2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;block_id&quot;</span><span class="p">:</span> <span class="n">last_block_id</span><span class="p">,</span> <span class="s2">&quot;org&quot;</span><span class="p">:</span> <span class="n">org_clean</span><span class="p">,</span> <span class="s2">&quot;n_ips&quot;</span><span class="p">:</span> <span class="n">n_ips</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">current_datetime</span><span class="p">}</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">last_block_1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;startAddress&quot;</span><span class="p">]))</span>
+                                    <span class="n">last_block_2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;endAddress&quot;</span><span class="p">]))</span>
+                                    <span class="n">n_ips</span> <span class="o">=</span> <span class="n">last_block_2</span> <span class="o">-</span> <span class="n">last_block_1</span> <span class="o">+</span><span class="mi">1</span>
+                                    <span class="n">tree</span><span class="p">[</span><span class="n">last_block_1</span><span class="p">:</span><span class="n">last_block_2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;block_id&quot;</span><span class="p">:</span> <span class="n">last_block_id</span><span class="p">,</span> <span class="s2">&quot;org&quot;</span><span class="p">:</span> <span class="n">org_clean</span><span class="p">,</span> <span class="s2">&quot;n_ips&quot;</span><span class="p">:</span> <span class="n">n_ips</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">current_datetime</span><span class="p">}</span>
+
+                                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;block_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">last_block_id</span>
+                                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;org_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">org_clean</span>
+                                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;crawler_timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+                                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                                <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Position </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">ip_int</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">org_clean</span><span class="si">}</span><span class="s2"> crawled with success (new block_id </span><span class="si">{</span><span class="n">last_block_id</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Position </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. Avoiding crawler the ip </span><span class="si">{</span><span class="n">ip_int</span><span class="si">}</span><span class="s2"> because its prefix was already searched without success</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Position </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. IP </span><span class="si">{</span><span class="n">ip_int</span><span class="si">}</span><span class="s2"> is not in delimited range.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">last_org</span> <span class="o">=</span> <span class="n">org_clean</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_selenium</span><span class="p">:</span>
+            <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_tree</span><span class="p">(</span><span class="n">tree_path</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">historical_data</span><span class="p">:</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">tree_path</span><span class="p">,</span> <span class="n">tree_path</span> <span class="o">+</span> <span class="s2">&quot;.bkp&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_tree</span><span class="p">(</span><span class="n">tree_path</span><span class="p">,</span> <span class="n">tree</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">output_json_data_name</span><span class="p">,</span> <span class="n">output_parquet_data</span><span class="p">,</span> <span class="n">append</span><span class="p">)</span>
+
+        <span class="c1"># registering the current execution</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;RELEASE&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s2">&quot;parquet&quot;</span><span class="p">],</span> 
+                     <span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;scan_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+        
+    <span class="k">def</span> <span class="nf">_load_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_input</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tree_input</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tree</span>
+
+    <span class="k">def</span> <span class="nf">_get_last_blockID</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="n">max_block_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+            <span class="n">block_id</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;block_id&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">block_id</span> <span class="o">&gt;</span> <span class="n">max_block_id</span><span class="p">:</span>
+                <span class="n">max_block_id</span> <span class="o">=</span> <span class="n">block_id</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Starting incremental running. Last block_id </span><span class="si">{</span><span class="n">max_block_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">max_block_id</span>
+    
+    <span class="k">def</span> <span class="nf">_is_IP_in_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip_int</span><span class="p">,</span> <span class="n">range_ips</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">range_ips</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">range_ips</span><span class="p">[(</span><span class="n">range_ips</span><span class="p">[</span><span class="s2">&quot;start_ip_int&quot;</span><span class="p">]</span> <span class="o">&lt;=</span>  <span class="n">ip_int</span><span class="p">)</span> <span class="o">&amp;</span>  <span class="p">(</span><span class="n">ip_int</span> <span class="o">&lt;=</span> <span class="n">range_ips</span><span class="p">[</span><span class="s2">&quot;end_ip_int&quot;</span><span class="p">])])</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    
+    
+    <span class="k">def</span> <span class="nf">_save_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_output</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tree_output</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_json_data_name</span><span class="p">,</span> <span class="n">output_data</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert JSON file into a Parquet format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_002</span><span class="p">)</span>
+        
+        <span class="n">rdap_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">output_json_data_name</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+        <span class="n">rdap_columns</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">columns</span>
+        
+        <span class="k">if</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This execution had none requisition. Operation Completed.&quot;</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The original RDAP dataset contains the following columns:&quot;</span><span class="p">,</span> <span class="n">rdap_columns</span><span class="p">)</span>
+
+            <span class="c1"># normalizing columns</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;nicbr_reverseDelegations&#39;</span><span class="p">,</span> <span class="s1">&#39;lacnic_reverseDelegations&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">rdap_columns</span><span class="p">:</span>
+                    <span class="n">rdap_df</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+
+            <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;nicbr_autnum&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span> 
+                <span class="s2">&quot;lacnic_originAutnum&quot;</span><span class="p">:</span> <span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()),</span>
+                <span class="s2">&quot;arin_originas0_originautnums&quot;</span><span class="p">:</span> <span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()),</span>
+
+                <span class="s2">&quot;nicbr_reverseDelegations&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span> 
+                <span class="s2">&quot;lacnic_reverseDelegations&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s1">&#39;whois_legal_representative&#39;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;lacnic_legalRepresentative&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+
+                <span class="s2">&quot;registrant_name&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;technical_name&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;abuse_name&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+
+                <span class="s2">&quot;administrative_registration&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;registrant_registration&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;abuse_registration&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;technical_registration&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+
+                <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+
+                <span class="s2">&quot;registrant_address&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;technical_address&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+                <span class="s2">&quot;abuse_address&quot;</span><span class="p">:</span> <span class="n">StringType</span><span class="p">(),</span>
+
+                <span class="s2">&quot;registrant_last_changed&quot;</span><span class="p">:</span> <span class="n">TimestampType</span><span class="p">(),</span>
+                <span class="s2">&quot;abuse_last_changed&quot;</span><span class="p">:</span> <span class="n">TimestampType</span><span class="p">(),</span>
+                <span class="s2">&quot;technical_last_changed&quot;</span><span class="p">:</span> <span class="n">TimestampType</span><span class="p">(),</span>
+                <span class="s2">&quot;administrative_last_changed&quot;</span><span class="p">:</span> <span class="n">TimestampType</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rdap_columns</span><span class="p">:</span>
+                    <span class="n">rdap_df</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">dtype</span><span class="p">))</span>
+
+
+            <span class="n">rdap_df</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;AS&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;nicbr_autnum&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;nicbr_autnum&quot;</span><span class="p">))</span>\
+                                   <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;lacnic_originAutnum&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;lacnic_originAutnum&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>\
+                                   <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;arin_originas0_originautnums&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;port43&quot;</span><span class="p">,</span> <span class="s2">&quot;reference&quot;</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;org_clean&quot;</span><span class="p">,</span> <span class="s2">&quot;whois_shodan_original&quot;</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">,</span> <span class="n">_process_entities_field</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;entities.*&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s2">&quot;cidr0_cidrs&quot;</span> <span class="ow">in</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">rdap_df</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;cidr0_cidrs&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">_get_cid</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">&quot;cidr0_cidrs&quot;</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;startAddress&quot;</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;endAddress&quot;</span><span class="p">))))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rdap_df</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;cidr0_cidrs&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="n">_get_cid</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;startAddress&quot;</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;endAddress&quot;</span><span class="p">))))</span>
+
+            <span class="n">rdap_df</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;cidr0_cidrs.*&quot;</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;ip_start&quot;</span><span class="p">,</span> <span class="n">_convert_to_int</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;start_ip_str&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;ip_end&quot;</span><span class="p">,</span> <span class="n">_convert_to_int</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;end_ip_str&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;whois_org&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;registrant_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;registrant_name&quot;</span><span class="p">))</span>\
+                                          <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;technical_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;technical_name&quot;</span><span class="p">))</span>\
+                                          <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;abuse_name&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;remarks&quot;</span><span class="p">,</span> <span class="n">_get_remarks</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;remarks&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;whois_org&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="s2">&quot;whois_org&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;abuse&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;remarks&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;remarks&quot;</span><span class="p">))</span>\
+                                          <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;whois_org&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;whois_address&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;registrant_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;registrant_address&quot;</span><span class="p">))</span>\
+                                              <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;technical_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;technical_address&quot;</span><span class="p">))</span>\
+                                              <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;abuse_address&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">greatest</span><span class="p">(</span><span class="s2">&quot;registrant_registration&quot;</span><span class="p">,</span> <span class="s2">&quot;abuse_registration&quot;</span><span class="p">,</span> <span class="s2">&quot;technical_registration&quot;</span><span class="p">,</span> <span class="s2">&quot;administrative_registration&quot;</span><span class="p">))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;last_changed&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">greatest</span><span class="p">(</span><span class="s2">&quot;registrant_last_changed&quot;</span><span class="p">,</span> <span class="s2">&quot;abuse_last_changed&quot;</span><span class="p">,</span> <span class="s2">&quot;technical_last_changed&quot;</span><span class="p">,</span> <span class="s2">&quot;administrative_last_changed&quot;</span><span class="p">))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">(),</span> <span class="n">_get_events_udf</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">getField</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;last_changed&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;last_changed&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">(),</span> <span class="n">_get_events_udf</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">getField</span><span class="p">(</span><span class="s2">&quot;last_changed&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;last_changed&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;reverseDelegations&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;nicbr_reverseDelegations&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;nicbr_reverseDelegations&quot;</span><span class="p">))</span>\
+                                                   <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;lacnic_reverseDelegations&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;whois_legal_representative&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;whois_legal_representative&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">(),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;whois_legal_representative&quot;</span><span class="p">))</span>\
+                                                           <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;lacnic_legalRepresentative&quot;</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">upper</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">))</span>\
+                <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;entities&quot;</span><span class="p">,</span> <span class="s2">&quot;cidr0_cidrs&quot;</span><span class="p">,</span> <span class="s2">&quot;startAddress&quot;</span><span class="p">,</span> <span class="s2">&quot;endAddress&quot;</span><span class="p">,</span> <span class="s2">&quot;handle&quot;</span><span class="p">,</span> <span class="s2">&quot;lacnic_originAutnum&quot;</span><span class="p">,</span> <span class="s2">&quot;nicbr_autnum&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;arin_originas0_originautnums&quot;</span><span class="p">,</span> <span class="s2">&quot;rdapConformance&quot;</span><span class="p">,</span> <span class="s2">&quot;notices&quot;</span><span class="p">,</span> <span class="s2">&quot;links&quot;</span><span class="p">,</span> <span class="s2">&quot;objectClassName&quot;</span><span class="p">,</span> <span class="s2">&quot;ipVersion&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;lang&quot;</span><span class="p">,</span> <span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="s2">&quot;parentHandle&quot;</span><span class="p">,</span> <span class="s2">&quot;lacnic_reverseDelegations&quot;</span><span class="p">,</span> <span class="s2">&quot;nicbr_reverseDelegations&quot;</span><span class="p">,</span> 
+                      <span class="s2">&quot;lacnic_legalRepresentative&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;remarks&quot;</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;whois_org&quot;</span><span class="p">,</span> <span class="n">cleaning_text_udf</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;whois_org&quot;</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">True</span><span class="p">)))</span>\
+                <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;ip_start&quot;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">append</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_data</span><span class="p">):</span>
+                <span class="n">old_rdap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">output_data</span><span class="p">)</span>
+                <span class="n">rdap_df</span> <span class="o">=</span> <span class="n">rdap_df</span><span class="o">.</span><span class="n">unionByName</span><span class="p">(</span><span class="n">old_rdap</span><span class="p">)</span>
+
+            <span class="n">rdap_df</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">output_data</span> <span class="o">+</span> <span class="s2">&quot;_folder&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;overwrite&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">)</span>
+
+            <span class="n">sparkfile</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">output_data</span> <span class="o">+</span> <span class="s2">&quot;_folder/part-*.parquet&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">sparkfile</span><span class="p">,</span> <span class="n">output_data</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">output_data</span> <span class="o">+</span> <span class="s2">&quot;_folder&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Operation Completed&quot;</span><span class="p">)</span>
+    
+        
+    <span class="k">def</span> <span class="nf">_request_rdap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">browser</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">use_selenium</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        We use Selenium to retrieve RDAP informations. We can </span>
+<span class="sd">        use 4 RDAP servers to minimize failures. There is a timeout </span>
+<span class="sd">        between each attempt to avoid IP blocking.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">&quot;https://rdap.registro.br/ip/</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;https://rdap-bootstrap.arin.net/bootstrap/ip/</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;https://rdap.org/ip/</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;https://rdap.db.ripe.net/ip/</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">retry</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="n">urls</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">use_selenium</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">raw</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                    <span class="n">reference</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">current_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;https://&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="s2">&quot;ERROR&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">:</span>
+                        <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">break</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">raw</span> <span class="o">=</span> <span class="s2">&quot;ERROR - selenium&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">raw</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+                    <span class="n">reference</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">history</span> <span class="k">else</span> <span class="n">resp</span><span class="o">.</span><span class="n">url</span>
+                    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                        <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">break</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">raw</span> <span class="o">=</span> <span class="s2">&quot;ERROR - requests&quot;</span>
+
+        <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reference</span>
+            <span class="k">if</span> <span class="s2">&quot;startAddress&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span> 
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[ERROR] IP </span><span class="si">{}</span><span class="s2"> could not be crawled: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">raw</span><span class="p">))</span>    
+
+
+    <span class="k">def</span> <span class="nf">_clean_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Our Interval tree depends on each IP subnet and its organization</span>
+<span class="sd">        (that was passed as parameters, i.e., identified by Shodan or other system). </span>
+<span class="sd">        Because of that, the final tree can have interval collisions. A collision will </span>
+<span class="sd">        be two or more equal intervals but with different organizations. </span>
+<span class="sd">        However, it doesn&#39;t mean an error in our crawler. For instance, it could be </span>
+<span class="sd">        due to a misidentification of the organization by Shodan or, if we are </span>
+<span class="sd">        processing old data, it could be due to changes in records.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Cleaning Tree - Initial size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="si">}</span><span class="s2">. Analysis possible collisions...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># checking which ranges have collisions </span>
+        <span class="c1"># (i.e. same range but different org names)</span>
+        <span class="n">colisions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">t1</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">b1</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">begin</span>
+            <span class="n">e1</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">end</span>
+            <span class="k">for</span> <span class="n">t2</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">b2</span> <span class="o">=</span> <span class="n">t2</span><span class="o">.</span><span class="n">begin</span>
+                <span class="n">e2</span> <span class="o">=</span> <span class="n">t2</span><span class="o">.</span><span class="n">end</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">b1</span> <span class="o">==</span> <span class="n">b2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">e1</span> <span class="o">==</span> <span class="n">e2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;org&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">t2</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;org&#39;</span><span class="p">]):</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="n">e1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">colisions</span><span class="p">:</span>
+                        <span class="n">colisions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">if</span> <span class="n">t1</span><span class="o">.</span><span class="n">data</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">colisions</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">colisions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">t2</span><span class="o">.</span><span class="n">data</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">colisions</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>    
+                        <span class="n">colisions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t2</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Cleaning Tree - </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">colisions</span><span class="p">)</span><span class="si">}</span><span class="s2"> intervals with colisions.&quot;</span><span class="p">)</span>
+        <span class="n">to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t1</span> <span class="ow">in</span> <span class="n">colisions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">colisions</span><span class="p">[</span><span class="n">t1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;block_id&#39;</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">elem</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;block_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">:</span>
+                <span class="n">tree</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Cleaning Tree - Final size: </span><span class="si">{}</span><span class="s2"> .&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)))</span>
+        <span class="k">return</span>  <span class="n">tree</span></div>
+
+
+<span class="c1"># @udf</span>
+<span class="c1"># def get_reverseDelegations(col1, col2):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Usage example: </span>
+    
+<span class="c1">#     .withColumn(OUTPUT, get_reverseDelegations(</span>
+<span class="c1">#                             to_json(col(&quot;nicbr_reverseDelegations&quot;)), </span>
+<span class="c1">#                             to_json(col(&quot;lacnic_reverseDelegations&quot;))</span>
+<span class="c1">#                )    </span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+    
+<span class="c1">#     if col1:</span>
+<span class="c1">#         col1 = json.loads(col1)</span>
+<span class="c1">#         return json.dumps(col1)</span>
+<span class="c1">#     elif col2:</span>
+<span class="c1">#         col2 = json.loads(col2)</span>
+<span class="c1">#         return json.dumps(col2)</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         return None</span>
+
+
+    
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">_get_remarks</span><span class="p">(</span><span class="n">remarks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Usage example:</span>
+<span class="sd">    </span>
+<span class="sd">    .withColumn(&quot;remarks&quot;, get_remarks(col(&quot;remarks&quot;)))</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;O objeto não possui todas as informações por políticas no servidor. Pode ser devido ao número total de consultas.&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;ADDRESSES WITHIN THIS BLOCK ARE NON-PORTABLE&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;BEGIN CERTIFICATE&quot;</span><span class="p">,</span> <span class="s2">&quot;===REMARK===&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;Reassignment information for this block is&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;-----------------------------&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;To report network abuse&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;For troubleshooting,&quot;</span><span class="p">,</span> <span class="s2">&quot;Geofeed&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;The custodianship of this IP prefix is presently&quot;</span><span class="p">,</span> <span class="s2">&quot;available at&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">remarks</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">remarks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]:</span>
+                <span class="n">notFound</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocklist</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">notFound</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="n">notFound</span><span class="p">:</span>
+                    <span class="n">tmp</span> <span class="o">+=</span> <span class="s2">&quot; - &quot;</span> <span class="o">+</span> <span class="n">f</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Owner: &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Abuse POC: &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">tmp</span>
+
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">LongType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">_convert_to_int</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert IP from string (octets) to integer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">IPv4Address</span><span class="p">(</span><span class="n">ip</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_get_events</span><span class="p">(</span><span class="n">events</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns creation and last change timestamp as new columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">reg</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">if</span> <span class="n">events</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;eventDate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;eventAction&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;registration&quot;</span><span class="p">:</span>
+                <span class="n">reg</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;eventAction&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;last changed&quot;</span><span class="p">:</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">last</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">last</span> <span class="o">&lt;</span> <span class="n">tmp</span><span class="p">:</span>
+                        <span class="n">last</span> <span class="o">=</span> <span class="n">tmp</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">last</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">return</span> <span class="n">reg</span><span class="p">,</span> <span class="n">last</span>
+
+<span class="n">schema1</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">,</span><span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;last_changed&quot;</span><span class="p">,</span><span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">schema1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_get_events_udf</span><span class="p">(</span><span class="n">events</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_get_events</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+
+<span class="n">schema3</span> <span class="o">=</span> <span class="n">ArrayType</span><span class="p">(</span><span class="n">StructType</span><span class="p">()</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;start_ip_str&quot;</span><span class="p">,</span><span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;end_ip_str&quot;</span><span class="p">,</span><span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">)),</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">schema3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_get_cid</span><span class="p">(</span><span class="n">cids</span><span class="p">,</span> <span class="n">start_ip</span><span class="p">,</span> <span class="n">end_ip</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get_endAddress</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">subnet</span><span class="p">):</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_network</span><span class="p">(</span><span class="n">ip</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">subnet</span><span class="p">))[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+
+    <span class="n">ips</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">cids</span><span class="p">:</span>
+        <span class="n">cids</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">cids</span><span class="p">:</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">cid</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">]</span>
+            <span class="n">startAddress</span> <span class="o">=</span> <span class="n">cid</span><span class="p">[</span><span class="s2">&quot;v4prefix&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">startAddress</span><span class="p">:</span>
+                <span class="n">endAddress</span> <span class="o">=</span> <span class="n">get_endAddress</span><span class="p">(</span><span class="n">startAddress</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+                <span class="n">ips</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">startAddress</span><span class="p">,</span> <span class="n">endAddress</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ips</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ips</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">start_ip</span><span class="p">,</span> <span class="n">end_ip</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ips</span>  
+
+    
+<span class="n">schema2</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;whois_legal_representative&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;whois_identifier&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;whois_identifier_type&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;registrant_name&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;registrant_email&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;registrant_address&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;registrant_registration&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;registrant_last_changed&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;administrative_name&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;administrative_email&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;administrative_address&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;administrative_registration&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;administrative_last_changed&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;technical_name&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;technical_email&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;technical_address&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;technical_registration&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;technical_last_changed&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;abuse_name&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;abuse_email&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;abuse_address&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;abuse_registration&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;abuse_last_changed&quot;</span><span class="p">,</span> <span class="n">DateType</span><span class="p">(),</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">schema2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_process_entities_field</span><span class="p">(</span><span class="n">entities</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+    
+    <span class="k">if</span> <span class="n">entities</span><span class="p">:</span>
+        <span class="n">entities</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>       
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">entitie</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">[</span><span class="s2">&quot;roles&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;registrant&quot;</span><span class="p">,</span> <span class="s2">&quot;administrative&quot;</span><span class="p">,</span> <span class="s2">&quot;technical&quot;</span><span class="p">,</span> <span class="s2">&quot;abuse&quot;</span><span class="p">]:</span>
+                    
+                    <span class="k">if</span> <span class="s2">&quot;legalRepresentative&quot;</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="s2">&quot;whois_legal_representative&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;whois_legal_representative&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entitie</span><span class="p">[</span><span class="s2">&quot;legalRepresentative&quot;</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;More than one legal_representative&quot;</span><span class="p">)</span>
+                        
+                        
+                    <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">adr</span> <span class="o">=</span> <span class="n">_collect_vcard2</span><span class="p">(</span><span class="n">entitie</span><span class="p">)</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">role</span><span class="o">+</span><span class="s2">&quot;_name&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">name</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">role</span><span class="o">+</span><span class="s2">&quot;_email&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">email</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">role</span><span class="o">+</span><span class="s2">&quot;_address&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">adr</span>
+                    
+                    <span class="k">if</span> <span class="s2">&quot;publicIds&quot;</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">[</span><span class="s2">&quot;publicIds&quot;</span><span class="p">]:</span>
+                            <span class="n">t</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;cnpj&quot;</span><span class="p">,</span> <span class="s2">&quot;cpf&quot;</span><span class="p">,</span> <span class="s2">&quot;eid&quot;</span><span class="p">]:</span>
+                                <span class="k">if</span> <span class="s2">&quot;whois_identifier&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                                    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;whois_identifier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;identifier&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                                    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;whois_identifier_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;More than one identifier&quot;</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;publicIds unknown: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]))</span>
+        
+                    <span class="k">if</span> <span class="s2">&quot;events&quot;</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">:</span>
+                        <span class="n">reg</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">_get_events</span><span class="p">(</span><span class="n">entitie</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">])</span>
+                        <span class="n">result</span><span class="p">[</span><span class="n">role</span><span class="o">+</span><span class="s2">&quot;_registration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span>
+                        <span class="n">result</span><span class="p">[</span><span class="n">role</span><span class="o">+</span><span class="s2">&quot;_last_changed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">last</span>
+                        
+                    <span class="k">if</span> <span class="s2">&quot;entities&quot;</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">entitie_level2</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">]:</span>
+                            <span class="n">role2</span> <span class="o">=</span> <span class="n">entitie_level2</span><span class="p">[</span><span class="s2">&quot;roles&quot;</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">role2</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;registrant&quot;</span><span class="p">,</span> <span class="s2">&quot;administrative&quot;</span><span class="p">,</span> <span class="s2">&quot;technical&quot;</span><span class="p">,</span> <span class="s2">&quot;abuse&quot;</span><span class="p">]:</span>
+                                
+                                <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">adr</span> <span class="o">=</span> <span class="n">_collect_vcard2</span><span class="p">(</span><span class="n">entitie_level2</span><span class="p">)</span>
+                                <span class="n">result</span><span class="p">[</span><span class="n">role2</span><span class="o">+</span><span class="s2">&quot;_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+                                <span class="n">result</span><span class="p">[</span><span class="n">role2</span><span class="o">+</span><span class="s2">&quot;_email&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
+                                <span class="n">result</span><span class="p">[</span><span class="n">role2</span><span class="o">+</span><span class="s2">&quot;_address&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adr</span>
+            
+                                <span class="k">if</span> <span class="s2">&quot;events&quot;</span> <span class="ow">in</span> <span class="n">entitie_level2</span><span class="p">:</span>
+                                    <span class="n">reg</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">_get_events</span><span class="p">(</span><span class="n">entitie_level2</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">])</span>
+                                    <span class="n">result</span><span class="p">[</span><span class="n">role2</span><span class="o">+</span><span class="s2">&quot;_registration&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span>
+                                    <span class="n">result</span><span class="p">[</span><span class="n">role2</span><span class="o">+</span><span class="s2">&quot;_last_changed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">last</span>
+
+            
+        <span class="k">return</span> <span class="n">result</span>
+    
+
+<span class="k">def</span> <span class="nf">_collect_vcard2</span><span class="p">(</span><span class="n">entitie</span><span class="p">):</span>
+    <span class="n">name</span>  <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">adr</span>   <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">if</span> <span class="s2">&quot;vcardArray&quot;</span> <span class="ow">in</span> <span class="n">entitie</span><span class="p">:</span>
+        <span class="n">vcard</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">entitie</span><span class="p">[</span><span class="s2">&quot;vcardArray&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">vcard</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;fn&quot;</span> <span class="ow">in</span> <span class="n">content</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s2">&quot;email&quot;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+                <span class="n">email</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s2">&quot;adr&quot;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;label&quot;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">adr</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">adr</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">adr</span>  
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, TLHOP Project - DCC/UFMG &amp; CERT.br/NIC.br.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

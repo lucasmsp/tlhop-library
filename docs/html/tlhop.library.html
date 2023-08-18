@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Library functions &#8212; TLHOP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tlhop.library';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API Reference: TLHOP abstraction" href="tlhop.shodan_abstraction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">TLHOP</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tlhop.crawlers.html">Crawlers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.shodan_mgr.html">API Reference: Shodan Dataset Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.shodan_abstraction.html">API Reference: TLHOP abstraction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Library functions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="api.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Library functions</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-tlhop.library">
+<span id="library-functions"></span><h1>Library functions<a class="headerlink" href="#module-tlhop.library" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.normalize_string">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">normalize_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="_modules/tlhop/library.html#normalize_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.normalize_string" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to string normalization (remove accents)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.cleaning_text_udf">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">cleaning_text_udf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleaning_org</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#cleaning_text_udf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.cleaning_text_udf" title="Permalink to this definition">#</a></dt>
+<dd><p>Method for standardizing texts in general (orgs names, html titles, etc.)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Replace html/unicode/hexa codes with their Latin equivalents;</p></li>
+<li><p>Convert all letters to lowercase;</p></li>
+<li><p>Replace letters with accents and the ‘ç’ with their ASCII equivalents;</p></li>
+<li><p>Remove all symbols;</p></li>
+<li><p>Remove business terms like (‘s/a’, ‘s.a’, ‘sa’, ‘ltda’, ‘ltd’, ‘inc’, ‘me’, etc);</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – Text to be edited</p></li>
+<li><p><strong>cleaning_org</strong> (<em>boolean</em>) – True to remove business terms (default, False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Text standardized</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.check_unicode_symbols">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">check_unicode_symbols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#check_unicode_symbols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.check_unicode_symbols" title="Permalink to this definition">#</a></dt>
+<dd><p>This code search for all unicode symbols in text and replace it, adjusting
+the text that may be corrupted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Text to be edited</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Text without unicode symbols</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.get_keys_udf">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">get_keys_udf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#get_keys_udf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.get_keys_udf" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to read a column that contains a struct/json
+and return a list of its field names.</p>
+<p>For example, the column <cite>vulns</cite> has a
+json structure, where each key is the name of a CVE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>field</strong> – A column field that represents a struct/json/dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of Keys contained in the struct/json/dict</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.get_fields_udf">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">get_fields_udf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#get_fields_udf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.get_fields_udf" title="Permalink to this definition">#</a></dt>
+<dd><p>An UDF method to read a column that contains a struct/dict/json
+and return a list with the values of the selected fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> (<em>1° -</em>) – A column name that represents a struct/json/dict</p></li>
+<li><p><strong>fields</strong> (<em>2° -</em>) – A list of subcolumns to be extracted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List with values of selected keys</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.get_frequency_orgs">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">get_frequency_orgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_orgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#get_frequency_orgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.get_frequency_orgs" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculates the representativeness of a set of organizations.
+Representativeness = (number of banners from organizations)/(total number of banners of the sample)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>List</strong> (<em>1° -</em>) – Organization name list</p></li>
+<li><p><strong>Dataset</strong> (<em>2° -</em>) – Dataset with organizations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Organizations representativeness</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.clean_pandas_temporal_plot">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">clean_pandas_temporal_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pivot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#clean_pandas_temporal_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.clean_pandas_temporal_plot" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to clean and transform the dataset appling pivot method in it.
+Futhermore, construct a matrix to represent a column value where X
+represents the rows and Y represents the columns, and the cell values
+(x,y) are the pivot values. Pivot tables rearrange data and perform statistics
+on them which can help us find meaningful insights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DataFrame</strong> (<em>1° -</em>) – DataFrame</p></li>
+<li><p><strong>x</strong> (<em>2° -</em>) – x axis</p></li>
+<li><p><strong>y</strong> (<em>3° -</em>) – y axis</p></li>
+<li><p><strong>pivot</strong> (<em>4° -</em>) – reshape value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cleaned DataFrame</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.gen_grafico_temporal">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">gen_grafico_temporal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logY</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLegend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#gen_grafico_temporal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.gen_grafico_temporal" title="Permalink to this definition">#</a></dt>
+<dd><p>Method for creating a time series chart for a given
+given set of columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>1°-</em>) – dataframe pandas;</p></li>
+<li><p><strong>x</strong> (<em>2° -</em>) – column name for the x-axis;</p></li>
+<li><p><strong>y_cols</strong> (<em>3° -</em>) – list of columns for the y-axis;</p></li>
+<li><p><strong>std_cols</strong> (<em>4°-</em>) – list with the columns for the standard deviation values.
+standard deviation. It is necessary to inform the same order as in
+y_cols;</p></li>
+<li><p><strong>labels</strong> (<em>5°-</em>) – list with the labels. If None then it will not display
+legend;</p></li>
+<li><p><strong>logY</strong> (<em>6° -</em>) – True (default) for the Y axis to be in log scale;</p></li>
+<li><p><strong>xlabel</strong> (<em>7° -</em>) – Text for the X axis;</p></li>
+<li><p><strong>ylabel</strong> (<em>8° -</em>) – Text for the Y axis;</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>plot</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.gen_single_temporal_plot">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">gen_single_temporal_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#gen_single_temporal_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.gen_single_temporal_plot" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.check_nulls">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">check_nulls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nan_as_null</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#check_nulls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.check_nulls" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to count how many NULL elements are present in each column of an DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>1° -</em>) – Spark’s DataFrame</p></li>
+<li><p><strong>nan_as_null</strong> (<em>2° -</em>) – Flag to consider NaN as NULL values (default, False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame that shows how many NULL and NAN values exists in each column</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.gen_cdf_pdf">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">gen_cdf_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pd_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#gen_cdf_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.gen_cdf_pdf" title="Permalink to this definition">#</a></dt>
+<dd><p>Method for generating PDF and CDF from a sample data in Pandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pd_df</strong> (<em>1° -</em>) – Pandas DataFrame</p></li>
+<li><p><strong>col</strong> (<em>2° -</em>) – column</p></li>
+<li><p><strong>ascending</strong> (<em>3° -</em>) – Flag to decide if asceding or descending sort default(False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas DataFrame with column cdf and pdf</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.gantt_chart_ips">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">gantt_chart_ips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pd_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#gantt_chart_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.gantt_chart_ips" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that plot a gantt chart(commonly used in project management,
+is one of the most popular and useful ways of showing activities (tasks or events)
+displayed against time.) for ips given a DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pd_df</strong> (<em>1° -</em>) – Pandas DataFrame</p></li>
+<li><p><strong>min_var</strong> (<em>2° -</em>) – Beggining of counting</p></li>
+<li><p><strong>max_var</strong> (<em>3° -</em>) – End of couting to create range</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.print_full">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">print_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pandas_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#print_full"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.print_full" title="Permalink to this definition">#</a></dt>
+<dd><p>Method to print a Pandas DataFrame with custom
+setting in order to display in a larger area.</p>
+<p>:param 1° - pandas_df : A Pandas DataFrame
+:returns: None
+:rtype: None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.process_lang">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">process_lang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#process_lang"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.process_lang" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that process the text replacing special characters and
+“lang=” expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>1° -</em>) – Text that will be processed</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if text is NULL or if its length is less than 2 or begin with “-”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.parser_html_code_udf">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">parser_html_code_udf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#parser_html_code_udf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.parser_html_code_udf" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that performs the processing of html information, looking for
+tags, meta, name, content, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw</strong> (<em>1° -</em>) – not processed HTML text</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>array with parsed html</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ArrayType(StringType)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.get_unique_tokens">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">get_unique_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#get_unique_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.get_unique_tokens" title="Permalink to this definition">#</a></dt>
+<dd><p>Get unique tokens splitted by blanked spaces with length greater than 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>1° -</em>) – DataFrame row with tokens</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Empty List or List with set of tokens</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ArrayType(StringType)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.get_sorted_tokens">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">get_sorted_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#get_sorted_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.get_sorted_tokens" title="Permalink to this definition">#</a></dt>
+<dd><p>Get all tokens greater than min_size and spllited by blanked spaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>row</strong> (<em>1° -</em>) – DataFrame row with tokens</p></li>
+<li><p><strong>min_size</strong> (<em>2° -</em>) – Min size for word length</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Empty List or List with tokens</p>
+</dd>
+</dl>
+<p>:rtype:ArrayType(StringType)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.plot_bubble_map">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">plot_bubble_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cities_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#plot_bubble_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.plot_bubble_map" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that plots a bubble map(Bubble Maps are used to describe qualities associated with
+a specific item, person, idea or event.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cities_df</strong> – DataFrame with cities</p></li>
+<li><p><strong>lat_col</strong> – column with cities latitude</p></li>
+<li><p><strong>lon_col</strong> – column with cities longitude</p></li>
+<li><p><strong>color_col</strong> – define column color, default(None)</p></li>
+<li><p><strong>size</strong> – define the plot size, default(None), if keeps none than size = 3</p></li>
+<li><p><strong>hover_name</strong> – name to display when hover, default(None)</p></li>
+<li><p><strong>hover_data</strong> – data to display when hover, default(None)</p></li>
+<li><p><strong>opacity</strong> – define graph opacity, default(0.9)</p></li>
+<li><p><strong>kwargs</strong> – key args, default({})</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>map_box object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>scatter_mapbox</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.plot_heatmap_map">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">plot_heatmap_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cities_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#plot_heatmap_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.plot_heatmap_map" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that plots a heatmap(By definition, Heat Maps are graphical representations of data that
+utilize color-coded systems.The primary purpose of Heat Maps is to better visualize the volume of
+locations/events within a dataset and assist in directing viewers towards areas on data visualizations
+that matter most.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cities_df</strong> (<em>1° -</em>) – DataFrame with cities</p></li>
+<li><p><strong>lat_col</strong> (<em>2° -</em>) – column with cities latitude</p></li>
+<li><p><strong>lon_col</strong> (<em>3° -</em>) – column with cities longitude</p></li>
+<li><p><strong>z_col</strong> (<em>4° -</em>) – </p></li>
+<li><p><strong>hover_name</strong> (<em>5° -</em>) – name to display when hover, default(None)</p></li>
+<li><p><strong>hover_data</strong> (<em>6° -</em>) – data to display when hover, default(None)</p></li>
+<li><p><strong>radius</strong> (<em>7° -</em>) – the radius searches a set distance, rather than for a certain number of nearby points,</p></li>
+</ul>
+</dd>
+</dl>
+<p>default(8)
+:param 8° - opacity: define graph opacity, default(0.9)
+:param 9° - kwargs: key args, default({})</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>map_box object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>density_mapbox</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.is_valid_uf_code">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">is_valid_uf_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#is_valid_uf_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.is_valid_uf_code" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that receive a code and verify if it is in the federation units array.
+:param 1° - code: federation units code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.parser_cpe_udf">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">parser_cpe_udf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#parser_cpe_udf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.parser_cpe_udf" title="Permalink to this definition">#</a></dt>
+<dd><p>Method that receive a cpe object and parses it.
+:param 1° - text: cpe data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>cpe_info</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dictionary Array or Empty Array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tlhop.shodan_abstraction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API Reference: TLHOP abstraction</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.normalize_string"><code class="docutils literal notranslate"><span class="pre">normalize_string()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.cleaning_text_udf"><code class="docutils literal notranslate"><span class="pre">cleaning_text_udf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.check_unicode_symbols"><code class="docutils literal notranslate"><span class="pre">check_unicode_symbols()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.get_keys_udf"><code class="docutils literal notranslate"><span class="pre">get_keys_udf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.get_fields_udf"><code class="docutils literal notranslate"><span class="pre">get_fields_udf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.get_frequency_orgs"><code class="docutils literal notranslate"><span class="pre">get_frequency_orgs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.clean_pandas_temporal_plot"><code class="docutils literal notranslate"><span class="pre">clean_pandas_temporal_plot()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.gen_grafico_temporal"><code class="docutils literal notranslate"><span class="pre">gen_grafico_temporal()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.gen_single_temporal_plot"><code class="docutils literal notranslate"><span class="pre">gen_single_temporal_plot()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.check_nulls"><code class="docutils literal notranslate"><span class="pre">check_nulls()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.gen_cdf_pdf"><code class="docutils literal notranslate"><span class="pre">gen_cdf_pdf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.gantt_chart_ips"><code class="docutils literal notranslate"><span class="pre">gantt_chart_ips()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.print_full"><code class="docutils literal notranslate"><span class="pre">print_full()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.process_lang"><code class="docutils literal notranslate"><span class="pre">process_lang()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.parser_html_code_udf"><code class="docutils literal notranslate"><span class="pre">parser_html_code_udf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.get_unique_tokens"><code class="docutils literal notranslate"><span class="pre">get_unique_tokens()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.get_sorted_tokens"><code class="docutils literal notranslate"><span class="pre">get_sorted_tokens()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.plot_bubble_map"><code class="docutils literal notranslate"><span class="pre">plot_bubble_map()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.plot_heatmap_map"><code class="docutils literal notranslate"><span class="pre">plot_heatmap_map()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.is_valid_uf_code"><code class="docutils literal notranslate"><span class="pre">is_valid_uf_code()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.parser_cpe_udf"><code class="docutils literal notranslate"><span class="pre">parser_cpe_udf()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, TLHOP Project - DCC/UFMG &amp; CERT.br/NIC.br.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

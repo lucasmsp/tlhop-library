@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>TLHOP Library &#8212; TLHOP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="setup.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    <p class="title logo__title">TLHOP</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="tlhop-library">
+<h1>TLHOP Library<a class="headerlink" href="#tlhop-library" title="Permalink to this heading">#</a></h1>
+<section id="what-is-this">
+<h2>What is this?<a class="headerlink" href="#what-is-this" title="Permalink to this heading">#</a></h2>
+<p>TLHOP Library is a Python module that we are developing to help researchers and network administrators to implement and to execute complex queries involving large volumes of data like Shodan’s. In this sense, we create a robust and scalable execution environment using Apache Spark, capable of executing complex queries on large volumes of data in a semi-iterative using a functional language interface. We have developed several techniques to enrich Shodan’s data and to integrate with external databases, such as Whois/RDAP, CAIDA ASes rankings and a public vulnerability database (NVD), to complement the information collected by Shodan about devices and applications.</p>
+<a class="reference internal image-reference" href="_images/arquitetura.drawio.png"><img alt="TLHOP's architecture" class="align-center" src="_images/arquitetura.drawio.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>All components are exemplified in figure above: Shodan’s data about probed devices are transformed and persisted in a more efficient format <span class="xref std std-doc">(shodan converter)</span>. Information can be complemented from other databases, made available from <a class="reference internal" href="datasets_crawlers.html"><span class="doc">Crawlers API</span></a> responsible for collecting and archiving. During analyses, data such as those from Shodan can be accessed from a <a class="reference internal" href="shodan_abstraction.html"><span class="doc">data abstraction</span></a> closer to the domain expert and integrated with the external databases. Because our abstraction is based on a Spark-based functional language, it hides implementation complexities, especially aspects of parallel and distributed processing to end-user data, while leveraging Spark’s scalability to power increasingly complex analyses.</p>
+</section>
+<section id="about-the-project">
+<h2>About the project<a class="headerlink" href="#about-the-project" title="Permalink to this heading">#</a></h2>
+<p>The project TLHOP (Thread-Limiting Holistic Open Platform) is a technical-scientific project signed between the Centro de Estudos, Resposta e Tratamento de Incidentes de Segurança no Brasil (CERT.br) and the Universidade Federal de Minas Gerais (UFMG) to understand and analyze the network security of the Brazilian internet.</p>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="setup.html"><span class="doc">Installation</span></a></p></li>
+<li><p><a class="reference internal" href="shodan_mgr.html"><span class="doc">Shodan Dataset Manager</span></a></p></li>
+<li><p><a class="reference internal" href="shodan_abstraction.html"><span class="doc">TLHOP abstraction</span></a></p></li>
+<li><p><a class="reference internal" href="datasets_crawlers.html"><span class="doc">External Datasets &amp; Crawlers</span></a></p></li>
+<li><p><a class="reference internal" href="api.html"><span class="doc">API Reference: TLHOP abstraction</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="q-a-support">
+<h2>Q&amp;A Support<a class="headerlink" href="#q-a-support" title="Permalink to this heading">#</a></h2>
+<p>For further questions, please submit a <a class="reference external" href="https://github.com/lucasmsp/tlhop-library">issue</a>.</p>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this heading">#</a></h2>
+<p>Please cite TLHOP Library in your publications if it helps your research:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="n">sbrc2022</span><span class="p">,</span>
+ <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Lucas</span> <span class="n">Ponce</span> <span class="ow">and</span> <span class="n">Matheus</span> <span class="n">Gimpel</span> <span class="ow">and</span> <span class="n">Elverton</span> <span class="n">Fazzion</span> <span class="ow">and</span> <span class="n">Ítalo</span> <span class="n">Cunha</span> <span class="ow">and</span> <span class="n">Cristine</span> <span class="n">Hoepers</span> <span class="ow">and</span> <span class="n">Klaus</span> <span class="n">Steding</span><span class="o">-</span><span class="n">Jessen</span> <span class="ow">and</span> <span class="n">Marcelo</span> <span class="n">Chaves</span> <span class="ow">and</span> <span class="n">Dorgival</span> <span class="n">Guedes</span> <span class="ow">and</span> <span class="n">Wagner</span> <span class="n">Meira</span> <span class="n">Jr</span><span class="o">.</span><span class="p">},</span>
+ <span class="n">title</span> <span class="o">=</span> <span class="p">{{</span><span class="n">Caracterização</span> <span class="n">Escalável</span> <span class="n">de</span> <span class="n">Vulnerabilidades</span> <span class="n">de</span> <span class="n">Segurança</span><span class="p">:</span> <span class="n">um</span> <span class="n">Estudo</span> <span class="n">de</span> <span class="n">Caso</span> <span class="n">na</span> <span class="n">Internet</span> <span class="n">Brasileira</span><span class="p">}},</span>
+ <span class="n">booktitle</span> <span class="o">=</span> <span class="p">{</span><span class="n">Anais</span> <span class="n">do</span> <span class="n">XL</span> <span class="n">Simpósio</span> <span class="n">Brasileiro</span> <span class="n">de</span> <span class="n">Redes</span> <span class="n">de</span> <span class="n">Computadores</span> <span class="n">e</span> <span class="n">Sistemas</span> <span class="n">Distribuídos</span><span class="p">},</span>
+ <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2022</span><span class="p">},</span>
+ <span class="n">pages</span> <span class="o">=</span> <span class="p">{</span><span class="mi">433</span><span class="o">--</span><span class="mi">446</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="publication">
+<h2>Publication<a class="headerlink" href="#publication" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><ol class="upperalpha simple" start="12">
+<li><p>Ponce et al.”Caracterização Escalável de Vulnerabilidades de Segurança: um Estudo de Caso na Internet Brasileira”, in <em>Anais do XL Simpósio Brasileiro de Redes de Computadores e Sistemas Distribuídos</em>, Fortaleza, 2022, pp. 433-446, doi: <cite>https://doi.org/10.5753/sbrc.2022.222341</cite>.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="right-next"
+       href="setup.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this">What is this?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-project">About the project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-a-support">Q&amp;A Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publication">Publication</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, TLHOP Project - DCC/UFMG &amp; CERT.br/NIC.br.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

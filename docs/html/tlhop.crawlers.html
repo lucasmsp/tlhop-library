@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Crawlers &#8212; TLHOP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tlhop.crawlers';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Datasets" href="tlhop.datasets.html" />
+    <link rel="prev" title="API Reference" href="api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">TLHOP</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawlers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.shodan_mgr.html">API Reference: Shodan Dataset Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.shodan_abstraction.html">API Reference: TLHOP abstraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.library.html">Library functions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="api.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Crawlers</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="crawlers">
+<h1>Crawlers<a class="headerlink" href="#crawlers" title="Permalink to this heading">#</a></h1>
+<section id="module-tlhop.crawlers.caida_as_classification">
+<span id="as2type-crawler"></span><h2>AS2Type Crawler<a class="headerlink" href="#module-tlhop.crawlers.caida_as_classification" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.caida_as_classification.AS2Type">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.caida_as_classification.</span></span><span class="sig-name descname"><span class="pre">AS2Type</span></span><a class="reference internal" href="_modules/tlhop/crawlers/caida_as_classification.html#AS2Type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.caida_as_classification.AS2Type" title="Permalink to this definition">#</a></dt>
+<dd><p>AS2Type Dataset</p>
+<p>Inferred classified Autonomous Systems (ASes) by their business type.</p>
+<p>Reference: <a class="reference external" href="https://catalog.caida.org/dataset/as_classification">https://catalog.caida.org/dataset/as_classification</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.caida_as_classification.AS2Type.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/caida_as_classification.html#AS2Type.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.caida_as_classification.AS2Type.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.caida_as_classification.AS2Type.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/caida_as_classification.html#AS2Type.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.caida_as_classification.AS2Type.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in its source link.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.caida_as_rank">
+<span id="asrank-crawler"></span><h2>ASRank Crawler<a class="headerlink" href="#module-tlhop.crawlers.caida_as_rank" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.caida_as_rank.ASRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.caida_as_rank.</span></span><span class="sig-name descname"><span class="pre">ASRank</span></span><a class="reference internal" href="_modules/tlhop/crawlers/caida_as_rank.html#ASRank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.caida_as_rank.ASRank" title="Permalink to this definition">#</a></dt>
+<dd><p>AS Rank Dataset</p>
+<p>A ranking of Autonomous Systems (AS). ASes are ranked by their
+customer cone size, which is the number of their direct and indirect customers.</p>
+<p>Reference: <a class="reference external" href="https://asrank.caida.org/">https://asrank.caida.org/</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.caida_as_rank.ASRank.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/caida_as_rank.html#ASRank.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.caida_as_rank.ASRank.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.caida_as_rank.ASRank.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/caida_as_rank.html#ASRank.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.caida_as_rank.ASRank.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in the source link. After download, it process the
+original data format to enrich its data and to convert to Parquet format.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.brazilian_cities">
+<span id="braziliancities-crawler"></span><h2>BrazilianCities Crawler<a class="headerlink" href="#module-tlhop.crawlers.brazilian_cities" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.brazilian_cities.BrazilianCities">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.brazilian_cities.</span></span><span class="sig-name descname"><span class="pre">BrazilianCities</span></span><a class="reference internal" href="_modules/tlhop/crawlers/brazilian_cities.html#BrazilianCities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.brazilian_cities.BrazilianCities" title="Permalink to this definition">#</a></dt>
+<dd><p>Brazilian Cities</p>
+<p>This dataset is a compilation of several publicly available information about Brazilian Municipalities. Altought this
+dataset be public, is necessary a kaggle account to download it.</p>
+<p>Reference: <a class="reference external" href="https://www.kaggle.com/datasets/crisparada/brazilian-cities">https://www.kaggle.com/datasets/crisparada/brazilian-cities</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.brazilian_cities.BrazilianCities.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/brazilian_cities.html#BrazilianCities.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.brazilian_cities.BrazilianCities.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference, fields, authors and license.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.brazilian_cities.BrazilianCities.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'manual'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/brazilian_cities.html#BrazilianCities.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.brazilian_cities.BrazilianCities.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in its source link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params mode</dt>
+<dd class="field-odd"><p>Option to inform if you want to download its dataset
+manualy (“manual”) or automatically (“tlhop”). When using “manual” mode,
+the user must download this dataset using the reference page ”         “(<a class="reference external" href="https://www.kaggle.com/datasets/crisparada/brazilian-cities">https://www.kaggle.com/datasets/crisparada/brazilian-cities</a>), and place it ”         “as file in ‘$TLHOP_DATASETS_PATH/brazilian-cities/brazilian_cities.csv’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.receita_federal">
+<span id="brazilianfr-crawler"></span><h2>BrazilianFR Crawler<a class="headerlink" href="#module-tlhop.crawlers.receita_federal" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.receita_federal.BrazilianFR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.receita_federal.</span></span><span class="sig-name descname"><span class="pre">BrazilianFR</span></span><a class="reference internal" href="_modules/tlhop/crawlers/receita_federal.html#BrazilianFR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.receita_federal.BrazilianFR" title="Permalink to this definition">#</a></dt>
+<dd><p>Brazilian National Register of Legal Entities - CNPJ</p>
+<p>The National Register of Legal Entities (CNPJ) is a database managed by the Special
+Secretariat of the Federal Revenue of Brazil (RFB), which stores registration information of legal
+entities and other entities of interest to the tax administrations of the Union, States, District
+Federal and Municipalities.</p>
+<p>Reference: <a class="reference external" href="https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj">https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup. Because the download data will be
+pos-processed to an efficient format, the initialization process will also check if a Spark
+session is already created.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.receita_federal.BrazilianFR.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/receita_federal.html#BrazilianFR.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.receita_federal.BrazilianFR.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.receita_federal.BrazilianFR.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/receita_federal.html#BrazilianFR.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.receita_federal.BrazilianFR.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in the source link. After download, it process the
+original data format to enrich its data and to convert to Parquet format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params manual</dt>
+<dd class="field-odd"><p>Because the download can take some time, users can download manually and place them at
+<cite>&lt;datasets_path&gt;/brazilian-rf/raw/</cite>. To inform that users already download manually, use parameter
+<cite>manual = True</cite>. Otherwise, the API will handle the download, one by one, automatically.
+In both cases, after this step, the API will process these files by Spark to create a consolidated version.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.cisa_known_exploits">
+<span id="cisaknownexploits-crawler"></span><h2>CISAKnownExploits Crawler<a class="headerlink" href="#module-tlhop.crawlers.cisa_known_exploits" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.cisa_known_exploits.CISAKnownExploits">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.cisa_known_exploits.</span></span><span class="sig-name descname"><span class="pre">CISAKnownExploits</span></span><a class="reference internal" href="_modules/tlhop/crawlers/cisa_known_exploits.html#CISAKnownExploits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.cisa_known_exploits.CISAKnownExploits" title="Permalink to this definition">#</a></dt>
+<dd><p>CISA’s Known Exploited Vulnerabilities Catalog</p>
+<p>CISA maintains a catalog of vulnerabilities that have been exploited in the wild.</p>
+<p>Reference: <a class="reference external" href="https://www.cisa.gov/known-exploited-vulnerabilities">https://www.cisa.gov/known-exploited-vulnerabilities</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.cisa_known_exploits.CISAKnownExploits.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/cisa_known_exploits.html#CISAKnownExploits.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.cisa_known_exploits.CISAKnownExploits.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.cisa_known_exploits.CISAKnownExploits.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/cisa_known_exploits.html#CISAKnownExploits.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.cisa_known_exploits.CISAKnownExploits.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in its source link.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.rdap">
+<span id="rdap-crawler"></span><h2>RDAP Crawler<a class="headerlink" href="#module-tlhop.crawlers.rdap" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.rdap.RDAP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.rdap.</span></span><span class="sig-name descname"><span class="pre">RDAP</span></span><a class="reference internal" href="_modules/tlhop/crawlers/rdap.html#RDAP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.rdap.RDAP" title="Permalink to this definition">#</a></dt>
+<dd><p>RDAP Dataset</p>
+<dl class="simple">
+<dt>Description: RDAP is a protocol that delivers registration data like WHOIS, this dataset is</dt><dd><p>generated from a list of &lt;IPs, orgs&gt;. Each IP will be requested in an ordered RDAP url list.</p>
+</dd>
+<dt>Download url: <a class="reference external" href="https://rdap.registro.br/ip">https://rdap.registro.br/ip</a>/&lt;ip&gt;, <a class="reference external" href="https://rdap-bootstrap.arin.net/bootstrap/ip">https://rdap-bootstrap.arin.net/bootstrap/ip</a>/&lt;ip&gt;,</dt><dd><p><a class="reference external" href="https://rdap.org/ip">https://rdap.org/ip</a>/&lt;ip&gt;, <a class="reference external" href="https://rdap.db.ripe.net/ip">https://rdap.db.ripe.net/ip</a>/&lt;ip&gt;</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.rdap.RDAP.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/rdap.html#RDAP.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.rdap.RDAP.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.rdap.RDAP.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ip_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_ips</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_selenium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">historical_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/rdap.html#RDAP.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.rdap.RDAP.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Generates the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params target_ip_list</dt>
+<dd class="field-odd"><p>A list of ip (integer format) and its organization to be crawled. The organization name is only used to
+avoid multiple requests over a subnet. As the IP network to be searched is already known, we skip its request unless the organization
+passed by parameter is different from the one previously identified;</p>
+</dd>
+<dt class="field-even">Params append</dt>
+<dd class="field-even"><p>True to increment an previous execution with new rdap requests, otherwise it will remove previous dataset (default, True);</p>
+</dd>
+<dt class="field-odd">Params range_ips</dt>
+<dd class="field-odd"><p>The path of a file containing the range of IPs (int format) to be considered. For instance, if we have a list of the
+brazilian IPs, we can force the application only to request IPs in this range.
+Each line contains a interval in format &lt;IP begin&gt;-&lt;IP end&gt;, separated by line.
+Any IP not in this range will not be crawled;</p>
+</dd>
+<dt class="field-even">Params resume</dt>
+<dd class="field-even"><p>True to resume the crawler, starting from the last probed IP (default, False);</p>
+</dd>
+<dt class="field-odd">Params timeout</dt>
+<dd class="field-odd"><p>A timeout in seconds between each RDAP request to avoid IP blocking (default is 9 seconds);</p>
+</dd>
+<dt class="field-even">Params historical_data</dt>
+<dd class="field-even"><p>If we are using historical data (old relations between IP and org) the changes over time are not captured
+(we can only crawler the current state of an IP registration), because of that, is possible that responsible organizations may be changed.
+Due our implementation, we crawler RDAP to each organization change, creating multiple collisions (same IP interval but different organizations).
+If historical_data is True (default), we will only keep the most recent RDAP record.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.mikrotik_releases">
+<span id="mikrotikreleases-crawler"></span><h2>MikrotikReleases Crawler<a class="headerlink" href="#module-tlhop.crawlers.mikrotik_releases" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.mikrotik_releases.MikrotikReleases">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.mikrotik_releases.</span></span><span class="sig-name descname"><span class="pre">MikrotikReleases</span></span><a class="reference internal" href="_modules/tlhop/crawlers/mikrotik_releases.html#MikrotikReleases"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.mikrotik_releases.MikrotikReleases" title="Permalink to this definition">#</a></dt>
+<dd><p>Mikrotik Releases Dataset</p>
+<p>A dataset about Mikrotik’s releases information crawled from official changelog.</p>
+<p>Reference: <a class="reference external" href="https://mikrotik.com/download/changelogs/">https://mikrotik.com/download/changelogs/</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.mikrotik_releases.MikrotikReleases.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/mikrotik_releases.html#MikrotikReleases.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.mikrotik_releases.MikrotikReleases.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.mikrotik_releases.MikrotikReleases.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/mikrotik_releases.html#MikrotikReleases.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.mikrotik_releases.MikrotikReleases.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in its source link.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tlhop.crawlers.nist_nvd">
+<span id="nist-s-nvd-crawler"></span><h2>NIST’s NVD Crawler<a class="headerlink" href="#module-tlhop.crawlers.nist_nvd" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tlhop.crawlers.nist_nvd.NISTNVD">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tlhop.crawlers.nist_nvd.</span></span><span class="sig-name descname"><span class="pre">NISTNVD</span></span><a class="reference internal" href="_modules/tlhop/crawlers/nist_nvd.html#NISTNVD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.nist_nvd.NISTNVD" title="Permalink to this definition">#</a></dt>
+<dd><p>NIST NVD</p>
+<p>The National Vulnerability Database (NVD) is the U.S. government
+repository of standards based vulnerability management data.</p>
+<p>Reference: <a class="reference external" href="https://nvd.nist.gov/">https://nvd.nist.gov/</a></p>
+<p>During the initialization process, it will check if a TLHOP directory folder is set and valid.
+It also will check on the Internet if an new dataset version is available to download in case
+of a previous download was found during folder lookup. Because the download data will be
+pos-processed to an efficient format, the initialization process will also check if a Spark
+session is already created.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.nist_nvd.NISTNVD.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/nist_nvd.html#NISTNVD.describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.nist_nvd.NISTNVD.describe" title="Permalink to this definition">#</a></dt>
+<dd><p>Function to describe some informations about the dataset:
+description, reference and fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tlhop.crawlers.nist_nvd.NISTNVD.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/crawlers/nist_nvd.html#NISTNVD.download"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.crawlers.nist_nvd.NISTNVD.download" title="Permalink to this definition">#</a></dt>
+<dd><p>Downloads a new dataset version available in the source link. After download, it process the
+original data format to enrich its data and to convert to Parquet format.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tlhop.datasets.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Datasets</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.caida_as_classification">AS2Type Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.caida_as_classification.AS2Type"><code class="docutils literal notranslate"><span class="pre">AS2Type</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.caida_as_classification.AS2Type.describe"><code class="docutils literal notranslate"><span class="pre">AS2Type.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.caida_as_classification.AS2Type.download"><code class="docutils literal notranslate"><span class="pre">AS2Type.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.caida_as_rank">ASRank Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.caida_as_rank.ASRank"><code class="docutils literal notranslate"><span class="pre">ASRank</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.caida_as_rank.ASRank.describe"><code class="docutils literal notranslate"><span class="pre">ASRank.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.caida_as_rank.ASRank.download"><code class="docutils literal notranslate"><span class="pre">ASRank.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.brazilian_cities">BrazilianCities Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.brazilian_cities.BrazilianCities"><code class="docutils literal notranslate"><span class="pre">BrazilianCities</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.brazilian_cities.BrazilianCities.describe"><code class="docutils literal notranslate"><span class="pre">BrazilianCities.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.brazilian_cities.BrazilianCities.download"><code class="docutils literal notranslate"><span class="pre">BrazilianCities.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.receita_federal">BrazilianFR Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.receita_federal.BrazilianFR"><code class="docutils literal notranslate"><span class="pre">BrazilianFR</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.receita_federal.BrazilianFR.describe"><code class="docutils literal notranslate"><span class="pre">BrazilianFR.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.receita_federal.BrazilianFR.download"><code class="docutils literal notranslate"><span class="pre">BrazilianFR.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.cisa_known_exploits">CISAKnownExploits Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.cisa_known_exploits.CISAKnownExploits"><code class="docutils literal notranslate"><span class="pre">CISAKnownExploits</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.cisa_known_exploits.CISAKnownExploits.describe"><code class="docutils literal notranslate"><span class="pre">CISAKnownExploits.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.cisa_known_exploits.CISAKnownExploits.download"><code class="docutils literal notranslate"><span class="pre">CISAKnownExploits.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.rdap">RDAP Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.rdap.RDAP"><code class="docutils literal notranslate"><span class="pre">RDAP</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.rdap.RDAP.describe"><code class="docutils literal notranslate"><span class="pre">RDAP.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.rdap.RDAP.download"><code class="docutils literal notranslate"><span class="pre">RDAP.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.mikrotik_releases">MikrotikReleases Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.mikrotik_releases.MikrotikReleases"><code class="docutils literal notranslate"><span class="pre">MikrotikReleases</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.mikrotik_releases.MikrotikReleases.describe"><code class="docutils literal notranslate"><span class="pre">MikrotikReleases.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.mikrotik_releases.MikrotikReleases.download"><code class="docutils literal notranslate"><span class="pre">MikrotikReleases.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-tlhop.crawlers.nist_nvd">NIST’s NVD Crawler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.nist_nvd.NISTNVD"><code class="docutils literal notranslate"><span class="pre">NISTNVD</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.nist_nvd.NISTNVD.describe"><code class="docutils literal notranslate"><span class="pre">NISTNVD.describe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.crawlers.nist_nvd.NISTNVD.download"><code class="docutils literal notranslate"><span class="pre">NISTNVD.download()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, TLHOP Project - DCC/UFMG &amp; CERT.br/NIC.br.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

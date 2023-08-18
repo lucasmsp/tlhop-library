@@ -1,0 +1,1212 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tlhop.library &#8212; TLHOP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tlhop/library';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">TLHOP</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tlhop.library</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tlhop.library</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+                                                                            
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">textdistance</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="c1">#nltk.download(&#39;stopwords&#39;)</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">ArrayType</span><span class="p">,</span> <span class="n">StructType</span><span class="p">,</span><span class="n">IntegerType</span><span class="p">,</span><span class="n">BooleanType</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;bs4&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tlhop.schemas</span> <span class="kn">import</span> <span class="n">Schemas</span>
+
+
+<span class="n">_library_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+
+
+<div class="viewcode-block" id="normalize_string"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.normalize_string">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">pandas_udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">normalize_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to string normalization (remove accents)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></div>
+<span class="c1"># normalize_string = pandas_udf(normalize_string, StringType())</span>
+
+
+<span class="n">UTF8_MAPPING_FILE</span> <span class="o">=</span> <span class="n">_library_path</span> <span class="o">+</span><span class="s2">&quot;/tlhop_internal_datasets/utf-codes/mapping-utf8-characters.csv&quot;</span>
+<span class="n">utf8_mappings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">UTF8_MAPPING_FILE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Actual&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">T</span>\
+    <span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">HTTP_STATUS_FILE</span> <span class="o">=</span> <span class="n">_library_path</span> <span class="o">+</span><span class="s2">&quot;/tlhop_internal_datasets/http-codes/http-response-status.csv&quot;</span>
+<span class="n">http_status</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">HTTP_STATUS_FILE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>\
+        <span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+<span class="n">ACCENTED_WORDS_PT_BR_FILE</span> <span class="o">=</span> <span class="n">_library_path</span> <span class="o">+</span> <span class="s2">&quot;/tlhop_internal_datasets/brazil-dictionaries/accented_words_ptbr.json&quot;</span>
+<span class="n">accented_dict</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">ACCENTED_WORDS_PT_BR_FILE</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="cleaning_text_udf"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.cleaning_text_udf">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">cleaning_text_udf</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cleaning_org</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method for standardizing texts in general (orgs names, html titles, etc.)</span>
+<span class="sd">    </span>
+<span class="sd">        - Replace html/unicode/hexa codes with their Latin equivalents;</span>
+<span class="sd">        - Convert all letters to lowercase;</span>
+<span class="sd">        - Replace letters with accents and the &#39;ç&#39; with their ASCII equivalents;</span>
+<span class="sd">        - Remove all symbols;</span>
+<span class="sd">        - Remove business terms like (&#39;s/a&#39;, &#39;s.a&#39;, &#39;sa&#39;, &#39;ltda&#39;, &#39;ltd&#39;, &#39;inc&#39;, &#39;me&#39;, etc);</span>
+<span class="sd">        </span>
+<span class="sd">    :param str s: Text to be edited</span>
+<span class="sd">    :param boolean cleaning_org: True to remove business terms (default, False)</span>
+
+<span class="sd">    :returns: Text standardized</span>
+
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">repl</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span>
+            <span class="s2">&quot;áéúíóçãõôêâªº&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;aeuiocaooeaao&quot;</span>
+        <span class="p">)</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot; s a &quot;</span><span class="p">,</span> <span class="s2">&quot; sa &quot;</span><span class="p">,</span><span class="s2">&quot; ltda&quot;</span><span class="p">,</span> <span class="s2">&quot; ltd &quot;</span><span class="p">,</span> <span class="s2">&quot; lt &quot;</span><span class="p">,</span> <span class="s2">&quot; inc &quot;</span><span class="p">,</span> 
+                   <span class="s2">&quot; me &quot;</span><span class="p">,</span> <span class="s2">&quot; eireli &quot;</span><span class="p">,</span> <span class="s2">&quot; eirelli &quot;</span><span class="p">,</span> <span class="s2">&quot; eirel &quot;</span><span class="p">,</span> <span class="s2">&quot; epp &quot;</span><span class="p">,</span> 
+                   <span class="s2">&quot; llc &quot;</span><span class="p">]</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="n">check_unicode_symbols</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">repl</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cleaning_org</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">),</span> <span class="n">exclude</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">s</span></div>
+
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="check_unicode_symbols"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.check_unicode_symbols">[docs]</a><span class="k">def</span> <span class="nf">check_unicode_symbols</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This code search for all unicode symbols in text and replace it, adjusting</span>
+<span class="sd">    the text that may be corrupted.</span>
+
+<span class="sd">    :param str text: Text to be edited</span>
+
+<span class="sd">    :returns: Text without unicode symbols</span>
+
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;ï¿½&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;ï¿½&quot;</span><span class="p">,</span> <span class="s2">&quot;�&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;�&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\w*�+[�\w]*&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">word_ajusted</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;�&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
+            <span class="n">len_word</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_ajusted</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">len_word</span> <span class="ow">in</span> <span class="n">accented_dict</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">accented_dict</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">len_word</span><span class="p">][</span><span class="s1">&#39;words&#39;</span><span class="p">]:</span>
+                    <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">for</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">word_ajusted</span><span class="p">,</span> <span class="n">candidate</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">p1</span> <span class="o">!=</span> <span class="n">p2</span> <span class="ow">and</span> <span class="n">p1</span> <span class="o">!=</span> <span class="s2">&quot;?&quot;</span><span class="p">:</span>
+                            <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="k">break</span>
+                    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+                        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span>
+                        <span class="k">break</span>
+    
+    <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">utf8_mappings</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">utf8_mappings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pattern</span><span class="p">),</span> <span class="n">text</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">text</span></div>
+
+<span class="c1">##############</span>
+
+
+<div class="viewcode-block" id="get_keys_udf"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.get_keys_udf">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">get_keys_udf</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to read a column that contains a struct/json</span>
+<span class="sd">    and return a list of its field names.</span>
+<span class="sd">    </span>
+<span class="sd">    For example, the column `vulns` has a </span>
+<span class="sd">    json structure, where each key is the name of a CVE.</span>
+
+<span class="sd">    :param field: A column field that represents a struct/json/dict</span>
+
+<span class="sd">    :returns: List of Keys contained in the struct/json/dict</span>
+
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">field</span><span class="p">:</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="get_fields_udf"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.get_fields_udf">[docs]</a><span class="k">def</span> <span class="nf">get_fields_udf</span><span class="p">(</span><span class="n">col_name</span><span class="p">,</span> <span class="n">fields_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An UDF method to read a column that contains a struct/dict/json</span>
+<span class="sd">    and return a list with the values of the selected fields.</span>
+
+<span class="sd">    :param 1° - column: A column name that represents a struct/json/dict</span>
+<span class="sd">    :param 2° - fields: A list of subcolumns to be extracted</span>
+<span class="sd">    :returns: List with values of selected keys</span>
+
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
+    <span class="k">def</span> <span class="nf">_get_fields</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span> 
+        <span class="n">json_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+        <span class="n">filtered_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">json_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> 
+                    <span class="k">else</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> 
+                  <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">filtered_fields</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">_get_fields</span><span class="p">(</span><span class="n">col_name</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields_list</span><span class="p">]))</span></div>
+
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="get_frequency_orgs"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.get_frequency_orgs">[docs]</a><span class="k">def</span> <span class="nf">get_frequency_orgs</span><span class="p">(</span><span class="n">list_orgs</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the representativeness of a set of organizations.</span>
+<span class="sd">    Representativeness = (number of banners from organizations)/(total number of banners of the sample)</span>
+<span class="sd">    </span>
+<span class="sd">    :parameter 1° - List: Organization name list</span>
+<span class="sd">    :parameter 2° - Dataset: Dataset with organizations</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: Organizations representativeness</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_records_filtered</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;org_clean&quot;</span><span class="p">,</span> <span class="n">cleaning_org_udf</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;org&#39;</span><span class="p">)))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;org_clean&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">list_orgs</span><span class="p">))</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">n_records_total</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">representatividade</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_records_equals</span><span class="o">/</span><span class="n">n_records_total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="k">return</span> <span class="n">representatividade</span></div>
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="clean_pandas_temporal_plot"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.clean_pandas_temporal_plot">[docs]</a><span class="k">def</span> <span class="nf">clean_pandas_temporal_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pivot</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to clean and transform the dataset appling pivot method in it.</span>
+<span class="sd">        Futhermore, construct a matrix to represent a column value where X</span>
+<span class="sd">        represents the rows and Y represents the columns, and the cell values</span>
+<span class="sd">        (x,y) are the pivot values. Pivot tables rearrange data and perform statistics</span>
+<span class="sd">        on them which can help us find meaningful insights.</span>
+
+<span class="sd">        :param 1° - DataFrame: DataFrame</span>
+<span class="sd">        :param 2° - x: x axis</span>
+<span class="sd">        :param 3° - y: y axis</span>
+<span class="sd">        :param 4° - pivot: reshape value</span>
+
+<span class="sd">        :returns: cleaned DataFrame</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    
+    <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">pivot</span><span class="p">)</span>
+    <span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    
+    <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">max_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+    <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_clean</span></div>
+
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="gen_grafico_temporal"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.gen_grafico_temporal">[docs]</a><span class="k">def</span> <span class="nf">gen_grafico_temporal</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_cols</span><span class="p">,</span> <span class="n">std_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">logY</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">useLegend</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method for creating a time series chart for a given</span>
+<span class="sd">    given set of columns.</span>
+
+<span class="sd">    :param 1°- df: dataframe pandas;</span>
+<span class="sd">    :param 2° - x: column name for the x-axis;</span>
+<span class="sd">    :param 3° - y_cols: list of columns for the y-axis;</span>
+<span class="sd">    :param 4°- std_cols: list with the columns for the standard deviation values.</span>
+<span class="sd">        standard deviation. It is necessary to inform the same order as in</span>
+<span class="sd">        y_cols;</span>
+<span class="sd">    :param 5°- labels: list with the labels. If None then it will not display</span>
+<span class="sd">        legend;</span>
+<span class="sd">    :param 6° - logY: True (default) for the Y axis to be in log scale;</span>
+<span class="sd">    :param 7° - xlabel: Text for the X axis;</span>
+<span class="sd">    :param 8° - ylabel: Text for the Y axis;</span>
+
+<span class="sd">    :returns: plot</span>
+<span class="sd">    :rtype: graph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mf">18.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">y_cols</span>
+         
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y_cols</span><span class="p">):</span>
+        
+        <span class="n">first_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">std_cols</span><span class="p">:</span>
+            <span class="n">err_col</span> <span class="o">=</span> <span class="n">std_cols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">err_col</span><span class="p">]][</span><span class="n">first_id</span><span class="p">:]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="s1">&#39;--o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">-</span><span class="n">tmp</span><span class="p">[</span><span class="n">err_col</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">+</span><span class="n">tmp</span><span class="p">[</span><span class="n">err_col</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">col</span><span class="p">]][</span><span class="n">first_id</span><span class="p">:]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="s1">&#39;--o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">logY</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+    <span class="n">weeks</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">weeks</span><span class="p">)</span>
+    <span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Jan&quot;</span><span class="p">,</span> <span class="s2">&quot;Fev&quot;</span><span class="p">,</span> <span class="s2">&quot;Mar&quot;</span><span class="p">,</span> <span class="s2">&quot;Abr&quot;</span><span class="p">,</span> <span class="s2">&quot;Mai&quot;</span><span class="p">,</span> <span class="s2">&quot;Jun&quot;</span><span class="p">,</span> <span class="s2">&quot;Jul&quot;</span><span class="p">,</span> <span class="s2">&quot;Ago&quot;</span><span class="p">,</span> <span class="s2">&quot;Set&quot;</span><span class="p">,</span> <span class="s2">&quot;Out&quot;</span><span class="p">,</span> <span class="s2">&quot;Nov&quot;</span><span class="p">,</span> <span class="s2">&quot;Dez&quot;</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">months</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">weeks</span><span class="p">)]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;xx-large&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+
+<div class="viewcode-block" id="gen_single_temporal_plot"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.gen_single_temporal_plot">[docs]</a><span class="k">def</span> <span class="nf">gen_single_temporal_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">DayLocator</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">14</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+    <span class="c1">#plt.tight_layout()</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="check_nulls"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.check_nulls">[docs]</a><span class="k">def</span> <span class="nf">check_nulls</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nan_as_null</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to count how many NULL elements are present in each column of an DataFrame. </span>
+
+<span class="sd">    :param 1° - df: Spark&#39;s DataFrame</span>
+<span class="sd">    :param 2° - nan_as_null: Flag to consider NaN as NULL values (default, False)</span>
+
+<span class="sd">    :returns: DataFrame that shows how many NULL and NAN values exists in each column</span>
+<span class="sd">    :rtype: DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">count_not_null</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">nan_as_null</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">F</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">if</span> <span class="n">nan_as_null</span> <span class="k">else</span> <span class="n">F</span><span class="o">.</span><span class="n">lit</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;integer&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">count_not_null</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">nan_as_null</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span></div>
+
+
+<span class="c1">##############</span>
+
+<div class="viewcode-block" id="gen_cdf_pdf"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.gen_cdf_pdf">[docs]</a><span class="k">def</span> <span class="nf">gen_cdf_pdf</span><span class="p">(</span><span class="n">pd_df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method for generating PDF and CDF from a sample data in Pandas.</span>
+
+<span class="sd">    :param 1° - pd_df: Pandas DataFrame</span>
+<span class="sd">    :param 2° - col: column</span>
+<span class="sd">    :param 3° - ascending: Flag to decide if asceding or descending sort default(False)</span>
+
+<span class="sd">    :returns: Pandas DataFrame with column cdf and pdf</span>
+<span class="sd">    :rtype: DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pd_df</span> <span class="o">=</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="n">ascending</span><span class="p">)</span>
+    <span class="n">pd_df</span><span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">/</span> <span class="n">pd_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">pd_df</span><span class="p">[</span><span class="s1">&#39;cdf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd_df</span><span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">pd_df</span> <span class="o">=</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd_df</span></div>
+
+<span class="c1">##############</span>
+
+
+<div class="viewcode-block" id="gantt_chart_ips"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.gantt_chart_ips">[docs]</a><span class="k">def</span> <span class="nf">gantt_chart_ips</span><span class="p">(</span><span class="n">pd_df</span><span class="p">,</span> <span class="n">min_var</span><span class="p">,</span> <span class="n">max_var</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method that plot a gantt chart(commonly used in project management,</span>
+<span class="sd">    is one of the most popular and useful ways of showing activities (tasks or events)</span>
+<span class="sd">    displayed against time.) for ips given a DataFrame.</span>
+
+<span class="sd">    :param 1° - pd_df: Pandas DataFrame</span>
+<span class="sd">    :param 2° - min_var: Beggining of counting</span>
+<span class="sd">    :param 3° - max_var: End of couting to create range</span>
+
+<span class="sd">    :returns: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">proj_start</span> <span class="o">=</span> <span class="n">pd_df</span><span class="p">[</span><span class="n">min_var</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="c1"># number of days from project start to task start</span>
+    <span class="n">pd_df</span><span class="p">[</span><span class="s1">&#39;start_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd_df</span><span class="p">[</span><span class="n">min_var</span><span class="p">]</span><span class="o">-</span><span class="n">proj_start</span><span class="p">)</span><span class="c1">#.dt.days</span>
+    <span class="c1"># number of days from project start to end of tasks</span>
+    <span class="n">pd_df</span><span class="p">[</span><span class="s1">&#39;end_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd_df</span><span class="p">[</span><span class="n">max_var</span><span class="p">]</span><span class="o">-</span><span class="n">proj_start</span><span class="p">)</span><span class="c1">#.dt.days</span>
+    <span class="c1"># days between start and end of each task</span>
+    <span class="n">pd_df</span><span class="p">[</span><span class="s1">&#39;days_start_to_end&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">end_num</span> <span class="o">-</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">start_num</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">pd_df</span><span class="o">.</span><span class="n">ip_str</span><span class="p">,</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">days_start_to_end</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="n">pd_df</span><span class="o">.</span><span class="n">start_num</span><span class="p">)</span>
+    <span class="c1">##### TICKS #####</span>
+    <span class="n">xticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">end_num</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">xticks_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">proj_start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">pd_df</span><span class="p">[</span><span class="n">max_var</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">xticks_labels</span><span class="p">[::</span><span class="mi">10</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+<span class="c1">##############   </span>
+    
+<div class="viewcode-block" id="print_full"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.print_full">[docs]</a><span class="k">def</span> <span class="nf">print_full</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to print a Pandas DataFrame with custom </span>
+<span class="sd">    setting in order to display in a larger area.</span>
+
+<span class="sd">    :param 1° - pandas_df : A Pandas DataFrame</span>
+<span class="sd">    :returns: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:20,.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">reset_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">)</span></div>
+    
+
+<span class="n">iso_639_choices</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;ab&#39;</span><span class="p">,</span> <span class="s1">&#39;Abkhaz&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aa&#39;</span><span class="p">,</span> <span class="s1">&#39;Afar&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;af&#39;</span><span class="p">,</span> <span class="s1">&#39;Afrikaans&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ak&#39;</span><span class="p">,</span> <span class="s1">&#39;Akan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sq&#39;</span><span class="p">,</span> <span class="s1">&#39;Albanian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;am&#39;</span><span class="p">,</span> <span class="s1">&#39;Amharic&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ar&#39;</span><span class="p">,</span> <span class="s1">&#39;Arabic&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;an&#39;</span><span class="p">,</span> <span class="s1">&#39;Aragonese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hy&#39;</span><span class="p">,</span> <span class="s1">&#39;Armenian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;as&#39;</span><span class="p">,</span> <span class="s1">&#39;Assamese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;av&#39;</span><span class="p">,</span> <span class="s1">&#39;Avaric&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ae&#39;</span><span class="p">,</span> <span class="s1">&#39;Avestan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ay&#39;</span><span class="p">,</span> <span class="s1">&#39;Aymara&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;az&#39;</span><span class="p">,</span> <span class="s1">&#39;Azerbaijani&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bm&#39;</span><span class="p">,</span> <span class="s1">&#39;Bambara&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ba&#39;</span><span class="p">,</span> <span class="s1">&#39;Bashkir&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;eu&#39;</span><span class="p">,</span> <span class="s1">&#39;Basque&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;be&#39;</span><span class="p">,</span> <span class="s1">&#39;Belarusian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bn&#39;</span><span class="p">,</span> <span class="s1">&#39;Bengali&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bh&#39;</span><span class="p">,</span> <span class="s1">&#39;Bihari&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bi&#39;</span><span class="p">,</span> <span class="s1">&#39;Bislama&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;bs&#39;</span><span class="p">,</span> <span class="s1">&#39;Bosnian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;br&#39;</span><span class="p">,</span> <span class="s1">&#39;Breton&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bg&#39;</span><span class="p">,</span> <span class="s1">&#39;Bulgarian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;my&#39;</span><span class="p">,</span> <span class="s1">&#39;Burmese&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;Catalan; Valencian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ch&#39;</span><span class="p">,</span> <span class="s1">&#39;Chamorro&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ce&#39;</span><span class="p">,</span> <span class="s1">&#39;Chechen&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ny&#39;</span><span class="p">,</span> <span class="s1">&#39;Chichewa; Chewa; Nyanja&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;zh&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;cv&#39;</span><span class="p">,</span> <span class="s1">&#39;Chuvash&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;kw&#39;</span><span class="p">,</span> <span class="s1">&#39;Cornish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;co&#39;</span><span class="p">,</span> <span class="s1">&#39;Corsican&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;cr&#39;</span><span class="p">,</span> <span class="s1">&#39;Cree&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hr&#39;</span><span class="p">,</span> <span class="s1">&#39;Croatian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;cs&#39;</span><span class="p">,</span> <span class="s1">&#39;Czech&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;da&#39;</span><span class="p">,</span> <span class="s1">&#39;Danish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span> <span class="s1">&#39;Divehi; Maldivian;&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nl&#39;</span><span class="p">,</span> <span class="s1">&#39;Dutch&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;dz&#39;</span><span class="p">,</span> <span class="s1">&#39;Dzongkha&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;English&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;eo&#39;</span><span class="p">,</span> <span class="s1">&#39;Esperanto&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;et&#39;</span><span class="p">,</span> <span class="s1">&#39;Estonian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ee&#39;</span><span class="p">,</span> <span class="s1">&#39;Ewe&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;fo&#39;</span><span class="p">,</span> <span class="s1">&#39;Faroese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;fj&#39;</span><span class="p">,</span> <span class="s1">&#39;Fijian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;fi&#39;</span><span class="p">,</span> <span class="s1">&#39;Finnish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;fr&#39;</span><span class="p">,</span> <span class="s1">&#39;French&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ff&#39;</span><span class="p">,</span> <span class="s1">&#39;Fula&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gl&#39;</span><span class="p">,</span> <span class="s1">&#39;Galician&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ka&#39;</span><span class="p">,</span> <span class="s1">&#39;Georgian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;de&#39;</span><span class="p">,</span> <span class="s1">&#39;German&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;el&#39;</span><span class="p">,</span> <span class="s1">&#39;Greek, Modern&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gn&#39;</span><span class="p">,</span> <span class="s1">&#39;Guaraní&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;gu&#39;</span><span class="p">,</span> <span class="s1">&#39;Gujarati&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ht&#39;</span><span class="p">,</span> <span class="s1">&#39;Haitian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ha&#39;</span><span class="p">,</span> <span class="s1">&#39;Hausa&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;he&#39;</span><span class="p">,</span> <span class="s1">&#39;Hebrew (modern)&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hz&#39;</span><span class="p">,</span> <span class="s1">&#39;Herero&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="s1">&#39;Hindi&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ho&#39;</span><span class="p">,</span> <span class="s1">&#39;Hiri Motu&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hu&#39;</span><span class="p">,</span> <span class="s1">&#39;Hungarian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ia&#39;</span><span class="p">,</span> <span class="s1">&#39;Interlingua&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;Indonesian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ie&#39;</span><span class="p">,</span> <span class="s1">&#39;Interlingue&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ga&#39;</span><span class="p">,</span> <span class="s1">&#39;Irish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ig&#39;</span><span class="p">,</span> <span class="s1">&#39;Igbo&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ik&#39;</span><span class="p">,</span> <span class="s1">&#39;Inupiaq&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;io&#39;</span><span class="p">,</span> <span class="s1">&#39;Ido&#39;</span><span class="p">),</span>
+                   <span class="p">(</span><span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;Icelandic&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;it&#39;</span><span class="p">,</span> <span class="s1">&#39;Italian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;iu&#39;</span><span class="p">,</span> <span class="s1">&#39;Inuktitut&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ja&#39;</span><span class="p">,</span> <span class="s1">&#39;Japanese&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;jv&#39;</span><span class="p">,</span> <span class="s1">&#39;Javanese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kl&#39;</span><span class="p">,</span> <span class="s1">&#39;Kalaallisut&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kn&#39;</span><span class="p">,</span> <span class="s1">&#39;Kannada&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kr&#39;</span><span class="p">,</span> <span class="s1">&#39;Kanuri&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ks&#39;</span><span class="p">,</span> <span class="s1">&#39;Kashmiri&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kk&#39;</span><span class="p">,</span> <span class="s1">&#39;Kazakh&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;km&#39;</span><span class="p">,</span> <span class="s1">&#39;Khmer&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ki&#39;</span><span class="p">,</span> <span class="s1">&#39;Kikuyu, Gikuyu&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;rw&#39;</span><span class="p">,</span> <span class="s1">&#39;Kinyarwanda&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ky&#39;</span><span class="p">,</span> <span class="s1">&#39;Kirghiz, Kyrgyz&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kv&#39;</span><span class="p">,</span> <span class="s1">&#39;Komi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kg&#39;</span><span class="p">,</span> <span class="s1">&#39;Kongo&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="s1">&#39;Korean&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ku&#39;</span><span class="p">,</span> <span class="s1">&#39;Kurdish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kj&#39;</span><span class="p">,</span> <span class="s1">&#39;Kwanyama, Kuanyama&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;la&#39;</span><span class="p">,</span> <span class="s1">&#39;Latin&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;lb&#39;</span><span class="p">,</span> <span class="s1">&#39;Luxembourgish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lg&#39;</span><span class="p">,</span> <span class="s1">&#39;Luganda&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="s1">&#39;Limburgish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ln&#39;</span><span class="p">,</span> <span class="s1">&#39;Lingala&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;lo&#39;</span><span class="p">,</span> <span class="s1">&#39;Lao&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lt&#39;</span><span class="p">,</span> <span class="s1">&#39;Lithuanian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lu&#39;</span><span class="p">,</span> <span class="s1">&#39;Luba-Katanga&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lv&#39;</span><span class="p">,</span> <span class="s1">&#39;Latvian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;gv&#39;</span><span class="p">,</span> <span class="s1">&#39;Manx&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mk&#39;</span><span class="p">,</span> <span class="s1">&#39;Macedonian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Malagasy&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ms&#39;</span><span class="p">,</span> <span class="s1">&#39;Malay&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ml&#39;</span><span class="p">,</span> <span class="s1">&#39;Malayalam&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mt&#39;</span><span class="p">,</span> <span class="s1">&#39;Maltese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mi&#39;</span><span class="p">,</span> <span class="s1">&#39;Māori&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mr&#39;</span><span class="p">,</span> <span class="s1">&#39;Marathi (Marāṭhī)&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;mh&#39;</span><span class="p">,</span> <span class="s1">&#39;Marshallese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mn&#39;</span><span class="p">,</span> <span class="s1">&#39;Mongolian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;Nauru&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;Navajo, Navaho&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;nb&#39;</span><span class="p">,</span> <span class="s1">&#39;Norwegian Bokmål&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nd&#39;</span><span class="p">,</span> <span class="s1">&#39;North Ndebele&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ne&#39;</span><span class="p">,</span> <span class="s1">&#39;Nepali&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="s1">&#39;Ndonga&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;nn&#39;</span><span class="p">,</span> <span class="s1">&#39;Norwegian Nynorsk&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;Norwegian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ii&#39;</span><span class="p">,</span> <span class="s1">&#39;Nuosu&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nr&#39;</span><span class="p">,</span> <span class="s1">&#39;South Ndebele&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;oc&#39;</span><span class="p">,</span> <span class="s1">&#39;Occitan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;oj&#39;</span><span class="p">,</span> <span class="s1">&#39;Ojibwe, Ojibwa&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Old Church Slavonic&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;om&#39;</span><span class="p">,</span> <span class="s1">&#39;Oromo&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;Oriya&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">,</span> <span class="s1">&#39;Ossetian, Ossetic&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pa&#39;</span><span class="p">,</span> <span class="s1">&#39;Panjabi, Punjabi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pi&#39;</span><span class="p">,</span> <span class="s1">&#39;Pāli&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;fa&#39;</span><span class="p">,</span> <span class="s1">&#39;Persian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span> <span class="s1">&#39;Polish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;Pashto, Pushto&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span> <span class="s1">&#39;Portuguese&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;qu&#39;</span><span class="p">,</span> <span class="s1">&#39;Quechua&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;Romansh&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;rn&#39;</span><span class="p">,</span> <span class="s1">&#39;Kirundi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="s1">&#39;Romanian, Moldavan&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ru&#39;</span><span class="p">,</span> <span class="s1">&#39;Russian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sa&#39;</span><span class="p">,</span> <span class="s1">&#39;Sanskrit (Saṁskṛta)&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sc&#39;</span><span class="p">,</span> <span class="s1">&#39;Sardinian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sd&#39;</span><span class="p">,</span> <span class="s1">&#39;Sindhi&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;se&#39;</span><span class="p">,</span> <span class="s1">&#39;Northern Sami&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sm&#39;</span><span class="p">,</span> <span class="s1">&#39;Samoan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sg&#39;</span><span class="p">,</span> <span class="s1">&#39;Sango&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sr&#39;</span><span class="p">,</span> <span class="s1">&#39;Serbian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;gd&#39;</span><span class="p">,</span> <span class="s1">&#39;Scottish Gaelic&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sn&#39;</span><span class="p">,</span> <span class="s1">&#39;Shona&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;si&#39;</span><span class="p">,</span> <span class="s1">&#39;Sinhala, Sinhalese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sk&#39;</span><span class="p">,</span> <span class="s1">&#39;Slovak&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;sl&#39;</span><span class="p">,</span> <span class="s1">&#39;Slovene&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;so&#39;</span><span class="p">,</span> <span class="s1">&#39;Somali&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="s1">&#39;Southern Sotho&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">,</span> <span class="s1">&#39;Spanish; Castilian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;su&#39;</span><span class="p">,</span> <span class="s1">&#39;Sundanese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sw&#39;</span><span class="p">,</span> <span class="s1">&#39;Swahili&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ss&#39;</span><span class="p">,</span> <span class="s1">&#39;Swati&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sv&#39;</span><span class="p">,</span> <span class="s1">&#39;Swedish&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ta&#39;</span><span class="p">,</span> <span class="s1">&#39;Tamil&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;te&#39;</span><span class="p">,</span> <span class="s1">&#39;Telugu&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tg&#39;</span><span class="p">,</span> <span class="s1">&#39;Tajik&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ti&#39;</span><span class="p">,</span> <span class="s1">&#39;Tigrinya&#39;</span><span class="p">),</span>
+                   <span class="p">(</span><span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="s1">&#39;Tibetan&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tk&#39;</span><span class="p">,</span> <span class="s1">&#39;Turkmen&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tl&#39;</span><span class="p">,</span> <span class="s1">&#39;Tagalog&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tn&#39;</span><span class="p">,</span> <span class="s1">&#39;Tswana&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;Tonga&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="s1">&#39;Turkish&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ts&#39;</span><span class="p">,</span> <span class="s1">&#39;Tsonga&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tt&#39;</span><span class="p">,</span> <span class="s1">&#39;Tatar&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tw&#39;</span><span class="p">,</span> <span class="s1">&#39;Twi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ty&#39;</span><span class="p">,</span> <span class="s1">&#39;Tahitian&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ug&#39;</span><span class="p">,</span> <span class="s1">&#39;Uighur, Uyghur&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;uk&#39;</span><span class="p">,</span> <span class="s1">&#39;Ukrainian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ur&#39;</span><span class="p">,</span> <span class="s1">&#39;Urdu&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;uz&#39;</span><span class="p">,</span> <span class="s1">&#39;Uzbek&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;ve&#39;</span><span class="p">,</span> <span class="s1">&#39;Venda&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;Vietnamese&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;vo&#39;</span><span class="p">,</span> <span class="s1">&#39;Volapük&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;Walloon&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;cy&#39;</span><span class="p">,</span> <span class="s1">&#39;Welsh&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;wo&#39;</span><span class="p">,</span> <span class="s1">&#39;Wolof&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;fy&#39;</span><span class="p">,</span> <span class="s1">&#39;Western Frisian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xh&#39;</span><span class="p">,</span> <span class="s1">&#39;Xhosa&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;yi&#39;</span><span class="p">,</span> <span class="s1">&#39;Yiddish&#39;</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;yo&#39;</span><span class="p">,</span> <span class="s1">&#39;Yoruba&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;za&#39;</span><span class="p">,</span> <span class="s1">&#39;Zhuang, Chuang&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;zu&#39;</span><span class="p">,</span> <span class="s1">&#39;Zulu&#39;</span><span class="p">)]</span>
+
+<span class="n">iso_639_choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">iso_639_choices</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="process_lang"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.process_lang">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">process_lang</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that process the text replacing special characters and</span>
+<span class="sd">        &quot;lang=&quot; expression.</span>
+
+<span class="sd">        :param 1° - s: Text that will be processed</span>
+
+<span class="sd">        :returns: None if text is NULL or if its length is less than 2 or begin with &quot;-&quot;</span>
+<span class="sd">        :rtype: String</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>\
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;lang=&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\_&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">iso_639_choices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+
+<span class="c1">########################</span>
+
+<span class="n">schema_html_code</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;preview-body&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;code-length&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;body-length&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<div class="viewcode-block" id="parser_html_code_udf"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.parser_html_code_udf">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">schema_html_code</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">parser_html_code_udf</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that performs the processing of html information, looking for</span>
+<span class="sd">        tags, meta, name, content, etc.</span>
+
+<span class="sd">        :param 1° - raw: not processed HTML text</span>
+
+<span class="sd">        :returns: array with parsed html</span>
+<span class="sd">        :rtype: ArrayType(StringType)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">body</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">code_size</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;(\s+|</span><span class="se">\n</span><span class="s2">+)&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">body</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">code_size</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;meta&quot;</span><span class="p">):</span>
+            <span class="n">tag_key</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;description&quot;</span> <span class="ow">in</span> <span class="n">tag_key</span><span class="p">:</span>
+                <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s2">&quot;keywords&quot;</span> <span class="ow">in</span> <span class="n">tag_key</span><span class="p">:</span>
+                <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">info</span></div>
+
+<span class="c1">#########################</span>
+
+<div class="viewcode-block" id="get_unique_tokens"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.get_unique_tokens">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
+<span class="k">def</span> <span class="nf">get_unique_tokens</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get unique tokens splitted by blanked spaces with length greater than 2.</span>
+
+<span class="sd">    :param 1° - row: DataFrame row with tokens</span>
+
+<span class="sd">    :returns: Empty List or List with set of tokens</span>
+<span class="sd">    :rtype: ArrayType(StringType)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+    
+<div class="viewcode-block" id="get_sorted_tokens"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.get_sorted_tokens">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
+<span class="k">def</span> <span class="nf">get_sorted_tokens</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">min_size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all tokens greater than min_size and spllited by blanked spaces.</span>
+
+<span class="sd">        :param 1° - row: DataFrame row with tokens</span>
+<span class="sd">        :param 2° - min_size: Min size for word length</span>
+
+<span class="sd">        :returns: Empty List or List with tokens</span>
+<span class="sd">        :rtype:ArrayType(StringType)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_size</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+    
+<span class="c1">##########################</span>
+
+<span class="c1">#stopwords_pt = nltk.corpus.stopwords.words(&#39;portuguese&#39;)</span>
+<span class="c1">#stopwords_en = nltk.corpus.stopwords.words(&#39;english&#39;)</span>
+
+<span class="c1">#stopwords = stopwords_pt + stopwords_en</span>
+
+<span class="c1">##########################</span>
+
+
+<div class="viewcode-block" id="plot_bubble_map"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.plot_bubble_map">[docs]</a><span class="k">def</span> <span class="nf">plot_bubble_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">color_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                    <span class="n">hover_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Method that plots a bubble map(Bubble Maps are used to describe qualities associated with</span>
+<span class="sd">        a specific item, person, idea or event.).</span>
+
+<span class="sd">        :param cities_df: DataFrame with cities</span>
+<span class="sd">        :param lat_col: column with cities latitude</span>
+<span class="sd">        :param lon_col: column with cities longitude</span>
+<span class="sd">        :param color_col: define column color, default(None)</span>
+<span class="sd">        :param size: define the plot size, default(None), if keeps none than size = 3</span>
+<span class="sd">        :param hover_name: name to display when hover, default(None)</span>
+<span class="sd">        :param hover_data: data to display when hover, default(None)</span>
+<span class="sd">        :param opacity: define graph opacity, default(0.9)</span>
+<span class="sd">        :param kwargs: key args, default({})</span>
+
+<span class="sd">        :returns: map_box object</span>
+<span class="sd">        :rtype: scatter_mapbox</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">cities_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">])</span>
+    <span class="n">cities_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">size</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="mf">3.0</span>  
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">-</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">size</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">size</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">size</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>   
+        <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">],</span> 
+                                            <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.33</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+                                            <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">size</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cities_df</span><span class="p">))]</span>
+    
+    <span class="k">if</span> <span class="n">color_col</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color_col</span>
+    
+    <span class="c1"># bubble</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_mapbox</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">lon_col</span><span class="p">,</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+        <span class="n">hover_name</span><span class="o">=</span><span class="n">hover_name</span><span class="p">,</span> <span class="n">hover_data</span><span class="o">=</span><span class="n">hover_data</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">mapbox_style</span><span class="o">=</span><span class="s2">&quot;open-street-map&quot;</span><span class="p">,</span> <span class="n">mapbox_center_lon</span><span class="o">=-</span><span class="mi">55</span><span class="p">,</span> <span class="n">mapbox_center_lat</span><span class="o">=-</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">showlegend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">geo</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">scope</span> <span class="o">=</span> <span class="s1">&#39;south america&#39;</span><span class="p">,</span>
+                <span class="n">landcolor</span> <span class="o">=</span> <span class="s1">&#39;rgb(217, 217, 217)&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<span class="c1">##########</span>
+
+
+<div class="viewcode-block" id="plot_heatmap_map"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.plot_heatmap_map">[docs]</a><span class="k">def</span> <span class="nf">plot_heatmap_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">z_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hover_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                     <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that plots a heatmap(By definition, Heat Maps are graphical representations of data that</span>
+<span class="sd">        utilize color-coded systems.The primary purpose of Heat Maps is to better visualize the volume of</span>
+<span class="sd">        locations/events within a dataset and assist in directing viewers towards areas on data visualizations</span>
+<span class="sd">        that matter most.).</span>
+
+<span class="sd">        :param 1° - cities_df: DataFrame with cities</span>
+<span class="sd">        :param 2° - lat_col: column with cities latitude</span>
+<span class="sd">        :param 3° - lon_col: column with cities longitude</span>
+<span class="sd">        :param 4° - z_col:</span>
+<span class="sd">        :param 5° - hover_name: name to display when hover, default(None)</span>
+<span class="sd">        :param 6° - hover_data: data to display when hover, default(None)</span>
+<span class="sd">        :param 7° - radius: the radius searches a set distance, rather than for a certain number of nearby points,</span>
+<span class="sd">        default(8)</span>
+<span class="sd">        :param 8° - opacity: define graph opacity, default(0.9)</span>
+<span class="sd">        :param 9° - kwargs: key args, default({})</span>
+
+
+<span class="sd">        :returns: map_box object</span>
+<span class="sd">        :rtype: density_mapbox</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cities_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">])</span>
+    <span class="n">cities_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">z_col</span><span class="p">:</span>
+        <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">z_col</span><span class="p">]</span> <span class="o">-</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">z_col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> 
+            <span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">z_col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">cities_df</span><span class="p">[</span><span class="n">z_col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+        <span class="p">)</span>
+        <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">],</span> 
+                                            <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.33</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+                                            <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span>
+    
+    <span class="c1">#mapbox</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">density_mapbox</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="n">lat_col</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">lon_col</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                            <span class="n">hover_name</span><span class="o">=</span><span class="n">hover_name</span><span class="p">,</span> <span class="n">hover_data</span><span class="o">=</span><span class="n">hover_data</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">mapbox_style</span><span class="o">=</span><span class="s2">&quot;open-street-map&quot;</span><span class="p">,</span> <span class="n">mapbox_center_lon</span><span class="o">=-</span><span class="mi">55</span><span class="p">,</span> <span class="n">mapbox_center_lat</span><span class="o">=-</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">showlegend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">geo</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">scope</span> <span class="o">=</span> <span class="s1">&#39;south america&#39;</span><span class="p">,</span>
+                <span class="n">landcolor</span> <span class="o">=</span> <span class="s1">&#39;rgb(217, 217, 217)&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<span class="c1">################</span>
+
+<span class="n">uf_codes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AC&#39;</span><span class="p">:</span> <span class="s1">&#39;Acre&#39;</span><span class="p">,</span> <span class="s1">&#39;AL&#39;</span><span class="p">:</span> <span class="s1">&#39;Alagoas&#39;</span><span class="p">,</span> <span class="s1">&#39;AM&#39;</span><span class="p">:</span> <span class="s1">&#39;Amazonas&#39;</span><span class="p">,</span> <span class="s1">&#39;AP&#39;</span><span class="p">:</span> <span class="s1">&#39;Amapá&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;BA&#39;</span><span class="p">:</span> <span class="s1">&#39;Bahia&#39;</span><span class="p">,</span> <span class="s1">&#39;CE&#39;</span><span class="p">:</span> <span class="s1">&#39;Ceará&#39;</span><span class="p">,</span> <span class="s1">&#39;DF&#39;</span><span class="p">:</span> <span class="s1">&#39;Distrito Federal&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;ES&#39;</span><span class="p">:</span> <span class="s1">&#39;Espírito Santo&#39;</span><span class="p">,</span> <span class="s1">&#39;GO&#39;</span><span class="p">:</span> <span class="s1">&#39;Goiás&#39;</span><span class="p">,</span> <span class="s1">&#39;MA&#39;</span><span class="p">:</span> <span class="s1">&#39;Maranhão&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;MT&#39;</span><span class="p">:</span> <span class="s1">&#39;Mato Grosso&#39;</span><span class="p">,</span> <span class="s1">&#39;MS&#39;</span><span class="p">:</span> <span class="s1">&#39;Mato Grosso do Sul&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;MG&#39;</span><span class="p">:</span> <span class="s1">&#39;Minas Gerais&#39;</span><span class="p">,</span> <span class="s1">&#39;PA&#39;</span><span class="p">:</span> <span class="s1">&#39;Pará&#39;</span><span class="p">,</span> <span class="s1">&#39;PB&#39;</span><span class="p">:</span> <span class="s1">&#39;Paraíba&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;PR&#39;</span><span class="p">:</span> <span class="s1">&#39;Paraná&#39;</span><span class="p">,</span> <span class="s1">&#39;PE&#39;</span><span class="p">:</span> <span class="s1">&#39;Pernambuco&#39;</span><span class="p">,</span> <span class="s1">&#39;PI&#39;</span><span class="p">:</span> <span class="s1">&#39;Piauí&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;RJ&#39;</span><span class="p">:</span> <span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;RN&#39;</span><span class="p">:</span> <span class="s1">&#39;Rio Grande do Norte&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;RS&#39;</span><span class="p">:</span> <span class="s1">&#39;Rio Grande do Sul&#39;</span><span class="p">,</span> <span class="s1">&#39;RO&#39;</span><span class="p">:</span> <span class="s1">&#39;Rondônia&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;RR&#39;</span><span class="p">:</span> <span class="s1">&#39;Roraima&#39;</span><span class="p">,</span> <span class="s1">&#39;SC&#39;</span><span class="p">:</span> <span class="s1">&#39;Santa Catarina&#39;</span><span class="p">,</span> <span class="s1">&#39;SP&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;SE&#39;</span><span class="p">:</span> <span class="s1">&#39;Sergipe&#39;</span><span class="p">,</span> <span class="s1">&#39;TO&#39;</span><span class="p">:</span> <span class="s1">&#39;Tocantins&#39;</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="is_valid_uf_code"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.is_valid_uf_code">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">BooleanType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">is_valid_uf_code</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Method that receive a code and verify if it is in the federation units array.</span>
+<span class="sd">        :param 1° - code: federation units code</span>
+
+<span class="sd">        :returns: boolean</span>
+<span class="sd">        :rtype: boolean</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">code</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">uf_codes</span>
+    <span class="k">else</span><span class="p">:</span>
+         <span class="k">return</span> <span class="kc">False</span></div>
+        
+        
+        
+<span class="c1">################</span>
+
+<span class="n">cpe_schema</span> <span class="o">=</span> <span class="n">Schemas</span><span class="p">()</span><span class="o">.</span><span class="n">get_external_schema_by_column</span><span class="p">(</span><span class="s2">&quot;cpe&quot;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="parser_cpe_udf"><a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.parser_cpe_udf">[docs]</a><span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">cpe_schema</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">parser_cpe_udf</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Method that receive a cpe object and parses it.</span>
+<span class="sd">        :param 1° - text: cpe data</span>
+
+<span class="sd">        :returns: cpe_info</span>
+<span class="sd">        :rtype: Dictionary Array or Empty Array</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">cpe</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">part</span> <span class="o">=</span> <span class="kc">None</span>
+            
+            <span class="k">if</span> <span class="s2">&quot;cpe:2.3&quot;</span> <span class="ow">in</span> <span class="n">cpe</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">part</span><span class="p">,</span> <span class="n">vendor</span><span class="p">,</span> <span class="o">*</span><span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpe</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">product</span> <span class="o">=</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">update</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpe</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">product</span> <span class="o">=</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">version</span> <span class="o">=</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">update</span> <span class="o">=</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">product</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">update</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">elif</span> <span class="s2">&quot;cpe:/&quot;</span> <span class="ow">in</span> <span class="n">cpe</span><span class="p">:</span>
+                <span class="n">cpe</span> <span class="o">=</span> <span class="n">cpe</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;cpe:/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">part</span><span class="p">,</span> <span class="n">vendor</span><span class="p">,</span> <span class="n">product</span> <span class="o">=</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpe</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">version</span> <span class="o">=</span> <span class="n">cpe</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                    <span class="n">update</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">update</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            
+            <span class="k">if</span> <span class="n">part</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;a&quot;</span> <span class="o">==</span> <span class="n">part</span><span class="p">:</span>
+                    <span class="n">part</span> <span class="o">=</span> <span class="s2">&quot;Application&quot;</span>
+                <span class="k">elif</span> <span class="s2">&quot;h&quot;</span> <span class="o">==</span> <span class="n">part</span><span class="p">:</span>
+                    <span class="n">part</span> <span class="o">=</span> <span class="s2">&quot;Hardware&quot;</span>
+                <span class="k">elif</span> <span class="s2">&quot;o&quot;</span> <span class="o">==</span> <span class="n">part</span><span class="p">:</span>
+                    <span class="n">part</span> <span class="o">=</span> <span class="s2">&quot;Operating System&quot;</span>
+                    
+                <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">({</span><span class="s2">&quot;cpe_type&quot;</span><span class="p">:</span> <span class="n">part</span><span class="p">,</span> <span class="s2">&quot;cpe_vendor&quot;</span><span class="p">:</span> <span class="n">vendor</span><span class="p">,</span> <span class="s2">&quot;cpe_product&quot;</span><span class="p">:</span> <span class="n">product</span><span class="p">})</span>
+                
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                    <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cpe_type&quot;</span><span class="p">:</span> <span class="n">part</span><span class="p">,</span> <span class="s2">&quot;cpe_vendor&quot;</span><span class="p">:</span> <span class="n">vendor</span><span class="p">,</span> <span class="s2">&quot;cpe_product&quot;</span><span class="p">:</span> <span class="n">product</span><span class="p">,</span> <span class="s2">&quot;cpe_versions&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">()}</span>
+
+                <span class="k">if</span> <span class="n">version</span><span class="p">:</span>    
+                    <span class="c1"># if version == &quot;-&quot;:</span>
+                    <span class="c1">#     version = &quot;*&quot;</span>
+                    <span class="c1"># if update == &quot;-&quot;:</span>
+                    <span class="c1">#     update = &quot;*&quot;</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">version</span><span class="p">,</span> <span class="n">update</span><span class="p">])</span>
+                    <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;cpe_versions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                    
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="s2">&quot;cpe_versions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="s2">&quot;cpe_versions&quot;</span><span class="p">]))</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+    <span class="k">return</span> <span class="n">results</span></div>
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, TLHOP Project - DCC/UFMG &amp; CERT.br/NIC.br.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

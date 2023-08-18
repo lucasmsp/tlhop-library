@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tlhop.crawlers.nist_nvd &#8212; TLHOP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/tlhop/crawlers/nist_nvd';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">TLHOP</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../setup.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_mgr.html">
+                        Shodan Dataset Manager
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../shodan_abstraction.html">
+                        TLHOP abstraction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../datasets_crawlers.html">
+                        External Datasets & Crawlers
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">tlhop.crawlers.nist_nvd</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for tlhop.crawlers.nist_nvd</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">json</span> 
+
+<span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<div class="viewcode-block" id="NISTNVD"><a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.nist_nvd.NISTNVD">[docs]</a><span class="k">class</span> <span class="nc">NISTNVD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    NIST NVD</span>
+
+<span class="sd">    The National Vulnerability Database (NVD) is the U.S. government </span>
+<span class="sd">    repository of standards based vulnerability management data.</span>
+<span class="sd">    </span>
+<span class="sd">    Reference: https://nvd.nist.gov/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_ERROR_MESSAGE_000</span> <span class="o">=</span> <span class="s2">&quot;[ERROR] This crawler requires an environment variable &#39;TLHOP_DATASETS_PATH&#39; containing a folder path to be used as storage to all TLHOP datasets.&quot;</span>
+    <span class="n">_ERROR_MESSAGE_001</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;[ERROR] Destination output already exists (&#39;</span><span class="si">{}</span><span class="s2">&#39;) but RELEASE file is &quot;</span> <span class="o">+</span>
+        <span class="s2">&quot;missing. Because of that, the crawler will not take in count previous files, if they exists.&quot;</span><span class="p">)</span>
+    <span class="n">_ERROR_MESSAGE_002</span> <span class="o">=</span> <span class="s2">&quot;[ERROR] Mentioned file &#39;</span><span class="si">{}</span><span class="s2">&#39; in RELEASE was not found.&quot;</span>
+    <span class="n">_ERROR_MESSAGE_003</span> <span class="o">=</span> <span class="s2">&quot;None active Spark session was found. Please start a new Spark session before use DataSets API.&quot;</span>
+    
+    <span class="n">_INFO_MESSAGE_001</span> <span class="o">=</span> <span class="s2">&quot;[INFO] Last crawling timestamp: </span><span class="si">{}</span><span class="s2">&quot;</span>
+    <span class="n">_INFO_MESSAGE_002</span> <span class="o">=</span> <span class="s2">&quot;[INFO] A most recent version of the current dataset was found.&quot;</span>
+    <span class="n">_INFO_MESSAGE_003</span> <span class="o">=</span> <span class="s2">&quot;[INFO] The current dataset version is the most recent.&quot;</span>
+    <span class="n">_INFO_MESSAGE_004</span> <span class="o">=</span> <span class="s2">&quot;[INFO] New dataset version is download with success!&quot;</span>
+    <span class="n">_INFO_MESSAGE_005</span> <span class="o">=</span> <span class="s2">&quot;[INFO] Downloading new file: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
+    <span class="n">_INFO_MESSAGE_006</span> <span class="o">=</span> <span class="s2">&quot;[INFO] Generating new consolided file.&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        During the initialization process, it will check if a TLHOP directory folder is set and valid.</span>
+<span class="sd">        It also will check on the Internet if an new dataset version is available to download in case </span>
+<span class="sd">        of a previous download was found during folder lookup. Because the download data will be </span>
+<span class="sd">        pos-processed to an efficient format, the initialization process will also check if a Spark </span>
+<span class="sd">        session is already created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">download_url</span> <span class="o">=</span> <span class="s2">&quot;https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-</span><span class="si">{year}</span><span class="s2">.json.zip&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;nist-nvd/&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;outname&quot;</span><span class="p">:</span> <span class="s2">&quot;cve_lib.gz.parquet&quot;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_version</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">year</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">getActiveSession</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_003</span><span class="p">)</span>
+    
+        <span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TLHOP_DATASETS_PATH&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">root_path</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_path</span> <span class="o">=</span> <span class="p">(</span><span class="n">root_path</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;//&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_status</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_new_files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">download_url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;raw&quot;</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;raw&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;RELEASE&quot;</span><span class="p">):</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s2">&quot;outname&quot;</span><span class="p">]):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_002</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s2">&quot;outname&quot;</span><span class="p">]))</span>
+            
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;RELEASE&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                    <span class="n">url</span><span class="p">,</span> <span class="n">etag</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="s2">&quot;raw/&quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="n">etag</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">}</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ERROR_MESSAGE_001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="p">))</span>
+        
+    <span class="k">def</span> <span class="nf">_check_for_new_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_url</span><span class="p">):</span>
+        
+        <span class="n">found_update</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">download_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">etag</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">()[</span><span class="s2">&quot;ETag&quot;</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="n">url</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+                
+            <span class="k">if</span> <span class="n">etag</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">][</span><span class="s2">&quot;etag&quot;</span><span class="p">]:</span>
+                <span class="n">found_update</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">][</span><span class="s2">&quot;download&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">][</span><span class="s2">&quot;etag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">etag</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">][</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">][</span><span class="s2">&quot;download&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="k">if</span> <span class="n">found_update</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_002</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_003</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NISTNVD.describe"><a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.nist_nvd.NISTNVD.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to describe some informations about the dataset: </span>
+<span class="sd">        description, reference and fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        # NIST NVD</span>
+<span class="s2">        </span>
+<span class="s2">        - Description: The National Vulnerability Database (NVD) is the U.S. government </span>
+<span class="s2">          repository of standards based vulnerability management data.</span>
+<span class="s2">        - Reference: https://nvd.nist.gov/</span>
+<span class="s2">        - Download link: </span><span class="si">{}</span>
+<span class="s2">        - Fields: cve_id, description, cvssv2, cvssv3, publishedDate, lastModifiedDate, </span>
+<span class="s2">                  baseMetricV2, baseMetricV3, cpe, references, published_year, rank_cvss_v2,</span>
+<span class="s2">                  rank_cvss_v3</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">download_url</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="NISTNVD.download"><a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.nist_nvd.NISTNVD.download">[docs]</a>    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Downloads a new dataset version available in the source link. After download, it process the</span>
+<span class="sd">        original data format to enrich its data and to convert to Parquet format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">raw_directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="s2">&quot;raw/&quot;</span> 
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">download_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">raw_directory</span> <span class="o">+</span> <span class="n">filename</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="p">[</span><span class="n">url</span><span class="p">][</span><span class="s2">&quot;download&quot;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_005</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+                <span class="n">fin</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+                <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fin</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+                <span class="n">fout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">fin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            
+            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+                <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">raw_directory</span><span class="p">)</span>
+
+        <span class="n">outfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basepath</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_schema</span><span class="p">[</span><span class="s2">&quot;outname&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">raw_directory</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">raw_directory</span><span class="o">+</span><span class="s2">&quot;*.json&quot;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        
+        <span class="n">now</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_file</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;etag&quot;</span><span class="p">],</span> <span class="n">now</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basepath</span><span class="o">+</span><span class="s2">&quot;RELEASE&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_004</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_INFO_MESSAGE_006</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;multiline&quot;</span><span class="p">,</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;PERMISSIVE&quot;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">input_folder</span> <span class="o">+</span><span class="s2">&quot;*.json&quot;</span><span class="p">)</span>
+
+        <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">&quot;CVE_Items&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;CVE_Items&quot;</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;CVE_Items.*&quot;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;cve.CVE_data_meta.ID&quot;</span><span class="p">,</span> 
+                    <span class="n">F</span><span class="o">.</span><span class="n">concat_ws</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;cve.references.reference_data.url&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;references&quot;</span><span class="p">),</span> 
+                    <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;cve.description.description_data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span> 
+                    <span class="n">_get_cpe</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;configurations.nodes.cpe_match&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;cpe&quot;</span><span class="p">),</span>
+                    <span class="s2">&quot;impact.*&quot;</span><span class="p">,</span> <span class="s2">&quot;lastModifiedDate&quot;</span><span class="p">,</span> <span class="s2">&quot;publishedDate&quot;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">_get_description</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;description.lang&quot;</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;description.value&quot;</span><span class="p">)))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">regexp_replace</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span> <span class="sa">r</span><span class="s1">&#39;(;\n)&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">)))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;cvssv2&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;baseMetricV2.cvssV2.baseScore&quot;</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;cvssv3&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;baseMetricV3.cvssV3.baseScore&quot;</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;baseMetricV2&quot;</span><span class="p">,</span> <span class="n">_nesting_dict</span><span class="p">(</span><span class="s2">&quot;baseMetricV2&quot;</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;baseMetricV3&quot;</span><span class="p">,</span> <span class="n">_nesting_dict</span><span class="p">(</span><span class="s2">&quot;baseMetricV3&quot;</span><span class="p">))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;publishedDate&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">to_date</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">unix_timestamp</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;publishedDate&quot;</span><span class="p">),</span> <span class="s2">&quot;yyyy-MM-dd&#39;T&#39;HH:mm&#39;Z&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">)))</span>\
+            <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;ID&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;cve_id&quot;</span><span class="p">),</span> <span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;cvssv2&quot;</span><span class="p">,</span> <span class="s2">&quot;cvssv3&quot;</span><span class="p">,</span> <span class="s2">&quot;publishedDate&quot;</span><span class="p">,</span> 
+                    <span class="s2">&quot;lastModifiedDate&quot;</span><span class="p">,</span> <span class="s2">&quot;baseMetricV2&quot;</span><span class="p">,</span> <span class="s2">&quot;baseMetricV3&quot;</span><span class="p">,</span> <span class="s2">&quot;cpe&quot;</span><span class="p">,</span> <span class="s2">&quot;references&quot;</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;published_year&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">year</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;publishedDate&quot;</span><span class="p">)))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;rank_cvss_v2&quot;</span><span class="p">,</span> <span class="n">_bucket_cvss_v2</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;cvssv2&quot;</span><span class="p">)))</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;rank_cvss_v3&quot;</span><span class="p">,</span> <span class="n">_bucket_cvss_v3</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;cvssv3&quot;</span><span class="p">)))</span>\
+            <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">outfile</span><span class="o">+</span><span class="s2">&quot;_folder&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">)</span>
+        
+        <span class="n">sparkfile</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">outfile</span><span class="o">+</span><span class="s2">&quot;_folder/part-*.parquet&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">sparkfile</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">outfile</span><span class="o">+</span><span class="s2">&quot;_folder&quot;</span><span class="p">)</span></div>
+    
+    
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">_get_description</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">)]</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">_nesting_dict</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">asDict</span><span class="p">()</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span>  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">row</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">Row</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">asDict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">k2</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+                <span class="n">row</span><span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">k2</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">k2</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">_get_cpe</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tmp</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">_bucket_cvss_v3</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">score</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;None&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">4.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;low&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">7.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;medium&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">9.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;high&quot;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="s2">&quot;critical&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;None&quot;</span>
+
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">_bucket_cvss_v2</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">score</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">4.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;low&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">7.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;medium&quot;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="s2">&quot;critical&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;low&quot;</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner"></div>
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, TLHOP Project - DCC/UFMG &amp; CERT.br/NIC.br.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

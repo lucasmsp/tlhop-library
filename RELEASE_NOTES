@@ -1,0 +1,12 @@
+---------------------------̣---
+  TLHOP Library
+------------------------------
+
+Release number: 0.5
+--------------------
+
+Main changes:
+- New ShodanDatasetManager API to convert Shodan's JSON files to delta format;
+- New datasets: RDAP, BrazilianFR, EndOfLife;
+- Add new modules in the requirements.txt;
+- New schemas API;

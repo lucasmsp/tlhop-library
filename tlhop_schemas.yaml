@@ -1,0 +1,49 @@
+cpe:
+  dataset: "any"
+  schema: | 
+    {"containsNull":true, "elementType":{"fields":[
+        {"metadata":{},"name":"cpe_type","nullable":true,"type":"string"},
+        {"metadata":{},"name":"cpe_vendor","nullable":true,"type":"string"},
+        {"metadata":{},"name":"cpe_product","nullable":true,"type":"string"},
+        {"metadata":{},"name":"cpe_versions","nullable":true,"type":{"containsNull":true,"elementType":"string","type":"array"}}
+    ], "type":"struct"},"type":"array"}
+    
+baseMetricV2:
+  dataset: "NVD_CVE_LIB"
+  schema: |
+    {"fields": [{"metadata": {}, "name": "acInsufInfo", "nullable": true, "type": "boolean"}, 
+                {"metadata": {}, "name": "exploitabilityScore", "nullable": true, "type": "float"}, 
+                {"metadata": {}, "name": "impactScore", "nullable": true, "type": "float"}, 
+                {"metadata": {}, "name": "obtainAllPrivilege", "nullable": true, "type": "boolean"}, 
+                {"metadata": {}, "name": "obtainOtherPrivilege", "nullable": true, "type": "boolean"}, 
+                {"metadata": {}, "name": "obtainUserPrivilege", "nullable": true, "type": "boolean"}, 
+                {"metadata": {}, "name": "severity", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "userInteractionRequired", "nullable": true, "type": "boolean"}, 
+                {"metadata": {}, "name": "cvssV2_accessComplexity", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV2_accessVector", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV2_authentication", "nullable": true, "type": "string"},
+                {"metadata": {}, "name": "cvssV2_availabilityImpact", "nullable": true, "type": "string"},
+                {"metadata": {}, "name": "cvssV2_baseScore", "nullable": true, "type": "float"},
+                {"metadata": {}, "name": "cvssV2_confidentialityImpact", "nullable": true, "type": "string"},
+                {"metadata": {}, "name": "cvssV2_integrityImpact", "nullable": true, "type": "string"},
+                {"metadata": {}, "name": "cvssV2_vectorString", "nullable": true, "type": "string"},
+                {"metadata": {}, "name": "cvssV2_version", "nullable": true, "type": "string"}
+    ], "type": "struct"}
+
+baseMetricV3:
+  dataset: "NVD_CVE_LIB"
+  schema: |
+    {"fields": [{"metadata": {}, "name": "exploitabilityScore", "nullable": true, "type": "float"}, 
+                {"metadata": {}, "name": "impactScore", "nullable": true, "type": "float"}, 
+                {"metadata": {}, "name": "cvssV3_attackComplexity", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_availabilityImpact", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_baseScore", "nullable": true, "type": "float"}, 
+                {"metadata": {}, "name": "cvssV3_baseSeverity", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_confidentialityImpact", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_integrityImpact", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_scope", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_privilegesRequired", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_userInteraction", "nullable": true, "type": "string"}, 
+                {"metadata": {}, "name": "cvssV3_vectorString", "nullable": true, "type": "string"},
+                {"metadata": {}, "name": "cvssV3_version", "nullable": true, "type": "string"}
+    ], "type": "struct"}

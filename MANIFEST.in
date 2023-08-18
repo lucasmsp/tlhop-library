@@ -1,0 +1,9 @@
+include *.txt
+include LICENSE
+recursive-include tlhop/tlhop_internal_datasets *
+recursive-include tlhop *.ods
+recursive-include tlhop *.pyx
+recursive-include tlhop *.so
+recursive-include tlhop *.css
+recursive-exclude */__pycache__ *
+recursive-exclude */.ipynb_checkpoints *

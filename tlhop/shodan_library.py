@@ -4,18 +4,24 @@
 import os
 import sys
 import json
+import glob
 import builtins
 import pandas as pd
 
 from IPython.display import HTML
+import xml.etree.ElementTree as ET
+    
 
 from pyspark.sql.functions import *                                                                              
 from pyspark.sql.types import *
 from pyspark.sql.window import Window
+from pyspark.ml.stat import Correlation
+from pyspark.ml.feature import VectorAssembler
 
 from tlhop.library import *
-
 from tlhop.schemas import Schemas
+from tlhop.algorithms import Fingerprints
+
 
 _library_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -365,78 +371,6 @@ def parser_complex_column(self, input_col, output_col=None):
     return result
 
 
-
-def get_events(self, new_rules=None):
-    """
-    Method to analize all records and columns to map some specificic events of a record in a new `meta_events` column.
-    The mapped events can be like: it has screenshots; it has some compromised database or has other type of vulnerability;
-    and others.
-
-    :params new_rules: Another patterns can be informed as string (using Spark SQL syntax);
-    :return: Spark DataFrame 
-    """
-
-    events_dict = {
-        'vulns-heartbleed': (col("opts").contains("heartbleed") & col("opts").contains("VULNERABLE")),
-        'password-leak-lantronix': col("lantronix").contains("password"),
-        'unauthenticated-admin-lantronix': col("data").contains("Press Enter for Setup Mode"), # Lantronix ethernet adapter’s admin interface without password
-        'unauthenticated-terminal': (
-                (col("shodan_module").contains("telnet") | col("shodan_module").contains("ssh")) & 
-                (col("data").contains("@") & col("data").contains("\r\n") & (col("data").contains("]$") | col("data").contains("]#") | col("data").contains("/ #")))
-        ),
-        'android_debug_bridge': (col("android_debug_bridge").isNotNull()),
-        'has_screenshot': col("opts").contains("screenshot"),
-        
-        # databases
-        'shodan-tag-database': array_contains(col("tags"), "database"),
-        'unauthenticated-ftp': col("data").contains("230 Login successful"), # FTP Servers with Anonymous Login
-        'unauthenticated-samba': col("data").contains("SMB Status:\n  Authentication: disabled"),
-        'unauthenticated-mongodb': col("mongodb").contains('"authentication":"false"'),
-        'unauthenticated-elastic': col("elastic").contains('"indices":{"'),
-        'unauthenticated-kibana':  (col("data").contains("kibana") & col("data").contains("content-length: 217")),
-        'unauthenticated-redis': (col("redis").isNotNull() & col("redis").contains('"keys":{')),
-        'unauthenticated-couchdb': (col("couchdb").isNotNull() & col("couchdb").contains('"dbs":["')),
-        
-        'compromised-mongodb': (col("mongodb").contains("meow") | lower("mongodb").contains("read_me_to_recovert_your_data")),
-        'compromised-elastic': (col("elastic").contains("-meow")),
-
-        # https://cloud7.news/security/39000-exposed-unauthenticated-redis-servers-are-under-attack/
-        'compromised-redis': (col("redis").isNotNull() &  col('redis').contains('"backup1"') &  col('redis').contains('"backup4"')), 
-
-        'vulns-couchdb-CVE-2017-12635': (
-            col("couchdb").isNotNull() & col("couchdb").contains('"dbs":["') &
-            (substring(regexp_extract("couchdb", 'version\"\:\"[0-2].\d+\.\d+', 0), 11, 5) < '2.1.1') 
-        ),
-        
-        'compromised-website': lower("http").rlike("hacked by \w"),
-        'compromised-routers': lower("data").contains("hacked-router-help-sos"),
-        'shodan-tag-malware': array_contains(col("tags"), "malware"),
-        'shodan-tag-compromised': array_contains(col("tags"), "compromised"),
-        'shodan-tag-ics': array_contains(col("tags"), "ics"),
-        'shodan-tag-medical': array_contains(col("tags"), "medical"),
-        'unauthenticated-vnc': (col("data").contains("Authentication Disabled") & col("data").contains("RFB 003.008")),
-        'vulns-hp-ilo4-CVE-2017-12542' : (
-            col("data").contains("iLO 4") & col("data").contains("iLO Firmware:") & 
-            ((substring(regexp_extract("data", 'iLO Firmware: \d\.\d+', 0),15, 5) < '2.53'))
-        ),
-        'has_vulns': col("vulns_cve").isNotNull(),
-        'has_verified_vulns': col("vulns_verified").isNotNull(),
-    }
-    
-    new_cols = []
-
-    for new_col, cond in events_dict.items():
-        tmp_col = "tmp_get_events_" + new_col
-        new_cols.append(tmp_col)
-        self = self.withColumn(tmp_col, when(cond, lit(new_col)))
-        
-    result = self.withColumn("meta_events", array_sort(array_distinct(array(*new_cols))))\
-        .withColumn("meta_events", expr('filter(meta_events, x -> x is not null)'))\
-        .drop(*new_cols)
-    
-    return result
-
-
 def get_softwares_in_data():
     return None
 
@@ -463,3 +397,46 @@ def efficient_join(self, df2):
         .join(df2, ["year", "date", "meta_module", 'shodan_id'])
 
     return result
+
+def find_patterns(self, labels, target_col="meta_events"):
+    """
+
+    """
+    
+    tmp_df = self
+    
+    fp = Fingerprints()
+    to_remove = []
+    for label in fp.fingerprints:
+        if not any([True  for l in labels if l in label]):
+            to_remove.append(label)
+
+    for label in to_remove:
+        del fp.fingerprints[label]
+            
+    if len(fp.fingerprints) == 0:
+        print("Fingerprints not found")
+        return tmp_df
+    
+    fp._find_all_fingerprints(tmp_df, output_col="meta_events")
+    result = fp.output
+    
+    return result
+
+
+def gen_correlation(self, features_cols):
+    
+
+    vector_col = "corr_features"
+
+    assembler = VectorAssembler(inputCols=features_cols, outputCol=vector_col)
+    df_vector = assembler.transform(self).select(vector_col)
+    
+    matrix = Correlation.corr(df_vector, vector_col)
+    cor_np = matrix.collect()[0]["pearson({})".format(vector_col)].values
+
+    corr_matrix = matrix.collect()[0][0].toArray().tolist() 
+    corr_matrix_df = pd.DataFrame(data=corr_matrix, columns = features_cols, index=features_cols) 
+    
+
+    return corr_matrix_df, corr_matrix_df.style.background_gradient(cmap='coolwarm').set_precision(2)

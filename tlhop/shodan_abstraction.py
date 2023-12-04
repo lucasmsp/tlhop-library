@@ -40,10 +40,6 @@ def shodan_extension(self):
     @add_attr(shodan_extension)
     def get_http_status(outname="http-code"):
         return shodan_lib.get_http_status(self, outname=outname)
-    
-    @add_attr(shodan_extension)
-    def get_events(new_rules):
-        return shodan_lib.get_events(self, new_rules)
         
     @add_attr(shodan_extension)
     def parser_http_col(outname=None, cols=None):
@@ -126,6 +122,14 @@ def shodan_extension(self):
     def get_ip_mask(input_col="ip_str", output_col=None, level=3):
         return shodan_lib.get_ip_mask(self, input_col=input_col, output_col=output_col, level=level)
 
+    @add_attr(shodan_extension)
+    def find_patterns(labels, target_col="meta_events"):
+        return shodan_lib.find_patterns(self, labels, target_col)
+
+    @add_attr(shodan_extension)
+    def gen_correlation(features_cols):
+        return shodan_lib.gen_correlation(self, features_cols)
+        
     return shodan_extension
 
 DataFrame.shodan_extension = property(shodan_extension)

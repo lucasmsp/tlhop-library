@@ -10,6 +10,7 @@ from tlhop.crawlers.receita_federal import BrazilianFR
 from tlhop.crawlers.cisa_known_exploits import CISAKnownExploits
 from tlhop.crawlers.rdap import RDAP
 from tlhop.crawlers.end_of_life import EndOfLife
+from tlhop.crawlers.first_epss import FirstEPSS
 
 __all__ = ['AS2Type', 
            'ASRank', 
@@ -19,4 +20,5 @@ __all__ = ['AS2Type',
            'BrazilianFR',
            'CISAKnownExploits',
            'RDAP',
-           'EndOfLife']
+           'EndOfLife',
+           'FirstEPSS']

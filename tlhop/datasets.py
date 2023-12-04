@@ -5,7 +5,6 @@ from pyspark.sql import SparkSession
 import pyspark.sql.functions as F                                                                              
 from pyspark.sql.types import *
 from pyspark.sql.window import Window
-from pyspark.sql.dataframe import DataFrame
 
 from pathlib import Path
 from datetime import datetime, timezone
@@ -16,7 +15,6 @@ import glob
 import pandas as pd
 import numpy as np
 
-from tlhop.shodan_abstraction import DataFrame
 from tlhop.library import print_full, normalize_string
 from tlhop.schemas import Schemas
 # TODO: Referer its crawlers
@@ -140,15 +138,18 @@ class DataSets(object):
         
         self.spark_session = SparkSession.getActiveSession()
         if not self.spark_session:
-            raise Exception(_ERROR_MESSAGE_001)
+            self.spark_session = SparkSession.builder.getOrCreate()
+            if not self.spark_session:
+                raise Exception(self._ERROR_MESSAGE_001)
 
         path = os.environ.get("TLHOP_DATASETS_PATH", None)
         if not path:
-            raise Exception(_ERROR_MESSAGE_002)
+            raise Exception(self._ERROR_MESSAGE_002)
         self.path = (path+"/").replace("//", "/")
         
         self._DATASET_LIST = {**self._INTERNAL_DATASET_LIST, **self._EXTERNAL_DATASET_LIST}
         self.datasets_df = self._check_datasets()
+        self.schemas = Schemas()
         
     def list_datasets(self):
         """
@@ -199,7 +200,8 @@ class DataSets(object):
                     with open(RELEASE_FILE, "r") as f:
                         info_release = f.readlines()[0].split("|")
                         timestamp = info_release[-1].replace("\n", "")
-                        filepath = filepath.replace("<>", timestamp)           
+                        filepath = filepath.replace("<>", timestamp)    
+
             
             if os.path.exists(filepath):
                 p = Path(filepath)
@@ -235,6 +237,16 @@ class DataSets(object):
             raise Exception(self._ERROR_MESSAGE_003)
             
         path = self.path + self._DATASET_LIST[code]["path"]
+        
+        if "<>" in path:
+            # this means that the dataset is inside an subfolder that changes over time
+            RELEASE_FILE = os.path.split(os.path.split(path)[0])[0] + "/RELEASE"
+            if os.path.exists(RELEASE_FILE):
+                with open(RELEASE_FILE, "r") as f:
+                    info_release = f.readlines()[0].split("|")
+                    timestamp = info_release[-1].replace("\n", "")
+                    path = path.replace("<>", timestamp) 
+                        
         if not os.path.exists(path):
             raise Exception(self._ERROR_MESSAGE_004)
             
@@ -244,9 +256,13 @@ class DataSets(object):
     
     
     def _read_nvd_cve_lib(self, path):
+
+        baseMetricV2_schema = self.schemas.get_external_schema_by_column("baseMetricV2", dataset_code="NVD_CVE_LIB")
+        baseMetricV3_schema = self.schemas.get_external_schema_by_column("baseMetricV3", dataset_code="NVD_CVE_LIB")
+        
         cve_lib = self.spark_session.read.parquet(path, compression="gzip")\
-            .withColumn("baseMetricV2", F.from_json("baseMetricV2", Schemas.nist_baseMetricV2_schema))\
-            .withColumn("baseMetricV3", F.from_json("baseMetricV3", Schemas.nist_baseMetricV3_schema))
+            .withColumn("baseMetricV2", F.from_json("baseMetricV2", baseMetricV2_schema))\
+            .withColumn("baseMetricV3", F.from_json("baseMetricV3", baseMetricV3_schema))
         return cve_lib
     
     def _read_cisa_known_exploits(self, path):
@@ -371,4 +387,8 @@ class DataSets(object):
             .withColumn("cnae_principal_raiz", F.substring(F.col("cnae_fiscal_principal_cod"), 0, 2))\
             .withColumn("cnae_secao", gen_secao(F.col("cnae_principal_raiz")))
         return rfb
-        
+
+    def _read_rdap_dataset(self, path):
+
+        rdap = self.spark_session.read.parquet(path, compression="gzip")
+        return rdap

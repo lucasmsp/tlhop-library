@@ -17,6 +17,7 @@ import numpy as np
 
 from tlhop.library import print_full, normalize_string
 from tlhop.schemas import Schemas
+import tlhop.crawlers as crawlers
 # TODO: Referer its crawlers
 
 class DataSets(object):
@@ -118,16 +119,22 @@ class DataSets(object):
             "path": "rdap/scan_<>/rdap.parquet",
             "description": "RDAP dataset generated from a list of IPs",
             "method": "_read_rdap_dataset"
+        },
+        "FIRST_EPSS": {
+            "path": "first-epss/epss.delta",
+            "description": "FIRST's Exploit Prediction Scoring system (EPSS)",
+            "method": "_read_epss_dataset"
         }
+        
     }
         
-    _ERROR_MESSAGE_001 = "None active Spark session was found. Please start a new Spark session before use DataSets API."
-    _ERROR_MESSAGE_002 = "TLHOP DataSets API requires an environment variable 'TLHOP_DATASETS_PATH' containing a folder path to be used as storage to all datasets."
-    _ERROR_MESSAGE_003 = "Dataset code does not exists. Please run `Dataset().list_datasets()` to check the right code."
-    _ERROR_MESSAGE_004 = "File or directory not found. Please check the informed path."
+    _ERROR_MESSAGE_001 = "[ERROR] None active Spark session was found. Please start a new Spark session before use DataSets API."
+    _ERROR_MESSAGE_002 = "[ERROR] TLHOP DataSets API requires an environment variable 'TLHOP_DATASETS_PATH' containing a folder path to be used as storage to all datasets."
+    _ERROR_MESSAGE_003 = "[ERROR] Dataset code does not exists. Please run `Dataset().list_datasets()` to check the right code."
+    _ERROR_MESSAGE_004 = "[ERROR] File or directory not found. Please check the informed path."
     
-    _WARN_MESSAGE_001 = "The following {} datasets remains missing: {}"
-       
+    _WARN_MESSAGE_001 = "[WARN] The following {} datasets remains missing: {}"
+    _WARN_MESSAGE_002 = "[WARN] Checking updation is not supported yet to this dataset."  
     
     def __init__(self):
         """
@@ -223,7 +230,7 @@ class DataSets(object):
 
         return pd.DataFrame(infos, columns=["Code name", "Description", "Type", "Downloaded", "Size (MB)", "Last timestamp"])
         
-    def read_dataset(self, code):
+    def read_dataset(self, code, check_update=False):
         """
         Method to read a dataset based on its reference code. 
         It returns a dataset as a Spark's DataFrame.
@@ -251,7 +258,13 @@ class DataSets(object):
             raise Exception(self._ERROR_MESSAGE_004)
             
         method = getattr(self, self._DATASET_LIST[code]["method"])
-        df = method(path)
+
+        if check_update and (code not in ["FIRST_EPSS"]):
+            print(self._WARN_MESSAGE_002)
+            df = method(path)
+        else:
+            df = method(path, check_update=True)
+        
         return df
     
     
@@ -392,3 +405,12 @@ class DataSets(object):
 
         rdap = self.spark_session.read.parquet(path, compression="gzip")
         return rdap
+
+    def _read_epss_dataset(self, path, check_update=False):
+
+        if check_update:
+            crawler = crawlers.FirstEPSS()
+            crawler.download()
+
+        epss = self.spark_session.read.format("delta").load(path)
+        return epss

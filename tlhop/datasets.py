@@ -259,7 +259,9 @@ class DataSets(object):
             
         method = getattr(self, self._DATASET_LIST[code]["method"])
 
-        if check_update and (code not in ["FIRST_EPSS"]):
+        if not check_update:
+            df = method(path)
+        elif code not in ["FIRST_EPSS"]:
             print(self._WARN_MESSAGE_002)
             df = method(path)
         else:

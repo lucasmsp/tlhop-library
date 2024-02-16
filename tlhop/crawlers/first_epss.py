@@ -164,15 +164,18 @@ class FirstEPSS(object):
                     current_url = self.download_url.replace("YYYY-mm-dd", day_str)
                     tmp_df = self._download_dataset(current_url)
                     if isinstance(tmp_df, pd.DataFrame):
-                        tmp_df.columns = ["cve_id", "epss", "percentile"]
+                        tmp_df = tmp_df.rename(columns={'cve': 'cve_id'}) 
                         tmp_df["model_version"] =  "v2021-04-14"
-                        tmp_df["score_date"] =  day
+                        tmp_df["score_date"] =  day   
+
+                        cols = ["cve_id", "score_date", "year", "model_version", "epss"]
+                        if "percentile" in tmp_df.columns:
+                            cols += ["percentile"]
                         
-            
                         self.spark_session.createDataFrame(tmp_df)\
                             .withColumn("score_date", F.col("score_date").cast("date"))\
                             .withColumn("year", F.year("score_date"))\
-                            .select("cve_id", "score_date", "year", "model_version", "epss", "percentile")\
+                            .select(*cols)\
                             .coalesce(1)\
                             .write\
                             .format("delta")\
@@ -183,9 +186,10 @@ class FirstEPSS(object):
                             .save(output_path)
     
                         self._gen_release(day_str)
+                        
                     
                 previous_date = day
-            
+
             next_dates = pd.date_range(previous_date, pd.to_datetime('today'), freq='d')
             output_path = self.basepath + self.expected_schema["outname"]
             

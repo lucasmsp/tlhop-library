@@ -14,3 +14,4 @@ __version__ = "0.5"
 from tlhop.schemas import *
 from tlhop.library import *
 from tlhop.shodan_abstraction import shodan_extension
+from tlhop.conversors import *

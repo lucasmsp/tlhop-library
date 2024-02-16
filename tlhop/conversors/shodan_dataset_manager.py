@@ -278,7 +278,6 @@ class ShodanDatasetManager(object):
         - Column `coap`, value: `{"resources":{}}` 
         - Column `iscsi`, value: `{"targets":[]}`
         - Column `data`, value: `""`
-        - Column `bgp`, value: `{"error_code":"Cease","error_subcode":"Connection Rejected","length":"21","type":"NOTIFICATION"}`
         """
 
         for name, dtype in df.dtypes:
@@ -288,8 +287,7 @@ class ShodanDatasetManager(object):
         df = df.replace("{}", None)\
             .replace("", None, subset=['data'])\
             .replace('{"resources":{}}', None, subset=['coap'])\
-            .replace('{"targets":[]}', None, subset=['iscsi'])\
-            .replace('{"error_code":"Cease","error_subcode":"Connection Rejected","length":"21","type":"NOTIFICATION"}', None, subset=['bgp'])
+            .replace('{"targets":[]}', None, subset=['iscsi'])
                 
         return df
     
@@ -312,11 +310,12 @@ class ShodanDatasetManager(object):
         """
         Removal of `title` and `html` columns due to obsolescence. Information is now present in `http`.
         """
-        df = df.withColumn("http", F.when((F.col("html").isNotNull() |  F.col("title").isNotNull()) & F.col("http").isNull(), 
-                                         F.to_json(F.struct("html", "title"))
-                                        ).otherwise(F.col("http")))\
-            .drop("html", "title")
-        
+        if ('html' in df.columns) or ('title' in df.columns):
+            df = df.withColumn("http", F.when((F.col("html").isNotNull() |  F.col("title").isNotNull()) & F.col("http").isNull(), 
+                                             F.to_json(F.struct("html", "title"))
+                                            ).otherwise(F.col("http")))\
+                .drop("html", "title")
+            
         return df
     
     

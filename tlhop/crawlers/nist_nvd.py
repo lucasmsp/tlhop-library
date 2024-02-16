@@ -95,8 +95,9 @@ class NISTNVD(object):
         
         found_update = False
         for y in range(2002, self.year+1):
+            print(f"Checking CVES of year {y}")
             url = self.download_url.format(year=y)
-            info = urllib.request.urlopen(url)
+            info = urllib.request.urlopen(url, timeout=30)
             etag = info.info()["ETag"]
             
             if url not in self.last_file:
@@ -174,6 +175,7 @@ class NISTNVD(object):
     def _process(self, input_folder, outfile):
         
         print(self._INFO_MESSAGE_006)
+
         df = self.spark_session.read.option("multiline","true")\
             .option("mode", "PERMISSIVE")\
             .json(input_folder +"*.json")
@@ -183,7 +185,7 @@ class NISTNVD(object):
             .select("cve.CVE_data_meta.ID", 
                     F.concat_ws(",", F.col("cve.references.reference_data.url")).alias("references"), 
                     F.col("cve.description.description_data").alias("description"), 
-                    _get_cpe(F.col("configurations.nodes.cpe_match")).alias("cpe"),
+                    F.col("configurations.nodes").alias("cpes"),
                     "impact.*", "lastModifiedDate", "publishedDate")\
             .withColumn("description", _get_description(F.col("description.lang"), F.col("description.value")))\
             .withColumn("description", F.trim(F.regexp_replace(F.col("description"), r'(;\n)', ',')))\
@@ -193,7 +195,7 @@ class NISTNVD(object):
             .withColumn("baseMetricV3", _nesting_dict("baseMetricV3"))\
             .withColumn("publishedDate", F.to_date(F.unix_timestamp(F.col("publishedDate"), "yyyy-MM-dd'T'HH:mm'Z'").cast("timestamp")))\
             .select(F.col("ID").alias("cve_id"), "description", "cvssv2", "cvssv3", "publishedDate", 
-                    "lastModifiedDate", "baseMetricV2", "baseMetricV3", "cpe", "references")\
+                    "lastModifiedDate", "baseMetricV2", "baseMetricV3", "cpes", "references")\
             .withColumn("published_year", F.year(F.col("publishedDate")))\
             .withColumn("rank_cvss_v2", _bucket_cvss_v2(F.col("cvssv2")))\
             .withColumn("rank_cvss_v3", _bucket_cvss_v3(F.col("cvssv3")))\

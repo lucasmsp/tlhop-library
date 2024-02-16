@@ -13,6 +13,7 @@ import zipfile
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
 from pyspark.sql import SparkSession
+from delta.tables import DeltaTable
 
 from tlhop.library import cleaning_text_udf
 
@@ -46,8 +47,8 @@ class BrazilianFR(object):
                   "If you want, you can abort this operation, download all zip files manually, "\
                   "place them inside `{}` folder and them resume the operation using the parameter `manual=True` "\
                   "to complete the setup.\nRequired files to download: {}\nDo you want to continue ? "\
-                  "Press [y/N] to continue or abort."
-    _WARN_MESSAGE_002 = "[WARN] Do you want to remove all download zipped files? [y/N]"
+                  "Press [Y/N] to continue or abort."
+    _WARN_MESSAGE_002 = "[WARN] Do you want to remove all download zipped files? [Y/N]"
     
     _ERROR_MESSAGE_000 = "[ERROR] This crawler requires an environment variable 'TLHOP_DATASETS_PATH' containing a folder path to be used as storage to all TLHOP datasets."
     _ERROR_MESSAGE_001 = "[ERROR] Mentioned file '{}' in RELEASE was not found."
@@ -68,7 +69,7 @@ class BrazilianFR(object):
         self.download_url = "http://200.152.38.155/CNPJ/"
         self.path = "brazilian-rf/"
         self.expected_schema = {
-            "outname": "brazilian-rf-consolidated.gz.parquet", 
+            "outname": "brazilian-rf-consolidated.gz.delta", 
             "files": ["Cnaes", "Empresas", "Estabelecimentos", 
                       "Naturezas", "Paises", "Municipios", "Motivos"] 
         }
@@ -80,6 +81,9 @@ class BrazilianFR(object):
         self.spark_session = SparkSession.getActiveSession()
         if not self.spark_session:
             raise Exception(self._ERROR_MESSAGE_004)
+        # To Spark be able to write dates prior to 1900 in Parquet
+        self.spark_session.conf.set("spark.sql.parquet.datetimeRebaseModeInWrite", "CORRECTED")
+        self.spark_session.conf.set("spark.databricks.delta.retentionDurationCheck.enabled", "false")
         
         root_path = os.environ.get("TLHOP_DATASETS_PATH", None)
         if not root_path:
@@ -198,6 +202,9 @@ class BrazilianFR(object):
             if op == "N":
                 print(self._INFO_MESSAGE_007)
                 return 
+
+            if not os.path.exists(raw_directory):
+                os.mkdir(raw_directory)
             
             for url in self.last_file:
                 filename = url.split("/")[-1] 
@@ -251,8 +258,7 @@ class BrazilianFR(object):
         """
         print(self._INFO_MESSAGE_006)
         
-        # To Spark be able to write dates prior to 1900 in Parquet
-        self.spark_session.conf.set("spark.sql.parquet.datetimeRebaseModeInWrite","LEGACY")
+        
         
         INPUT_ESTALECIMENTOS = f"{input_folder}*ESTABELE*"
         INPUT_PAISES = f"{input_folder}*PAISCSV"
@@ -289,7 +295,7 @@ class BrazilianFR(object):
                     ignoreTrailingWhiteSpace=True,  maxColumns=30, schema=schema_estabelecimentos,
                     escape="\"", charToEscapeQuoteEscaping="\\")\
             .drop("contato_ddd_fax")\
-            .withColumn("nome_fantasia_clean", cleaning_text_udf(F.col("nome_fantasia")), F.lit(True))\
+            .withColumn("nome_fantasia_clean", cleaning_text_udf(F.col("nome_fantasia"), F.lit(True)))\
             .withColumn("situacao_cadastral", F.when(F.col("situacao_cadastral") == 1, "NULA")\
                                 .when(F.col("situacao_cadastral") == 2, "ATIVA")\
                                 .when(F.col("situacao_cadastral") == 3, "SUSPENSA")\
@@ -320,7 +326,7 @@ class BrazilianFR(object):
                                     .when(F.col("porte_empresa") == "01", "MICRO EMPRESA")\
                                     .when(F.col("porte_empresa") == "03", "EMPRESA DE PORTE PEQUENO")\
                                     .otherwise("DEMAIS"))\
-            .withColumn("razao_social_clean", cleaning_org(F.col("razao_social")))\
+            .withColumn("razao_social_clean", cleaning_text_udf(F.col("razao_social"), F.lit(True)))\
             .join(naturezas.hint("broadcast"), F.col("cod_natureza") == F.col("cod_natureza_juridica"), "left")\
             .drop("cod_natureza", "cod_natureza_juridica")\
             .persist()
@@ -340,9 +346,27 @@ class BrazilianFR(object):
             .drop("cod_cnea")\
             .join(empresas, "cnpj_basico")\
             .withColumn("cnpj", F.concat_ws("", F.col("cnpj_basico"), F.col("cnpj_ordem"), F.col("cnpj_dv")))\
-            .drop("cnpj_ordem", "cnpj_dv")
+            .drop("cnpj_ordem", "cnpj_dv")\
+            .withColumn("dump_data", lit(self.now.strftime("%Y-%m-%d")).cast("date"))
         
-        df_consolidado.write.parquet(outfile, compression="gzip")
+        if os.path.exists(outfile):
+            deltaTable = DeltaTable.forPath(self.spark_session, outfile)
+            deltaTable.alias("old").merge(
+                df_consolidado.alias("new"),
+                (col("old.cnpj") == col("new.cnpj")) & (col("old.razao_social") == col("new.razao_social")) & 
+                (
+                     (col("old.nome_fantasia").isNull() & col("new.nome_fantasia").isNull()) |
+                     (col("old.nome_fantasia").isNotNull() & col("new.nome_fantasia").isNotNull() & (col("old.nome_fantasia") == col("new.nome_fantasia")))
+                )
+            )\
+            .whenNotMatchedInsertAll()\
+            .execute()
+
+            deltaTable.optimize().executeCompaction()
+            deltaTable.vacuum(0)
+        else:
+            df_consolidado.write.format("delta").save(outfile)
+
         estabelecimentos.unpersist()
         empresas.unpersist()
 

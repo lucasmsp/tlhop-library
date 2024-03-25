@@ -266,7 +266,7 @@ class DataSets(object):
 
         if not check_update:
             df = method(path)
-        elif code not in ["FIRST_EPSS", "LACNIC_STATISTICS"]:
+        elif code not in ["FIRST_EPSS", "LACNIC_STATISTICS", "NVD_CVE_LIB"]:
             print(self._WARN_MESSAGE_002)
             df = method(path)
         else:
@@ -275,14 +275,14 @@ class DataSets(object):
         return df
     
     
-    def _read_nvd_cve_lib(self, path):
+    def _read_nvd_cve_lib(self, path, check_update=False):
 
-        baseMetricV2_schema = self.schemas.get_external_schema_by_column("baseMetricV2", dataset_code="NVD_CVE_LIB")
-        baseMetricV3_schema = self.schemas.get_external_schema_by_column("baseMetricV3", dataset_code="NVD_CVE_LIB")
+        if check_update:
+            crawler = crawlers.NISTNVD()
+            crawler.download()
         
-        cve_lib = self.spark_session.read.parquet(path, compression="gzip")\
-            .withColumn("baseMetricV2", F.from_json("baseMetricV2", baseMetricV2_schema))\
-            .withColumn("baseMetricV3", F.from_json("baseMetricV3", baseMetricV3_schema))
+        cve_lib = self.spark_session.read.parquet(path, compression="gzip")
+        
         return cve_lib
     
     def _read_cisa_known_exploits(self, path):

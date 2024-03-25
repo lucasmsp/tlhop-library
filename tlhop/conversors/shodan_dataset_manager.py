@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 import time
 import json
 import os
@@ -31,11 +32,13 @@ class ShodanDatasetManager(object):
     
     _ERROR_MESSAGE_001 = "None active Spark session was found. Please start a new Spark session before use the API."
     
-    def __init__(self, output_folder, output_log=None):
+    def __init__(self, org_refinement=True, fix_brazilian_cities=True, only_vulns=False, output_log=None):
         """
         A Class to convert Shodan's Json files into a single Delta format, to enrich and manage the dataset.
-        
-        :params output_folder: A path where the converted dataset will be stored;
+
+        :params org_refinement: True to add a new column (org_clean) containing the 
+                                name of the organization in a standardized version;  
+        :params fix_brazilian_cities: If true, it fixes brazilian cities and region codes names (default, True).  
         :param output_log: A filepath to store the log execution (default None, only prints on screen).
         """
         
@@ -43,9 +46,11 @@ class ShodanDatasetManager(object):
         if not self.spark_session:
             raise Exception(self._ERROR_MESSAGE_001)
             
-        self.LOG_OUTPUT = output_log
-        self.OUTPUT_FOLDER = output_folder
         self.locationModel = {}
+        self.org_refinement = org_refinement
+        self.fix_brazilian_cities = fix_brazilian_cities
+        self.only_vulns = only_vulns
+        self.LOG_OUTPUT = output_log
         
         # Setting Spark configurations
         self.spark_session.conf.set("spark.sql.caseSensitive", "true")
@@ -63,27 +68,34 @@ class ShodanDatasetManager(object):
         self.spark_session.conf.set("spark.databricks.delta.optimize.maxThreads", maxThreads)
         self.spark_session.conf.set("spark.databricks.delta.retentionDurationCheck.enabled","false")
         self.spark_session.conf.set("spark.databricks.delta.merge.repartitionBeforeWrite.enabled", "true") 
+
+        if self.fix_brazilian_cities:
+            self._load_KNNClassifier_to_brazilian_cities()  
+
+    def convert_dump_to_df(self, input_filepath):
+        """
+                :params output_folder: A path where the converted dataset will be stored;
+        """
+        df = self._convert(input_filepath, persist=False, output_filepath=None)
         
-    def convert_files(self, input_list_files, org_refinement=True, fix_brazilian_cities=True):
+        return df
+        
+    def convert_files(self, input_list_files, output_folder):
         """
         Converts all JSON files in `input_list_files` into a single DELTA file format.
         
         :params input_list_files: A list of input filepaths;
-        :params org_refinement: True to add a new column (org_clean) containing the 
-         name of the organization in a standardized version;  
-        :params fix_brazilian_cities: If true, it fixes brazilian cities and region codes names (default, True).   
+         
         """
         
-        if fix_brazilian_cities:
-            self._load_KNNClassifier_to_brazilian_cities()     
         times = []
         
         for filepath in input_list_files:
             filename = os.path.basename(filepath)
-            self._logger("[INFO] Reading {} and saving as {}".format(filename, self.OUTPUT_FOLDER))
+            self._logger("[INFO] Reading {} and saving as {}".format(filename, output_folder))
 
             t1 = time.time()
-            self._convert(filepath, self.OUTPUT_FOLDER, org_refinement, fix_brazilian_cities)
+            self._convert(filepath, persist=True, output_filepath=output_folder)
             t2 = time.time()
             elapsed_time = int(t2-t1)
             times.append(elapsed_time)
@@ -127,24 +139,6 @@ class ShodanDatasetManager(object):
         size = sum(f.stat().st_size for f in Path(dataset_folder).glob('**/*') if f.is_file()) / (1024**3)
         self._logger(f"[INFO] Operation completed. It took {elapsed_time2} seconds to remove old files.\nNew size: {size:.2f} GB")
 
-#     def infering_missing_organization_name(self, df):
-#         """
-        
-#         """
-        
-#         raise Exception("Sorry, not implemented yet!")
-#         # Preencher organização ausente baseado em IP, e para os que possui o campo, gere a versão padronizada
-#         # aqui, só consideramos o dia
-# #         part_not_ok = df.filter(col("org").isNull() & col("ip_str").isNotNull())\
-# #             .shodan_extension.get_ip_mask(input_col="ip_str", output_col="mask3", level=3)\
-# #             .join(mask3.hint("broadcast"), on=["mask3"])\
-# #             .drop("mask3")
-
-# #         part_ok = df.filter(col("org").isNotNull() | col("ip_str").isNull())\
-# #             .shodan_abstraction.cleaning_org(input_col="org", output_col="org_clean")
-
-# #         df = part_ok.union(part_not_ok)
-#         return df
 
     def _logger(self, msg):
         """
@@ -263,11 +257,16 @@ class ShodanDatasetManager(object):
         we added the `shodan_` prefix in their name.
         """
         
-        df = df.select(_flatten_struct(df.schema, ['location']))
+        # df = df.select(_flatten_struct(df.schema, ['location']))
         # each _flatten_struct must be separated by an instantiation to update the schema layout.
-        df = df.select(_flatten_struct(df.schema, ['_shodan'], "shodan_"))\
-                .withColumn("shodan_ptr", F.when(F.col("shodan_ptr") == "true", True).otherwise(False))\
-                .withColumn("shodan_options", F.to_json("shodan_options"))
+        #df = df.select(_flatten_struct(df.schema, ['_shodan'], "shodan_"))\
+        #        .withColumn("shodan_ptr", F.when(F.col("shodan_ptr") == "true", True).otherwise(False))\
+        #        .withColumn("shodan_options", F.to_json("shodan_options"))
+        
+        df = df.withColumn("_shodan", df["_shodan"].withField("ptr", F.when(F.col("_shodan.ptr") == "true", True).otherwise(False)))
+        df = df.withColumn("_shodan", df["_shodan"].withField("options", F.to_json("_shodan.options")))\
+               .withColumnRenamed("_shodan", "shodan")
+        
         return df
     
     def _cleaning_empty_columns(self, df):
@@ -299,10 +298,8 @@ class ShodanDatasetManager(object):
         df = df.withColumn("timestamp", F.col("timestamp").cast("timestamp"))\
             .withColumn("ip", F.col("ip").cast("long"))\
             .withColumn("port", F.col("port").cast("int"))\
-            .withColumn("hash", F.col("hash").cast("long"))\
-            .withColumn("latitude", F.col("latitude").cast("double"))\
-            .withColumn("longitude", F.col("longitude").cast("double"))
-        
+            .withColumn("hash", F.col("hash").cast("long"))
+
         return df
     
     
@@ -319,31 +316,36 @@ class ShodanDatasetManager(object):
         return df
     
     
-    def _fixing_location(self, df, fix_brazilian_cities):
+    def _cleaning_location(self, df):
         
         """
+        Method to force the right datatype for latitude and longitude;
+        
         Some records have location information wrong. In some cases,
         region_code is a number, other cases is a string. City or region 
         can also be missing. This method uses your model 
         (_load_KNNClassifier_to_brazilian_cities) to verified these 
-        informations based on lat/long information. `city` column is 
-        also converted to capital letters.
+        informations based on lat/long information. 
         """
-        
-        if fix_brazilian_cities:
-            df = df.withColumn("fixing_location", 
-                               F.when((~_is_valid_uf_code(F.col("region_code"))) &
-                                      (F.col("latitude").isNotNull()) & 
-                                      (F.col("longitude").isNotNull()), 
-                                _find_real_location_udf(self.locationModel)(F.col("latitude"), F.col("longitude"))
-                               ).otherwise(F.struct(*[F.col('city').alias('city'), 
-                                                      F.col("region_code").alias('region_code')])))\
-                    .drop("city","region_code")\
-                    .select("*", "fixing_location.*")\
-                    .drop("fixing_location")
-        
-        df = df.withColumn("city", F.upper("city"))
-        
+
+        df = df.withColumn("location", df["location"].withField("latitude", F.col("location.latitude").cast("double")))
+        df = df.withColumn("location", df["location"].withField("longitude", F.col("location.longitude").cast("double")))
+        df = df.withColumn("location", df["location"].withField("city", F.upper("location.city")))\
+               .withColumn("location", F.col("location").dropFields("dma_code", "country_code3", "postal_code", "area_code"))
+
+        if self.fix_brazilian_cities:
+            df = df.withColumn("new_location", 
+                               F.when((~_is_valid_uf_code(F.col("location.region_code"))) &
+                                      (F.col("location.latitude").isNotNull()) & 
+                                      (F.col("location.longitude").isNotNull()), 
+                                _find_real_location_udf(self.locationModel)(F.col("location.latitude"), F.col("location.longitude"))
+                               ).otherwise(F.struct(*[F.col('location.city').alias('city'), 
+                                                      F.col("location.region_code").alias('region_code')])))
+            
+            df = df.withColumn("location", df["location"].withField('city', F.col("new_location.city")))
+            df = df.withColumn("location", df["location"].withField('region_code', F.col("new_location.region_code")))\
+                    .drop("new_location")
+
         return df
         
     
@@ -359,8 +361,33 @@ class ShodanDatasetManager(object):
                 .drop("tmp", "vulns")
         
         return df
+
+
+    def _read_json(self, input_filepath):
+        """
+
+        """
+        
+        try:
+            # infers all primitive values as a string type
+            df = self.spark_session.read.json(input_filepath, primitivesAsString=True)
+        except:
+            self._logger("[ERROR] Memory error while Spark tried to infer the JSON schema."\
+                  "Try to increase 'spark.sql.files.minPartitionNum' to more than 3 "\
+                  "x n_cores in your Spark Session, after that, run `convert_files()` again.")
+            print(traceback.format_exc())
+            
+        self._logger(f"[INFO] Schema inferred to all columns. Starting conversion.")
+        schema = self._gen_initial_schema(df)
+        
+        df = self.spark_session.read.json(input_filepath, schema=schema)
+        
+        if self.only_vulns:
+            df = df.filter(F.col("vulns").isNotNull())
+            
+        return df
     
-    def _convert(self, input_filepath, output_filepath, org_refinement, fix_brazilian_cities):
+    def _convert(self, input_filepath, persist=False, output_filepath=None):
         """
         
         - Convert multiples `json` files to a single `delta` file;
@@ -378,46 +405,38 @@ class ShodanDatasetManager(object):
         - We use `gzip` as the compression method in parquet. The other `snappy` option, although is faster for reading, has less compression;  
         
         """
-        try:
-            # infers all primitive values as a string type
-            df = self.spark_session.read.json(input_filepath, primitivesAsString=True)
-        except:
-            self._logger("[ERROR] Memory error while Spark tried to infer the JSON schema."\
-                  "Try to increase 'spark.sql.files.minPartitionNum' to more than 3 "\
-                  "x n_cores in your Spark Session, after that, run `convert_files()` again.")
-            print(traceback.format_exc())
-            
-        self._logger(f"[INFO] Schema inferred to all columns. Starting conversion.")
+
+        df = self._read_json(input_filepath)
         
-        schema = self._gen_initial_schema(df)
-        df = self.spark_session.read.json(input_filepath, schema=schema)
         df = self._extracting_complex_json_columns(df)
         df = self._force_casting(df)
         df = self._fixing_http_html_columns(df)
-        df = self._fixing_location(df, fix_brazilian_cities)
+        
+        df = self._cleaning_location(df)
         df = self._changing_vulns_layout(df)
         df = self._cleaning_empty_columns(df)
-           
-        drop_unwanted_columns = ["dma_code", "country_code3", "postal_code", "area_code", 'cpe']
-        
-        df = df.withColumn("date", F.to_date("timestamp"))\
+
+        df = df.withColumn("meta_id", gen_ulid("timestamp"))\
+                .withColumn("date", F.to_date("timestamp"))\
                 .withColumn("year", F.year("timestamp"))\
-                .withColumn("meta_module", _get_tag_udf(F.col("shodan_module")))\
-            .drop(*drop_unwanted_columns)
+                .withColumn("meta_module", _get_tag_udf(F.col("shodan.module")))\
+            .drop("_id", 'cpe')
         
-        if org_refinement:
+        if self.org_refinement:
             df = df.shodan_extension.cleaning_org(input_col="org", output_col="org_clean")
 
-        # Logging e salvando o resultado
         columns = df.columns
         self._logger("[INFO] {} columns: {}".format(len(columns), columns))  
-
-        df.write\
-          .format("delta")\
-          .mode("append")\
-          .option("mergeSchema", "true")\
-          .partitionBy("year", "date", "meta_module")\
-          .save(output_filepath)      
+        
+        if persist:
+            df.write\
+              .format("delta")\
+              .mode("append")\
+              .option("mergeSchema", "true")\
+              .partitionBy("year", "date", "meta_module")\
+              .save(output_filepath)
+            
+        return df
 
 
 def _find_real_location(lat, lon, model):

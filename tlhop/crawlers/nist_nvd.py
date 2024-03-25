@@ -38,7 +38,7 @@ class NISTNVD(object):
     _INFO_MESSAGE_003 = "[INFO] The current dataset version is the most recent."
     _INFO_MESSAGE_004 = "[INFO] New dataset version is download with success!"
     _INFO_MESSAGE_005 = "[INFO] Downloading new file: '{}'"
-    _INFO_MESSAGE_006 = "[INFO] Generating new consolided file."
+    _INFO_MESSAGE_006 = "[INFO] Generating new consolidated file."
     
     def __init__(self):
         """
@@ -52,7 +52,7 @@ class NISTNVD(object):
         self.download_url = "https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-{year}.json.zip"
         self.path = "nist-nvd/"
         self.expected_schema = {"outname": "cve_lib.gz.parquet"}
-        self.new_version = None
+        self.new_version = False
         self.last_file = {}
         self.now = datetime.now()
         self.year = self.now.year
@@ -104,14 +104,14 @@ class NISTNVD(object):
                 self.last_file[url] = {"etag": None}
                 
             if etag != self.last_file[url]["etag"]:
-                found_update = True
+                self.new_version = True
                 self.last_file[url]["download"] = True
                 self.last_file[url]["etag"] = etag
                 self.last_file[url]["timestamp"] = self.now
             else:
                 self.last_file[url]["download"] = False
         
-        if found_update:
+        if self.new_version:
             print(self._INFO_MESSAGE_002)
         else:
             print(self._INFO_MESSAGE_003)
@@ -138,69 +138,91 @@ class NISTNVD(object):
         Downloads a new dataset version available in the source link. After download, it process the
         original data format to enrich its data and to convert to Parquet format.
         """
-        raw_directory = self.basepath + "raw/" 
-        for y in range(2002, self.year+1):
-            url = self.download_url.format(year=y)
-            filename = url.split("/")[-1] 
-            filepath = raw_directory + filename
-            
-            if self.last_file[url]["download"]:
-                print(self._INFO_MESSAGE_005.format(filename))
-                fin = requests.get(url, allow_redirects=True)
-                fout = open(filepath, 'wb')
-                fout.write(fin.content)
-                fout.close()
-                fin.close()
-            
-            with zipfile.ZipFile(filepath, 'r') as zip_ref:
-                zip_ref.extractall(raw_directory)
-
-        outfile = self.basepath + self.expected_schema["outname"]
-        self._process(raw_directory, outfile)
         
-        for f in glob.glob(raw_directory+"*.json"):
-            os.remove(f)
-        
-        now = self.now.strftime("%Y%m%d_%H%M%S")
-        msg = ""
-        for key, values in self.last_file.items():
-            msg += "{}|{}|{}\n".format(key, values["etag"], now)
-        msg = msg[0:-1]
-        f = open(self.basepath+"RELEASE", "w")
-        f.write(msg)
-        f.close()
-        print(self._INFO_MESSAGE_004)
+        if self.new_version:
+            raw_directory = self.basepath + "raw/" 
+            for y in range(2002, self.year+1):
+                url = self.download_url.format(year=y)
+                filename = url.split("/")[-1] 
+                filepath = raw_directory + filename
+                
+                if self.last_file[url]["download"]:
+                    print(self._INFO_MESSAGE_005.format(filename))
+                    fin = requests.get(url, allow_redirects=True)
+                    fout = open(filepath, 'wb')
+                    fout.write(fin.content)
+                    fout.close()
+                    fin.close()
+                
+                with zipfile.ZipFile(filepath, 'r') as zip_ref:
+                    zip_ref.extractall(raw_directory)
+    
+            outfile = self.basepath + self.expected_schema["outname"]
+            self._process(raw_directory, outfile)
+            
+            for f in glob.glob(raw_directory+"*.json"):
+                os.remove(f)
+            
+            now = self.now.strftime("%Y%m%d_%H%M%S")
+            msg = ""
+            for key, values in self.last_file.items():
+                msg += "{}|{}|{}\n".format(key, values["etag"], now)
+            msg = msg[0:-1]
+            f = open(self.basepath+"RELEASE", "w")
+            f.write(msg)
+            f.close()
+            print(self._INFO_MESSAGE_004)
         return True
     
     def _process(self, input_folder, outfile):
-        
+
         print(self._INFO_MESSAGE_006)
 
         df = self.spark_session.read.option("multiline","true")\
             .option("mode", "PERMISSIVE")\
             .json(input_folder +"*.json")
 
-        df.select(F.explode("CVE_Items").alias("CVE_Items"))\
+        df = df.select(F.explode("CVE_Items").alias("CVE_Items"))\
             .select("CVE_Items.*")\
             .select("cve.CVE_data_meta.ID", 
+                    F.col("cve.problemtype.problemtype_data").getItem(0).getField("description").getField("value").alias("cwe"),
                     F.concat_ws(",", F.col("cve.references.reference_data.url")).alias("references"), 
                     F.col("cve.description.description_data").alias("description"), 
                     F.col("configurations.nodes").alias("cpes"),
-                    "impact.*", "lastModifiedDate", "publishedDate")\
+                    "impact.*", 
+                    "lastModifiedDate", 
+                    "publishedDate")\
             .withColumn("description", _get_description(F.col("description.lang"), F.col("description.value")))\
             .withColumn("description", F.trim(F.regexp_replace(F.col("description"), r'(;\n)', ',')))\
-            .withColumn("cvssv2", F.col("baseMetricV2.cvssV2.baseScore"))\
-            .withColumn("cvssv3", F.col("baseMetricV3.cvssV3.baseScore"))\
-            .withColumn("baseMetricV2", _nesting_dict("baseMetricV2"))\
-            .withColumn("baseMetricV3", _nesting_dict("baseMetricV3"))\
             .withColumn("publishedDate", F.to_date(F.unix_timestamp(F.col("publishedDate"), "yyyy-MM-dd'T'HH:mm'Z'").cast("timestamp")))\
-            .select(F.col("ID").alias("cve_id"), "description", "cvssv2", "cvssv3", "publishedDate", 
-                    "lastModifiedDate", "baseMetricV2", "baseMetricV3", "cpes", "references")\
-            .withColumn("published_year", F.year(F.col("publishedDate")))\
-            .withColumn("rank_cvss_v2", _bucket_cvss_v2(F.col("cvssv2")))\
-            .withColumn("rank_cvss_v3", _bucket_cvss_v3(F.col("cvssv3")))\
-            .coalesce(1)\
-            .write.parquet(outfile+"_folder", compression="gzip")
+            .withColumn("cvss_version", F.when(F.col("baseMetricV3.cvssV3.version").isNotNull(), F.col("baseMetricV3.cvssV3.version")).otherwise(F.col("baseMetricV2.cvssV2.version")))
+        
+        renamingV2 = [F.col('baseMetricV2.'+ col) for col in df.select('baseMetricV2.*').drop("cvssV2").columns] + \
+                     [F.col('baseMetricV2.cvssV2.' + col).alias(col.replace("baseScore", "score")) for col in df.select('baseMetricV2.cvssV2.*').columns]
+        renamingV3 = [F.col('baseMetricV3.'+ col) for col in df.select('baseMetricV3.*').drop("cvssV3").columns] + \
+                     [F.col('baseMetricV3.cvssV3.' + col).alias(col.replace("baseScore", "score")) for col in df.select('baseMetricV3.cvssV3.*').columns]
+        
+        df = df.withColumn("cvss_v2", F.struct(*renamingV2))\
+            .withColumn("cvss_v3", F.struct(*renamingV3))\
+            .drop('baseMetricV2', 'baseMetricV3')
+        
+        df = df.withColumn("cvss_v2", df["cvss_v2"].withField('rank', _bucket_cvss_v2(F.col("cvss_v2.score"))))
+        df = df.withColumn("cvss_v3", df["cvss_v3"].withField('rank', _bucket_cvss_v3(F.col("cvss_v3.score"))))
+        df = df.withColumn("cvss_score", F.when(F.col("cvss_v3.score").isNotNull(), F.col("cvss_v3.score")).otherwise(F.col("cvss_v2.score")))
+
+        df = df.select(F.col("ID").alias("cve_id"), 
+                       'cvss_score',
+                       'cvss_version',  
+                       "description",     
+                       "publishedDate", 
+                       "lastModifiedDate", 
+                       "cvss_v2", 
+                       "cvss_v3", 
+                       "cwe", 
+                       "cpes", 
+                       "references")
+        
+        df.coalesce(1).write.parquet(outfile+"_folder", compression="gzip")
         
         sparkfile = glob.glob(outfile+"_folder/part-*.parquet")[0]
         os.rename(sparkfile, outfile)

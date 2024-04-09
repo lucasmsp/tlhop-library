@@ -106,7 +106,7 @@ class DataSets(object):
             "method": "_read_brazilian_ip_range"
         },
         "BRAZILIAN_RF": {
-            "path": "brazilian-rf/brazilian-rf-consolidated.gz.parquet",
+            "path": "brazilian-rf/brazilian-rf-consolidated.gz.delta",
             "description": "Brazilian National Register of Legal Entities - CNPJ",
             "method": "_read_brazilian_rf"
         },
@@ -124,6 +124,11 @@ class DataSets(object):
             "path": "first-epss/epss.delta",
             "description": "FIRST's Exploit Prediction Scoring system (EPSS)",
             "method": "_read_epss_dataset"
+        },
+        "LACNIC_STATISTICS": {
+            "path": "rir_statistics/rir_statistcs.delta",
+            "description": "LACNIC RIR Statistics",
+            "method": "_read_rir_dataset"
         }
         
     }
@@ -235,15 +240,20 @@ class DataSets(object):
         Method to read a dataset based on its reference code. 
         It returns a dataset as a Spark's DataFrame.
 
-        :param code: DataSet code listed in `list_datasets` table.
-
+        :param code: DataSet code listed in `list_datasets` table;
+        :param check_update: Option to check and update the dataset, if a new version is available (only available to few datasets);
+        
         :returns: Data Frame
         :rtype: Spark's DataFrame.
         """
         if code not in self._DATASET_LIST:
             raise Exception(self._ERROR_MESSAGE_003)
-            
-        path = self.path + self._DATASET_LIST[code]["path"]
+
+        if code in self._INTERNAL_DATASET_LIST:
+            _library_path = os.path.dirname(os.path.abspath(__file__))
+            path = _library_path + "/" + self._DATASET_LIST[code]["path"]
+        else:
+            path = self.path + self._DATASET_LIST[code]["path"]
         
         if "<>" in path:
             # this means that the dataset is inside an subfolder that changes over time
@@ -261,7 +271,7 @@ class DataSets(object):
 
         if not check_update:
             df = method(path)
-        elif code not in ["FIRST_EPSS"]:
+        elif code not in ["FIRST_EPSS", "LACNIC_STATISTICS", "NVD_CVE_LIB"]:
             print(self._WARN_MESSAGE_002)
             df = method(path)
         else:
@@ -270,14 +280,14 @@ class DataSets(object):
         return df
     
     
-    def _read_nvd_cve_lib(self, path):
+    def _read_nvd_cve_lib(self, path, check_update=False):
 
-        baseMetricV2_schema = self.schemas.get_external_schema_by_column("baseMetricV2", dataset_code="NVD_CVE_LIB")
-        baseMetricV3_schema = self.schemas.get_external_schema_by_column("baseMetricV3", dataset_code="NVD_CVE_LIB")
+        if check_update:
+            crawler = crawlers.NISTNVD()
+            crawler.download()
         
-        cve_lib = self.spark_session.read.parquet(path, compression="gzip")\
-            .withColumn("baseMetricV2", F.from_json("baseMetricV2", baseMetricV2_schema))\
-            .withColumn("baseMetricV3", F.from_json("baseMetricV3", baseMetricV3_schema))
+        cve_lib = self.spark_session.read.parquet(path, compression="gzip")
+        
         return cve_lib
     
     def _read_cisa_known_exploits(self, path):
@@ -292,9 +302,8 @@ class DataSets(object):
             .persist()
         return status_http
     
-    def _read_utf8_mapping_file(self):
-        mapping_utf8 = self.spark_session.read.csv(
-            self.FILE_PATHS["UTF8_MAPPING_FILE"], sep=";", quote='\"',header=True)\
+    def _read_utf8_mapping_file(self, path):
+        mapping_utf8 = self.spark_session.read.csv(path, sep=";", quote='\"',header=True)\
             .persist()
         return mapping_utf8
     
@@ -398,7 +407,7 @@ class DataSets(object):
             elif ( 99 <= x <= 99): return	"U - ORGANISMOS INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS"
             return "DESCONHECIDA"
         
-        rfb = self.spark_session.read.parquet(path, compression="gzip")\
+        rfb = self.spark_session.read.format("delta").load(path)\
             .withColumn("cnae_principal_raiz", F.substring(F.col("cnae_fiscal_principal_cod"), 0, 2))\
             .withColumn("cnae_secao", gen_secao(F.col("cnae_principal_raiz")))
         return rfb
@@ -416,3 +425,13 @@ class DataSets(object):
 
         epss = self.spark_session.read.format("delta").load(path)
         return epss
+
+    def _read_rir_dataset(self, path, check_update=False):
+        if check_update:
+            crawler = crawlers.LACNICStatistics()
+            crawler.download()
+
+        epss = self.spark_session.read.format("delta").load(path)
+        return epss
+        
+

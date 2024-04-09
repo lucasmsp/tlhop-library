@@ -13,6 +13,7 @@ import numpy as np
 import os
 import textdistance
 import nltk
+import ulid
 #nltk.download('stopwords')
 import plotly.io as pio
 import plotly.graph_objects as go
@@ -799,3 +800,9 @@ def parser_cpe_udf(text):
         results = [v for v in results.values()]
 
     return results
+
+
+
+@F.udf
+def gen_ulid(timestamp):
+    return str(ulid.from_timestamp(timestamp))

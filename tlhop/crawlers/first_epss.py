@@ -10,6 +10,7 @@ from pyspark.sql import SparkSession
 import pyspark.sql.functions as F 
 from delta.tables import *
 import time
+from deltalake import write_deltalake
 
 class FirstEPSS(object):
 
@@ -144,7 +145,57 @@ class FirstEPSS(object):
         deltaTable.optimize().executeCompaction()
         deltaTable.vacuum(0)
         
+    def _download_single_file(self, day_str):
+
+        day = datetime.strptime(day_str, self.date_format)
+        current_url = self.download_url.replace("YYYY-mm-dd", day_str)
         
+        tmp_df = self._download_dataset(current_url)
+        df = None
+        
+        if isinstance(tmp_df, pd.DataFrame):
+
+            # model v1
+            if  day < datetime.strptime("2022-02-03", self.date_format):
+                tmp_df = tmp_df.rename(columns={'cve': 'cve_id'}) 
+                tmp_df["model_version"] =  "v2021-04-14"
+                tmp_df['epss'] = tmp_df['epss'].astype(float)
+                
+                cols = ["cve_id", "score_date", "year", "model_version", "epss"]
+                if "percentile" in tmp_df.columns:
+                    cols += ["percentile"]
+                    tmp_df['percentile'] = tmp_df['percentile'].astype(float)
+
+                tmp_df["score_date"] =  day   
+                tmp_df['year'] = tmp_df['score_date'].dt.year
+                tmp_df['score_date'] = pd.to_datetime(tmp_df['score_date']).dt.date
+                tmp_df['year'] = tmp_df['year'].astype('int32')
+                
+                df = tmp_df[cols]
+
+            else:
+                info = tmp_df.iloc[0].index.tolist()
+                tmp_df = tmp_df.drop(["cve"], axis=0)\
+                    .reset_index()
+                tmp_df.columns = ["cve_id", "epss", "percentile"]
+                
+                tmp_df["model_version"] =  info[0][15:]
+                tmp_df['epss'] = tmp_df['epss'].astype(float)
+                tmp_df['percentile'] = tmp_df['percentile'].astype(float)
+                
+                tmp_df["score_date"] =  datetime.strptime(info[1][11:-14], self.date_format)
+                tmp_df['year'] = tmp_df['score_date'].dt.year
+                tmp_df['score_date'] = pd.to_datetime(tmp_df['score_date']).dt.date
+                tmp_df['year'] = tmp_df['year'].astype('int32')
+                
+                df = tmp_df[["cve_id", "score_date", "year", "model_version", "epss", "percentile"]]
+
+        return df  
+
+    def download_to_df(self, day_str):
+        tmp_df = self._download_single_file(day_str)
+        return self.spark_session.createDataFrame(tmp_df)
+
     def download(self):
         """
         Downloads a new dataset version available in its source link. 
@@ -152,72 +203,17 @@ class FirstEPSS(object):
         if self.new_version:
             print(self._INFO_MESSAGE_004)
             previous_date = datetime.strptime(self.last_file["timestamp"], self.date_format)
-
-            v2_date_str = "2022-02-03"
-            v2_date = datetime.strptime(v2_date_str, self.date_format)
-            if  previous_date < v2_date:
-                next_dates = pd.date_range(previous_date, v2_date, freq='d')
-                output_path = self.basepath + self.expected_schema["outname"]
-                
-                for day in next_dates:
-                    day_str = day.strftime(self.date_format)
-                    current_url = self.download_url.replace("YYYY-mm-dd", day_str)
-                    tmp_df = self._download_dataset(current_url)
-                    if isinstance(tmp_df, pd.DataFrame):
-                        tmp_df.columns = ["cve_id", "epss", "percentile"]
-                        tmp_df["model_version"] =  "v2021-04-14"
-                        tmp_df["score_date"] =  day
-                        
-            
-                        self.spark_session.createDataFrame(tmp_df)\
-                            .withColumn("score_date", F.col("score_date").cast("date"))\
-                            .withColumn("year", F.year("score_date"))\
-                            .select("cve_id", "score_date", "year", "model_version", "epss", "percentile")\
-                            .coalesce(1)\
-                            .write\
-                            .format("delta")\
-                            .mode("append")\
-                            .option("compression","gzip")\
-                            .option("mergeSchema", "true")\
-                            .partitionBy("year")\
-                            .save(output_path)
-    
-                        self._gen_release(day_str)
-                    
-                previous_date = day
-            
             next_dates = pd.date_range(previous_date, pd.to_datetime('today'), freq='d')
             output_path = self.basepath + self.expected_schema["outname"]
             
             for day in next_dates:
                 day_str = day.strftime(self.date_format)
-                current_url = self.download_url.replace("YYYY-mm-dd", day_str)
-                tmp_df = self._download_dataset(current_url)
-                if isinstance(tmp_df, pd.DataFrame):
-                    info = tmp_df.iloc[0].index.tolist()
-                    tmp_df = tmp_df.drop(["cve"], axis=0)\
-                        .reset_index()
-                    tmp_df.columns = ["cve_id", "epss", "percentile"]
-                    tmp_df["model_version"] =  info[0][15:]
-                    tmp_df["score_date"] =  datetime.strptime(info[1][11:-14], self.date_format)
-        
-                    self.spark_session.createDataFrame(tmp_df)\
-                        .withColumn("epss", F.col("epss").cast("double"))\
-                        .withColumn("percentile", F.col("percentile").cast("double"))\
-                        .withColumn("score_date", F.col("score_date").cast("date"))\
-                        .withColumn("year", F.year("score_date"))\
-                        .select("cve_id", "score_date", "year", "model_version", "epss", "percentile")\
-                        .coalesce(1)\
-                        .write\
-                        .format("delta")\
-                        .mode("append")\
-                        .option("compression","gzip")\
-                        .option("mergeSchema", "true")\
-                        .partitionBy("year")\
-                        .save(output_path)
+                df = self._download_single_file(day_str)
 
-                self._gen_release(day_str)
-    
+                if isinstance(df, pd.DataFrame):
+                    write_deltalake(output_path, df, mode='append', partition_by=['year'], overwrite_schema=True)                
+                    self._gen_release(day_str)
+
             self._optimize_delta(output_path)
 
             print(self._INFO_MESSAGE_005)

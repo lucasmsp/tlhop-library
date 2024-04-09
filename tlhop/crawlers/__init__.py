@@ -11,6 +11,7 @@ from tlhop.crawlers.cisa_known_exploits import CISAKnownExploits
 from tlhop.crawlers.rdap import RDAP
 from tlhop.crawlers.end_of_life import EndOfLife
 from tlhop.crawlers.first_epss import FirstEPSS
+from tlhop.crawlers.rir_statistics import LACNICStatistics
 
 __all__ = ['AS2Type', 
            'ASRank', 
@@ -21,4 +22,5 @@ __all__ = ['AS2Type',
            'CISAKnownExploits',
            'RDAP',
            'EndOfLife',
-           'FirstEPSS']
+           'FirstEPSS',
+           'LACNICStatistics']

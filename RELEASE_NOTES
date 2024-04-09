@@ -2,6 +2,18 @@
   TLHOP Library
 ------------------------------
 
+
+
+Release number: 0.6
+--------------------
+
+Main changes:
+- New CensysDatasetManager API to convert Censys's Avro file to delta format;
+- New datasets: First EPSS, LACNIC Statistics;
+- New layout in NIST/NVD crawler;
+- Changing ShodanDatasetManager to also allow dynamic conversion, without writing into a new file;
+
+
 Release number: 0.5
 --------------------
 

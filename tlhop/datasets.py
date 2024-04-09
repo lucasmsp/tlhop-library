@@ -240,15 +240,20 @@ class DataSets(object):
         Method to read a dataset based on its reference code. 
         It returns a dataset as a Spark's DataFrame.
 
-        :param code: DataSet code listed in `list_datasets` table.
-
+        :param code: DataSet code listed in `list_datasets` table;
+        :param check_update: Option to check and update the dataset, if a new version is available (only available to few datasets);
+        
         :returns: Data Frame
         :rtype: Spark's DataFrame.
         """
         if code not in self._DATASET_LIST:
             raise Exception(self._ERROR_MESSAGE_003)
-            
-        path = self.path + self._DATASET_LIST[code]["path"]
+
+        if code in self._INTERNAL_DATASET_LIST:
+            _library_path = os.path.dirname(os.path.abspath(__file__))
+            path = _library_path + "/" + self._DATASET_LIST[code]["path"]
+        else:
+            path = self.path + self._DATASET_LIST[code]["path"]
         
         if "<>" in path:
             # this means that the dataset is inside an subfolder that changes over time
@@ -297,9 +302,8 @@ class DataSets(object):
             .persist()
         return status_http
     
-    def _read_utf8_mapping_file(self):
-        mapping_utf8 = self.spark_session.read.csv(
-            self.FILE_PATHS["UTF8_MAPPING_FILE"], sep=";", quote='\"',header=True)\
+    def _read_utf8_mapping_file(self, path):
+        mapping_utf8 = self.spark_session.read.csv(path, sep=";", quote='\"',header=True)\
             .persist()
         return mapping_utf8
     

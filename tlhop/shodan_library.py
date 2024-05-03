@@ -11,17 +11,14 @@ import pandas as pd
 from IPython.display import HTML
 import xml.etree.ElementTree as ET
     
-
 from pyspark.sql.functions import *                                                                              
 from pyspark.sql.types import *
 from pyspark.sql.window import Window
 from pyspark.ml.stat import Correlation
 from pyspark.ml.feature import VectorAssembler
 
-from tlhop.library import *
 from tlhop.schemas import Schemas
-from tlhop.algorithms import Fingerprints
-
+import tlhop.library as tlhop_library
 
 _library_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -83,7 +80,7 @@ def parser_html_code(self, input_col="html", output_col="html_parsed"):
     :return: Spark DataFrame 
     """
 
-    return self.withColumn(output_col, parser_html_code_udf(col(input_col)))
+    return self.withColumn(output_col, tlhop_library.parser_html_code_udf(col(input_col)))
 
 
 def webpage_is_available(self, html_col="html", title_col="title_clean"):
@@ -147,7 +144,7 @@ def cleaning_org(self, input_col="org", output_col=None):
     if not output_col:
         output_col = input_col + "_clean"
 
-    return self.withColumn(output_col, cleaning_text_udf(col(input_col), lit(True)))
+    return self.withColumn(output_col, tlhop_library.cleaning_text_udf(col(input_col), lit(True)))
 
 
 def cleaning_text(self, input_col, output_col=None):
@@ -162,7 +159,7 @@ def cleaning_text(self, input_col, output_col=None):
     if not output_col:
         output_col = input_col + "_clean"
 
-    return self.withColumn(output_col, cleaning_text_udf(col(input_col), lit(False)))
+    return self.withColumn(output_col, tlhop_library.cleaning_text_udf(col(input_col), lit(False)))
 
 
 #
@@ -189,7 +186,7 @@ def extract_screenshot(self):
 
     col_schema = Schemas().get_shodan_schema_by_column("screenshot", force_original=False)
     
-    result = self.withColumn("screenshot_tmp", get_fields_udf("opts", ["screenshot"]).getItem(0))\
+    result = self.withColumn("screenshot_tmp", tlhop_library.get_fields_udf("opts", ["screenshot"]).getItem(0))\
         .withColumn('screenshot_tmp', from_json(col('screenshot_tmp'), col_schema))\
         .withColumn("screenshot_labels", col("screenshot_tmp.labels"))\
         .withColumn("screenshot_img", concat_ws("",lit('<img src="data:'), 
@@ -255,7 +252,7 @@ def parser_cpe(self, input_col="cpe", output_col="cpe_parsed"):
     :param output_col: Output column name (default, `cpe_parsed`)
     :return: Spark DataFrame 
     """
-    return self.withColumn(output_col, parser_cpe_udf(col(input_col)))
+    return self.withColumn(output_col, tlhop_library.parser_cpe_udf(col(input_col)))
 
 
 #
@@ -312,7 +309,7 @@ def plot_bubble(self, lat_col, lon_col, color_col=None, size=3.0, hover_name=Non
     else:
         cities_df = self.toPandas()
     
-    fig = plot_bubble_map(cities_df, lat_col, lon_col, color_col, 
+    fig = tlhop_library.plot_bubble_map(cities_df, lat_col, lon_col, color_col, 
                             size, hover_name, hover_data, opacity)
     return fig
 
@@ -325,7 +322,7 @@ def plot_heatmap(self, lat_col, lon_col, z_col=None, hover_name=None, hover_data
         cities_df = self.limit(max_rows).toPandas()
     else:
         cities_df = self.toPandas()
-    fig = plot_heatmap_map(cities_df, lat_col, lon_col, z_col, hover_name, hover_data, radius, opacity)
+    fig = tlhop_library.plot_heatmap_map(cities_df, lat_col, lon_col, z_col, hover_name, hover_data, radius, opacity)
     return fig
 
 
@@ -402,6 +399,7 @@ def find_patterns(self, labels, target_col="meta_events"):
     """
 
     """
+    from tlhop.algorithms import Fingerprints
     
     tmp_df = self
     

@@ -13,8 +13,7 @@ import json
 
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
-from pyspark.sql import Row
-from pyspark.sql import SparkSession
+from pyspark.sql import Row, SparkSession
 
 class NISTNVD(object):
 

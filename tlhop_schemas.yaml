@@ -1,13 +1,3 @@
-cpe:
-  dataset: "any"
-  schema: | 
-    {"containsNull":true, "elementType":{"fields":[
-        {"metadata":{},"name":"cpe_type","nullable":true,"type":"string"},
-        {"metadata":{},"name":"cpe_vendor","nullable":true,"type":"string"},
-        {"metadata":{},"name":"cpe_product","nullable":true,"type":"string"},
-        {"metadata":{},"name":"cpe_versions","nullable":true,"type":{"containsNull":true,"elementType":"string","type":"array"}}
-    ], "type":"struct"},"type":"array"}
-    
 baseMetricV2:
   dataset: "NVD_CVE_LIB"
   schema: |

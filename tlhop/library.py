@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
                                                                             
-from pyspark.sql.types import *
+
 import matplotlib.pyplot as plt
 import re
 from functools import reduce
@@ -22,12 +22,10 @@ from bs4 import BeautifulSoup
 
 
 import pyspark.sql.functions as F
-from pyspark.sql.types import StringType, ArrayType, StructType,IntegerType,BooleanType
+from pyspark.sql.types import *
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module='bs4')
-
-from tlhop.schemas import Schemas
 
 
 _library_path = os.path.dirname(os.path.abspath(__file__))
@@ -91,7 +89,7 @@ def cleaning_text_udf(s, cleaning_org=False):
         s = re.sub('[^A-Za-z0-9]+', ' ', s)
         if cleaning_org:
             s = reduce(lambda a, key: a.replace(key, " "), exclude, s)
-        s = re.sub(' +', ' ', s).strip()
+        s = re.sub(' +', ' ', s).strip().upper()
 
     return s
 
@@ -729,8 +727,17 @@ def is_valid_uf_code(code):
         
 ################
 
-cpe_schema = Schemas().get_external_schema_by_column("cpe", 'any')
+#from tlhop.schemas import Schemas
+#cpe_schema = Schemas().get_external_schema_by_column("cpe", 'any')
 
+cpe_schema = ArrayType(
+    StructType([
+        StructField('cpe_type', StringType(), True), 
+        StructField('cpe_vendor', StringType(), True),
+        StructField('cpe_product', StringType(), True),  
+        StructField('cpe_versions', ArrayType(StringType()), True)
+    ])
+)
 
 @F.udf(returnType=cpe_schema)
 def parser_cpe_udf(text):
@@ -806,3 +813,62 @@ def parser_cpe_udf(text):
 @F.udf
 def gen_ulid(timestamp):
     return str(ulid.from_timestamp(timestamp))
+
+@F.udf
+def gen_secao_cnae(x):
+    x = int(x)
+    if (x <= 3): return	"A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA"
+    elif ( 5 <= x <= 9): return 	"B - INDÚSTRIAS EXTRATIVAS"
+    elif ( 10 <= x <= 33): return	"C - INDÚSTRIAS DE TRANSFORMAÇÃO"
+    elif ( 35 <= x <= 35): return	"D - ELETRICIDADE E GÁS"
+    elif ( 36 <= x <= 39): return	"E - ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO"
+    elif ( 41 <= x <= 43): return	"F - CONSTRUÇÃO"
+    elif ( 45 <= x <= 47): return	"G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS"
+    elif ( 49 <= x <= 53): return	"H - TRANSPORTE, ARMAZENAGEM E CORREIO"
+    elif ( 55 <= x <= 56): return	"I - ALOJAMENTO E ALIMENTAÇÃO"
+    elif ( 58 <= x <= 63): return	"J - INFORMAÇÃO E COMUNICAÇÃO"
+    elif ( 64 <= x <= 66): return	"K - ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS"
+    elif ( 68 <= x <= 68): return	"L - ATIVIDADES IMOBILIÁRIAS"
+    elif ( 69 <= x <= 75): return	"M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS"
+    elif ( 77 <= x <= 82): return	"N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES"
+    elif ( 84 <= x <= 84): return	"O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL"
+    elif ( 85 <= x <= 85): return	"P - EDUCAÇÃO"
+    elif ( 86 <= x <= 88): return	"Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS"
+    elif ( 90 <= x <= 93): return	"R - ARTES, CULTURA, ESPORTE E RECREAÇÃO"
+    elif ( 94 <= x <= 96): return	"S - OUTRAS ATIVIDADES DE SERVIÇOS"
+    elif ( 97 <= x <= 97): return	"T - SERVIÇOS DOMÉSTICOS"
+    elif ( 99 <= x <= 99): return	"U - ORGANISMOS INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS"
+    return "DESCONHECIDA"
+        
+
+@F.udf
+def bucket_epss(score):
+
+    if score < 0.2:
+        return "< 0.2"
+    elif score < 0.4:
+        return "< 0.4"
+    elif score < 0.6:
+        return "< 0.6"
+    elif score < 0.8:
+        return "< 0.8"
+    else:
+        return ">= 0.8"
+
+
+cpe_schema2 = StructType()\
+    .add("cpe_product", StringType(), True, None)\
+    .add("cpe_version", StringType(), True, None)
+@F.udf(returnType=cpe_schema2)
+def match_cpes_simple(shodan_cpes, nvd_cpes):
+    product, version = None, None
+    for cpe in shodan_cpes:
+        cpe_parts = cpe.split(":")
+        if len(cpe_parts) >= 6:
+            cpe_common = ":".join(cpe_parts[3:5])
+            if cpe_common in nvd_cpes:
+                product = ":".join(cpe_parts[3:5])
+                version = cpe_parts[5]
+                return product, version
+    return product, version
+    

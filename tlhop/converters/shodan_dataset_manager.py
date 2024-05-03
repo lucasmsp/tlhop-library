@@ -21,9 +21,10 @@ import pyspark.sql.functions as F
 from delta.tables import DeltaTable
 from delta.tables import *
 
-from tlhop.shodan_abstraction import DataFrame
+from tlhop.schemas import Schemas
 from tlhop.datasets import DataSets
-from tlhop.library import *
+from tlhop.tlhop_abstraction import tlhop_extension
+from tlhop.library import gen_ulid
 
 
 class ShodanDatasetManager(object):
@@ -69,18 +70,19 @@ class ShodanDatasetManager(object):
         self.spark_session.conf.set("spark.databricks.delta.optimize.maxThreads", maxThreads)
         self.spark_session.conf.set("spark.databricks.delta.retentionDurationCheck.enabled","false")
         self.spark_session.conf.set("spark.databricks.delta.merge.repartitionBeforeWrite.enabled", "true") 
-
+        self.filter_columns = None
+        
         if self.fix_brazilian_cities:
             self._load_KNNClassifier_to_brazilian_cities()  
 
-    def convert_dump_to_df(self, input_filepath):
+    def convert_dump_to_df(self, input_filepath, fast_mode=False):
         """
         Convert the original JSON file into DataFrame without writing into a file.
         
         :params input_filepath: A single JSON file;
         :return: A Spark's DataFrame
         """
-        df = self._convert(input_filepath, persist=False, output_filepath=None)
+        df = self._convert(input_filepath, persist=False, output_filepath=None, fast_mode=fast_mode)
         
         return df
         
@@ -207,7 +209,7 @@ class ShodanDatasetManager(object):
         self._logger("City/Region classifier model loaded !")
 
     
-    def _gen_initial_schema(self, df):
+    def _gen_initial_schema(self, df, fast_mode=False):
         """
         Converts a StructType() (dictionaries/sub-jsons) to json-string, 
         except  "location" and "_shodan" columns (both columns will have 
@@ -215,15 +217,16 @@ class ShodanDatasetManager(object):
         to json-string.
         """
         schema = df.schema
-        path = self._get_tlhop_auxiliar_folder()
-        self._update_persisted_schema(path, schema)
+        if not fast_mode:
+            path = self._get_tlhop_auxiliar_folder()
+            self._update_persisted_schema(path, schema)
         
         for field in df.schema:
             name = field.name
             dtype = field.dataType
 
             if isinstance(dtype, StructType):
-                if (name not in ["location", "_shodan"]):
+                if (name not in ["location", "_shodan", 'vulns']):
                     schema[name].dataType = StringType()
 
             elif isinstance(dtype, ArrayType):
@@ -251,7 +254,7 @@ class ShodanDatasetManager(object):
             pickle.dump(initial_schema, f)
         
 
-    def _extracting_complex_json_columns(self, df):
+    def _extracting_complex_json_columns(self, df, fast_mode=False):
         """
         The column `location` (frequent) is a composite attribute with 10 
         fixed fields such as `latitude`, `longitude`, among others. 
@@ -260,16 +263,12 @@ class ShodanDatasetManager(object):
         We also moved the `shodan` subcolumns to the first level, but in this case,
         we added the `shodan_` prefix in their name.
         """
-        
-        # df = df.select(_flatten_struct(df.schema, ['location']))
-        # each _flatten_struct must be separated by an instantiation to update the schema layout.
-        #df = df.select(_flatten_struct(df.schema, ['_shodan'], "shodan_"))\
-        #        .withColumn("shodan_ptr", F.when(F.col("shodan_ptr") == "true", True).otherwise(False))\
-        #        .withColumn("shodan_options", F.to_json("shodan_options"))
-        
-        df = df.withColumn("_shodan", df["_shodan"].withField("ptr", F.when(F.col("_shodan.ptr") == "true", True).otherwise(False)))
-        df = df.withColumn("_shodan", df["_shodan"].withField("options", F.to_json("_shodan.options")))\
-               .withColumnRenamed("_shodan", "shodan")
+
+        if not fast_mode:
+            df = df.withColumn("_shodan", df["_shodan"].withField("options", F.to_json("_shodan.options")))
+            df = df.withColumn("_shodan", df["_shodan"].withField("ptr", F.when(F.col("_shodan.ptr") == "true", True).otherwise(False)))
+
+        df = df.withColumnRenamed("_shodan", "shodan")
         
         return df
     
@@ -287,10 +286,16 @@ class ShodanDatasetManager(object):
             if "array" in dtype:
                 df = df.withColumn(name, F.when((F.size(F.col(name)) == 0), F.lit(None)).otherwise(F.col(name)))
                 
-        df = df.replace("{}", None)\
-            .replace("", None, subset=['data'])\
-            .replace('{"resources":{}}', None, subset=['coap'])\
-            .replace('{"targets":[]}', None, subset=['iscsi'])
+        df = df.replace("{}", None)
+
+        if "data" in df.columns:
+            df = df.replace("", None, subset=['data'])
+            
+        if "coap" in df.columns:
+            df = df.replace('{"resources":{}}', None, subset=['coap'])
+
+        if "isci" in df.columns:
+            df = df.replace('{"targets":[]}', None, subset=['iscsi'])
                 
         return df
     
@@ -299,10 +304,14 @@ class ShodanDatasetManager(object):
         Method to force the right datatype for columns: 
         timestamp, ip, port, hash, latitude and longitude;
         """
-        df = df.withColumn("timestamp", F.col("timestamp").cast("timestamp"))\
-            .withColumn("ip", F.col("ip").cast("long"))\
-            .withColumn("port", F.col("port").cast("int"))\
-            .withColumn("hash", F.col("hash").cast("long"))
+        if "timestamp" in df.columns:
+            df = df.withColumn("timestamp", F.col("timestamp").cast("timestamp"))
+        if "ip" in df.columns:    
+            df = df.withColumn("ip", F.col("ip").cast("long"))
+        if "port" in df.columns:    
+            df = df.withColumn("port", F.col("port").cast("int"))
+        if "hash" in df.columns:    
+            df = df.withColumn("hash", F.col("hash").cast("long"))
 
         return df
     
@@ -332,66 +341,132 @@ class ShodanDatasetManager(object):
         informations based on lat/long information. 
         """
 
-        df = df.withColumn("location", df["location"].withField("latitude", F.col("location.latitude").cast("double")))
-        df = df.withColumn("location", df["location"].withField("longitude", F.col("location.longitude").cast("double")))
-        df = df.withColumn("location", df["location"].withField("city", F.upper("location.city")))\
-               .withColumn("location", F.col("location").dropFields("dma_code", "country_code3", "postal_code", "area_code"))
-
-        if self.fix_brazilian_cities:
-            df = df.withColumn("new_location", 
-                               F.when((~_is_valid_uf_code(F.col("location.region_code"))) &
-                                      (F.col("location.latitude").isNotNull()) & 
-                                      (F.col("location.longitude").isNotNull()), 
-                                _find_real_location_udf(self.locationModel)(F.col("location.latitude"), F.col("location.longitude"))
-                               ).otherwise(F.struct(*[F.col('location.city').alias('city'), 
-                                                      F.col("location.region_code").alias('region_code')])))
-            
-            df = df.withColumn("location", df["location"].withField('city', F.col("new_location.city")))
-            df = df.withColumn("location", df["location"].withField('region_code', F.col("new_location.region_code")))\
-                    .drop("new_location")
+        if "location" in df.columns:
+            df = df.withColumn("location", df["location"].withField("latitude", F.col("location.latitude").cast("double")))
+            df = df.withColumn("location", df["location"].withField("longitude", F.col("location.longitude").cast("double")))
+            df = df.withColumn("location", df["location"].withField("city", F.upper("location.city")))\
+                   .withColumn("location", F.col("location").dropFields("dma_code", "country_code3", "postal_code", "area_code"))
+    
+            if self.fix_brazilian_cities:
+                df = df.withColumn("new_location", 
+                                   F.when((~_is_valid_uf_code(F.col("location.region_code"))) &
+                                          (F.col("location.latitude").isNotNull()) & 
+                                          (F.col("location.longitude").isNotNull()), 
+                                    _find_real_location_udf(self.locationModel)(F.col("location.latitude"), F.col("location.longitude"))
+                                   ).otherwise(F.struct(*[F.col('location.city').alias('city'), 
+                                                          F.col("location.region_code").alias('region_code')])))
+                
+                df = df.withColumn("location", df["location"].withField('city', F.col("new_location.city")))
+                df = df.withColumn("location", df["location"].withField('region_code', F.col("new_location.region_code")))\
+                        .drop("new_location")
 
         return df
         
     
-    def _changing_vulns_layout(self, df):
+    def _changing_vulns_layout(self, df, fast_mode=False):
         """
         Changing layout of `vulns` column. The new layout will be composed of two columns:
         `vulns_cve` (array<string>) containing all cve codes; `vulns_verified` 
         (array<string>) containing all Shodan's verified cve codes. 
         """
+        if not fast_mode:
+            dtype = df.schema['vulns'].dataType[0].dataType.simpleString()
+            df = df.withColumn('vulns', F.from_json(F.to_json("vulns"), f'map<string,{dtype}>'))
         
-        df = df.withColumn("tmp", _convert_vulns_udf("vulns"))\
-                .select("*", "tmp.*")\
-                .drop("tmp", "vulns")
-        
+        df = df.withColumn('vulns_cve', F.map_values(F.transform_values('vulns',  lambda k, v: k)))\
+            .withColumn('vulns_verified', F.map_values(F.transform_values("vulns", lambda k, v: F.when(v.getField("verified") == "true", F.lit(k)))))\
+            .drop("vulns")
+                
         return df
 
 
-    def _read_json(self, input_filepath):
+    def _read_json(self, input_filepath, fast_mode):
         """
 
         """
-        
-        try:
-            # infers all primitive values as a string type
-            df = self.spark_session.read.json(input_filepath, primitivesAsString=True)
-        except:
-            self._logger("[ERROR] Memory error while Spark tried to infer the JSON schema."\
-                  "Try to increase 'spark.sql.files.minPartitionNum' to more than 3 "\
-                  "x n_cores in your Spark Session, after that, run `convert_files()` again.")
-            print(traceback.format_exc())
+
+        if fast_mode:
+            schema = StructType()\
+                .add("_shodan", StructType([
+                    StructField('crawler', StringType(), True),  
+                    StructField('module', StringType(), True), 
+                    StructField('options', StringType(), True), 
+                    StructField('ptr', BooleanType(), True), 
+                    StructField('region', StringType(), True)
+                   ]), True)\
+                .add("asn", StringType(), True)\
+                .add("cloud", StructType([
+                    StructField('provider', StringType(), True), 
+                    StructField('region', StringType(), True), 
+                    StructField('service', StringType(), True)
+                   ]), True)\
+                .add("cpe23", ArrayType(StringType()), True)\
+                .add("device", StringType(), True)\
+                .add("devicetype", StringType(), True)\
+                .add("hostnames", ArrayType(StringType()), True)\
+                .add("domains", ArrayType(StringType()), True)\
+                .add("location", StructType([
+                    StructField('area_code', StringType(), True), 
+                    StructField('city', StringType(), True), 
+                    StructField('country_code', StringType(), True), 
+                    StructField('country_name', StringType(), True), 
+                    StructField('latitude', StringType(), True),
+                    StructField('longitude', StringType(), True), 
+                    StructField('region_code', StringType(), True)
+                    ]), True)\
+                .add("ip", LongType(), True)\
+                .add("hash", LongType(), True)\
+                .add("ip_str", StringType(), True)\
+                .add("isp", StringType(), True)\
+                .add("info", StringType(), True)\
+                .add("data", StringType(), True)\
+                .add("org", StringType(), True)\
+                .add("os", StringType(), True)\
+                .add("platform", StringType(), True)\
+                .add("product", StringType(), True)\
+                .add("port", IntegerType(), True)\
+                .add("tags", ArrayType(StringType()), True)\
+                .add("timestamp", TimestampType(), True)\
+                .add("version", StringType(), True)\
+                .add("vulns", MapType(StringType(), StructType([
+                    StructField('verified', StringType(), True)
+                    ])), True)
             
-        self._logger(f"[INFO] Schema inferred to all columns. Starting conversion.")
-        schema = self._gen_initial_schema(df)
+            for c in Schemas().list_shodan_schemes():
+                if c not in schema.fieldNames():
+                    schema.add(c, StringType(), True)
+
+            if self.filter_columns:
+                schema_tmp = StructType()
+                for c in schema:
+                    if (c.name in self.filter_columns) or (c.name == "_shodan"):
+                        schema_tmp = schema_tmp.add(c.name, c.dataType, True)  
+                schema = schema_tmp
+                    
+            df = self.spark_session.read.schema(schema).json(input_filepath)
+            self._logger(f"[INFO] Inference schema skipped. Starting conversion.")
+        else:
+            try:
+                # infers all primitive values as a string type
+                df = self.spark_session.read.json(input_filepath, primitivesAsString=True)
+                self._logger(f"[INFO] Schema inferred to all columns. Starting conversion.")
+            except:
+                self._logger("[ERROR] Memory error while Spark tried to infer the JSON schema."\
+                      "Try to increase 'spark.sql.files.minPartitionNum' to more than 3 "\
+                      "x n_cores in your Spark Session, after that, run `convert_files()` again.")
+                print(traceback.format_exc())
+                
         
+        schema = self._gen_initial_schema(df, fast_mode)
         df = self.spark_session.read.json(input_filepath, schema=schema)
         
         if self.only_vulns:
             df = df.filter(F.col("vulns").isNotNull())
-            
+
+        df = df.persist()
         return df
     
-    def _convert(self, input_filepath, persist=False, output_filepath=None):
+    def _convert(self, input_filepath, persist=False, output_filepath=None, fast_mode=False):
         """
         
         - Convert multiples `json` files to a single `delta` file;
@@ -410,24 +485,26 @@ class ShodanDatasetManager(object):
         
         """
 
-        df = self._read_json(input_filepath)
+        df = self._read_json(input_filepath, fast_mode)
         
-        df = self._extracting_complex_json_columns(df)
+        df = self._extracting_complex_json_columns(df, fast_mode)
         df = self._force_casting(df)
         df = self._fixing_http_html_columns(df)
         
         df = self._cleaning_location(df)
-        df = self._changing_vulns_layout(df)
+        df = self._changing_vulns_layout(df, fast_mode)
         df = self._cleaning_empty_columns(df)
 
         df = df.withColumn("meta_id", gen_ulid("timestamp"))\
                 .withColumn("date", F.to_date("timestamp"))\
                 .withColumn("year", F.year("timestamp"))\
-                .withColumn("meta_module", _get_tag_udf(F.col("shodan.module")))\
+                .withColumn("meta_module", F.when(F.col("shodan.module").isin(["https", "http", "http-simple-new", "https-simple-new", "auto", "rdp"]), 
+                                                  F.col("shodan.module"))
+                            .otherwise(F.lit("mixed-modules")))\
             .drop("_id", 'cpe')
         
         if self.org_refinement:
-            df = df.shodan_extension.cleaning_org(input_col="org", output_col="org_clean")
+            df = df.tlhop_extension.cleaning_org(input_col="org", output_col="org_clean")
 
         columns = df.columns
         self._logger("[INFO] {} columns: {}".format(len(columns), columns))  
@@ -456,44 +533,6 @@ schema_address = StructType()\
 
 def _find_real_location_udf(model):
     return F.udf(lambda lat, long: _find_real_location(lat, long, model), schema_address)
-
-@F.udf
-def _get_tag_udf(shodan_module):
-    """
-    Create a new column based on shodan_module value. 
-    """
-    if shodan_module in ["https", "http", "http-simple-new", "https-simple-new", "auto", "rdp"]:
-        return shodan_module
-    else:
-        return "mixed-modules"        
-        
-schema1 = StructType()\
-    .add("vulns_cve", ArrayType(StringType()), True)\
-    .add("vulns_verified", ArrayType(StringType()), True, None)
-
-@F.udf(returnType=schema1)
-def _convert_vulns_udf(row):
-    """
-    Method to transform `vulns` column (in json) into two new columns:
-    a list of CVEs and a list of verified CVEs.
-    """
-
-    if row:
-        row = json.loads(row)
-        cves = list(row.keys())
-        verifieds = []
-        
-        for r in row:
-            if row[r].get("verified", "false") == "true":
-                verifieds.append(r)
-                
-        if len(verifieds) == 0:
-            verifieds = None
-            
-        results = [cves, verifieds]
-    else:
-        results = [None, None]
-    return results
 
 
 @F.udf(returnType=BooleanType())

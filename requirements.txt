@@ -10,3 +10,8 @@ tabulate>=0.9.0
 textdistance>=4.2.2
 selenium>=4.10.0
 webdriver-manager>=3.9.1
+ulid
+bs4
+PyYAML
+intervaltree
+ipython

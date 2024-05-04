@@ -15,7 +15,7 @@ import glob
 import pandas as pd
 import numpy as np
 
-from tlhop.library import print_full, normalize_string
+from tlhop.library import print_full, normalize_string, bucket_epss, gen_secao_cnae
 from tlhop.schemas import Schemas
 import tlhop.crawlers as crawlers
 # TODO: Referer its crawlers
@@ -381,35 +381,10 @@ class DataSets(object):
         return eol_ds
     
     def _read_brazilian_rf(self, path):
-        @F.udf
-        def gen_secao(x):
-            x = int(x)
-            if (x <= 3): return	"A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA"
-            elif ( 5 <= x <= 9): return 	"B - INDÚSTRIAS EXTRATIVAS"
-            elif ( 10 <= x <= 33): return	"C - INDÚSTRIAS DE TRANSFORMAÇÃO"
-            elif ( 35 <= x <= 35): return	"D - ELETRICIDADE E GÁS"
-            elif ( 36 <= x <= 39): return	"E - ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO"
-            elif ( 41 <= x <= 43): return	"F - CONSTRUÇÃO"
-            elif ( 45 <= x <= 47): return	"G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS"
-            elif ( 49 <= x <= 53): return	"H - TRANSPORTE, ARMAZENAGEM E CORREIO"
-            elif ( 55 <= x <= 56): return	"I - ALOJAMENTO E ALIMENTAÇÃO"
-            elif ( 58 <= x <= 63): return	"J - INFORMAÇÃO E COMUNICAÇÃO"
-            elif ( 64 <= x <= 66): return	"K - ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS"
-            elif ( 68 <= x <= 68): return	"L - ATIVIDADES IMOBILIÁRIAS"
-            elif ( 69 <= x <= 75): return	"M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS"
-            elif ( 77 <= x <= 82): return	"N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES"
-            elif ( 84 <= x <= 84): return	"O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL"
-            elif ( 85 <= x <= 85): return	"P - EDUCAÇÃO"
-            elif ( 86 <= x <= 88): return	"Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS"
-            elif ( 90 <= x <= 93): return	"R - ARTES, CULTURA, ESPORTE E RECREAÇÃO"
-            elif ( 94 <= x <= 96): return	"S - OUTRAS ATIVIDADES DE SERVIÇOS"
-            elif ( 97 <= x <= 97): return	"T - SERVIÇOS DOMÉSTICOS"
-            elif ( 99 <= x <= 99): return	"U - ORGANISMOS INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS"
-            return "DESCONHECIDA"
         
         rfb = self.spark_session.read.format("delta").load(path)\
             .withColumn("cnae_principal_raiz", F.substring(F.col("cnae_fiscal_principal_cod"), 0, 2))\
-            .withColumn("cnae_secao", gen_secao(F.col("cnae_principal_raiz")))
+            .withColumn("cnae_secao", gen_secao_cnae(F.col("cnae_principal_raiz")))
         return rfb
 
     def _read_rdap_dataset(self, path):
@@ -423,7 +398,10 @@ class DataSets(object):
             crawler = crawlers.FirstEPSS()
             crawler.download()
 
-        epss = self.spark_session.read.format("delta").load(path)
+        epss = self.spark_session.read.format("delta").load(path)\
+            .withColumn("epss_rank", bucket_epss(F.col("epss")))
+
+
         return epss
 
     def _read_rir_dataset(self, path, check_update=False):

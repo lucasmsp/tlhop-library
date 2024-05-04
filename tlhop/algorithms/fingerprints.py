@@ -1,12 +1,14 @@
-import pyspark.sql.functions as F 
-import xml.etree.ElementTree as ET
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import os
 import glob
 
+import xml.etree.ElementTree as ET
+
 from pyspark.sql import SparkSession
-import pyspark.sql.functions as F
 from pyspark.sql.functions import *  # needed to be easy to create fingerprints in xml
+import pyspark.sql.functions as F
 
 class Fingerprints(object):
 

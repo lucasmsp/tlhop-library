@@ -3,14 +3,18 @@
 
 
 import os
-from datetime import datetime
+import time
 import pandas as pd
 import urllib.request
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F 
+
 from delta.tables import *
-import time
 from deltalake import write_deltalake
+
+from tlhop.library import bucket_epss
 
 class FirstEPSS(object):
 
@@ -194,7 +198,9 @@ class FirstEPSS(object):
 
     def download_to_df(self, day_str):
         tmp_df = self._download_single_file(day_str)
-        return self.spark_session.createDataFrame(tmp_df)
+        tmp_df = self.spark_session.createDataFrame(tmp_df)\
+            .withColumn("epss_rank", bucket_epss(F.col("epss")))
+        return tmp_df
 
     def download(self):
         """

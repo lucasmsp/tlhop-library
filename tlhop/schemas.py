@@ -24,7 +24,7 @@ class Schemas(object):
         self.shodan_mapping = [k for k, v in self.original_schema.items() if ('type": "struct"' in v) and (k[0] != "_")]
                                    
         self.external_schemas = {}
-        
+        self.custom_schemas = {}
         custom_schemas_path = os.environ.get("TLHOP_CUSTOM_SCHEMAS", None) 
         if custom_schemas_path:
             with open(custom_schemas_path, 'r') as file:

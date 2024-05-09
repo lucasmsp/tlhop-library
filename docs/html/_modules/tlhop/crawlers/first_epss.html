@@ -357,14 +357,18 @@ document.write(`
 
 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
 <span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
 <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span> 
+
 <span class="kn">from</span> <span class="nn">delta.tables</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">deltalake</span> <span class="kn">import</span> <span class="n">write_deltalake</span>
+
+<span class="kn">from</span> <span class="nn">tlhop.library</span> <span class="kn">import</span> <span class="n">bucket_epss</span>
 
 <div class="viewcode-block" id="FirstEPSS">
 <a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.first_epss.FirstEPSS">[docs]</a>
@@ -555,7 +559,9 @@ document.write(`
 <a class="viewcode-back" href="../../../tlhop.crawlers.html#tlhop.crawlers.first_epss.FirstEPSS.download_to_df">[docs]</a>
     <span class="k">def</span> <span class="nf">download_to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">day_str</span><span class="p">):</span>
         <span class="n">tmp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_download_single_file</span><span class="p">(</span><span class="n">day_str</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">)</span></div>
+        <span class="n">tmp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;epss_rank&quot;</span><span class="p">,</span> <span class="n">bucket_epss</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;epss&quot;</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">tmp_df</span></div>
 
 
 <div class="viewcode-block" id="FirstEPSS.download">

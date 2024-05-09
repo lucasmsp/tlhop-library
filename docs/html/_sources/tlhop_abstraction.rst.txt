@@ -12,8 +12,8 @@ TLHOP abstraction is an extended Spark's DataFrame abstraction that contains hig
    tmp = F.array(*[F.lit(c) for c in target])
    df.filter(F.arrays_overlap(“column_name”, tmp))
 
-   # using our Shodan Abstraction:
-   from tlhop.shodan_abstraction import DataFrame
+   # using our abstraction:
+   from tlhop.tlhop_abstraction import DataFrame
 
    target = ["CVE-2021-26855", ..., "CVE-2021-26885"]
    df.shodan_extension.contains_vulnerability(target, mode="any")

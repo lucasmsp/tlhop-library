@@ -14,5 +14,5 @@ This page gives an overview of all public TLHOP objects, functions and methods.
    tlhop.datasets
    tlhop.shodan_mgr
    tlhop.censys_mgr 
-   tlhop.shodan_abstraction
+   tlhop.tlhop_abstraction
    tlhop.library

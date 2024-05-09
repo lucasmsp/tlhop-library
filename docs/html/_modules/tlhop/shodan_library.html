@@ -365,17 +365,14 @@ document.write(`
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
     
-
 <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="o">*</span>                                                                              
 <span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">pyspark.sql.window</span> <span class="kn">import</span> <span class="n">Window</span>
 <span class="kn">from</span> <span class="nn">pyspark.ml.stat</span> <span class="kn">import</span> <span class="n">Correlation</span>
 <span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">VectorAssembler</span>
 
-<span class="kn">from</span> <span class="nn">tlhop.library</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">tlhop.schemas</span> <span class="kn">import</span> <span class="n">Schemas</span>
-<span class="kn">from</span> <span class="nn">tlhop.algorithms</span> <span class="kn">import</span> <span class="n">Fingerprints</span>
-
+<span class="kn">import</span> <span class="nn">tlhop.library</span> <span class="k">as</span> <span class="nn">tlhop_library</span>
 
 <span class="n">_library_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 
@@ -388,7 +385,7 @@ document.write(`
 <span class="c1"># HTTP operators</span>
 <span class="c1">#</span>
 <div class="viewcode-block" id="get_http_status">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.get_http_status">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.get_http_status">[docs]</a>
 <span class="k">def</span> <span class="nf">get_http_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outname</span><span class="o">=</span><span class="s2">&quot;http-code&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Process `data` column to retrieve the HTTP response numeric code and convert it to message code pattern.</span>
@@ -406,7 +403,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="parser_http_col">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.parser_http_col">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.parser_http_col">[docs]</a>
 <span class="k">def</span> <span class="nf">parser_http_col</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outname</span><span class="o">=</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parser `http` column (an original string field) into a struct field with the selected sub-field, </span>
@@ -429,7 +426,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="parser_html_code">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.parser_html_code">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.parser_html_code">[docs]</a>
 <span class="k">def</span> <span class="nf">parser_html_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="s2">&quot;html_parsed&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parser the `html` code. The resultant column will be a struct containing </span>
@@ -445,12 +442,12 @@ document.write(`
 <span class="sd">    :return: Spark DataFrame </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">parser_html_code_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">parser_html_code_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)))</span></div>
 
 
 
 <div class="viewcode-block" id="webpage_is_available">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.webpage_is_available">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.webpage_is_available">[docs]</a>
 <span class="k">def</span> <span class="nf">webpage_is_available</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html_col</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">title_col</span><span class="o">=</span><span class="s2">&quot;title_clean&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a new column `webpage_stats` containing information if: both code </span>
@@ -471,7 +468,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="filter_valid_html_page">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.filter_valid_html_page">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.filter_valid_html_page">[docs]</a>
 <span class="k">def</span> <span class="nf">filter_valid_html_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hash_col</span><span class="o">=</span><span class="s2">&quot;html_hash&quot;</span><span class="p">,</span> <span class="n">status_col</span><span class="o">=</span><span class="s2">&quot;http-code&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    </span>
@@ -488,7 +485,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="get_html_lang">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.get_html_lang">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.get_html_lang">[docs]</a>
 <span class="k">def</span> <span class="nf">get_html_lang</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="s2">&quot;html_lang&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Detect the site official language (infered by lang metadada)</span>
@@ -507,7 +504,7 @@ document.write(`
 <span class="c1">#  Cleaning text operators</span>
 <span class="c1">#</span>
 <div class="viewcode-block" id="cleaning_org">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.cleaning_org">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.cleaning_org">[docs]</a>
 <span class="k">def</span> <span class="nf">cleaning_org</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="o">=</span><span class="s2">&quot;org&quot;</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to apply all cleaning and standardization operations to an organization name.</span>
@@ -521,12 +518,12 @@ document.write(`
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_col</span><span class="p">:</span>
         <span class="n">output_col</span> <span class="o">=</span> <span class="n">input_col</span> <span class="o">+</span> <span class="s2">&quot;_clean&quot;</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">cleaning_text_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="kc">True</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">cleaning_text_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="kc">True</span><span class="p">)))</span></div>
 
 
 
 <div class="viewcode-block" id="cleaning_text">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.cleaning_text">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.cleaning_text">[docs]</a>
 <span class="k">def</span> <span class="nf">cleaning_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to apply all cleaning operations to a text.</span>
@@ -539,7 +536,7 @@ document.write(`
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_col</span><span class="p">:</span>
         <span class="n">output_col</span> <span class="o">=</span> <span class="n">input_col</span> <span class="o">+</span> <span class="s2">&quot;_clean&quot;</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">cleaning_text_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="kc">False</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">cleaning_text_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="kc">False</span><span class="p">)))</span></div>
 
 
 
@@ -547,7 +544,7 @@ document.write(`
 <span class="c1"># ScreenShot operators</span>
 <span class="c1">#</span>
 <div class="viewcode-block" id="filter_banners_with_screenshot">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.filter_banners_with_screenshot">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.filter_banners_with_screenshot">[docs]</a>
 <span class="k">def</span> <span class="nf">filter_banners_with_screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Filtering Shodan records that contain screenshot in it data (within `opts` column).</span>
@@ -560,7 +557,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="extract_screenshot">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.extract_screenshot">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.extract_screenshot">[docs]</a>
 <span class="k">def</span> <span class="nf">extract_screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert the original screenshot content (inside the `opts` field) to two new columns:</span>
@@ -572,7 +569,7 @@ document.write(`
 
     <span class="n">col_schema</span> <span class="o">=</span> <span class="n">Schemas</span><span class="p">()</span><span class="o">.</span><span class="n">get_shodan_schema_by_column</span><span class="p">(</span><span class="s2">&quot;screenshot&quot;</span><span class="p">,</span> <span class="n">force_original</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     
-    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;screenshot_tmp&quot;</span><span class="p">,</span> <span class="n">get_fields_udf</span><span class="p">(</span><span class="s2">&quot;opts&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;screenshot&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>\
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;screenshot_tmp&quot;</span><span class="p">,</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">get_fields_udf</span><span class="p">(</span><span class="s2">&quot;opts&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;screenshot&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>\
         <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;screenshot_tmp&#39;</span><span class="p">,</span> <span class="n">from_json</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;screenshot_tmp&#39;</span><span class="p">),</span> <span class="n">col_schema</span><span class="p">))</span>\
         <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;screenshot_labels&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;screenshot_tmp.labels&quot;</span><span class="p">))</span>\
         <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;screenshot_img&quot;</span><span class="p">,</span> <span class="n">concat_ws</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">lit</span><span class="p">(</span><span class="s1">&#39;&lt;img src=&quot;data:&#39;</span><span class="p">),</span> 
@@ -588,7 +585,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="print_screenshot">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.print_screenshot">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.print_screenshot">[docs]</a>
 <span class="k">def</span> <span class="nf">print_screenshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print `size` records as a Pandas DataFrame containing images.</span>
@@ -609,7 +606,7 @@ document.write(`
 <span class="c1">#  CVE and CPE operators</span>
 <span class="c1">#</span>
 <div class="viewcode-block" id="contains_vulnerability">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.contains_vulnerability">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.contains_vulnerability">[docs]</a>
 <span class="k">def</span> <span class="nf">contains_vulnerability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cves</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="n">vulns_col</span><span class="o">=</span><span class="s2">&quot;vulns_cve&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Selects records with the vulnerabilities listed in `cve` parameters. </span>
@@ -638,16 +635,17 @@ document.write(`
 
 <span class="c1"># https://en.wikipedia.org/wiki/Common_Platform_Enumeration</span>
 <div class="viewcode-block" id="parser_cpe">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.parser_cpe">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.parser_cpe">[docs]</a>
 <span class="k">def</span> <span class="nf">parser_cpe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="o">=</span><span class="s2">&quot;cpe&quot;</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="s2">&quot;cpe_parsed&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parser CPE column to extract &quot;cpe_type&quot;, &quot;cpe_vendor&quot;, &quot;cpe_product&quot; and &quot;cpe_versions&quot; informations.</span>
 
 <span class="sd">    :param input_col: Input CPE field name (default, `cpe`)</span>
 <span class="sd">    :param output_col: Output column name (default, `cpe_parsed`)</span>
+<span class="sd">    </span>
 <span class="sd">    :return: Spark DataFrame </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">parser_cpe_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">output_col</span><span class="p">,</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">parser_cpe_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)))</span></div>
 
 
 
@@ -655,13 +653,15 @@ document.write(`
 <span class="c1"># Plot operators</span>
 <span class="c1">#</span>
 <div class="viewcode-block" id="gen_cdf_pdf">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.gen_cdf_pdf">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.gen_cdf_pdf">[docs]</a>
 <span class="k">def</span> <span class="nf">gen_cdf_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">to_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a CDF/PDF that represents a frequency of a elements in a column.</span>
+<span class="sd">    </span>
 <span class="sd">    :param input_col: Target column to generate its frequency;</span>
 <span class="sd">    :param to_pandas: True to return result as a Pandas DataFrame (default), </span>
-<span class="sd">     otherwise it keeps as Spark DataFrame;</span>
+<span class="sd">         otherwise it keeps as Spark DataFrame;</span>
+<span class="sd">     </span>
 <span class="sd">    :return: Spark DataFrame </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
@@ -673,19 +673,15 @@ document.write(`
                   <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>\
                   <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">))</span>\
                   <span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
-    
     <span class="n">stats_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_col</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">]</span>
-    <span class="c1"># PDF</span>
-    <span class="n">stats_df</span><span class="p">[</span><span class="n">pdf_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">builtins</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">])</span>
-
-    <span class="c1"># CDF</span>
-    <span class="n">stats_df</span><span class="p">[</span><span class="n">cdf_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats_df</span><span class="p">[</span><span class="n">pdf_col</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">stats_df</span><span class="p">[</span><span class="n">pdf_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">builtins</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">stats_df</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">])</span> <span class="c1"># PDF</span>
+    <span class="n">stats_df</span><span class="p">[</span><span class="n">cdf_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats_df</span><span class="p">[</span><span class="n">pdf_col</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="c1"># CDF</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">to_pandas</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sparkSession</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     
-    <span class="c1"># Spark approach: We do not use this approach, to avoid Warnings (although is safe)</span>
+    <span class="c1"># Spark approach: We do not use this approach, to avoid Warnings (although it is safe)</span>
     <span class="c1">#w0 = Window.partitionBy()</span>
     <span class="c1">#w = Window.orderBy(desc(&quot;count&quot;)).rowsBetween(Window.unboundedPreceding, 0)</span>
     <span class="c1"># result = (self.filter(col(input_col).isNotNull())</span>
@@ -698,8 +694,9 @@ document.write(`
     <span class="k">return</span> <span class="n">result</span></div>
 
 
+
 <div class="viewcode-block" id="plot_bubble">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.plot_bubble">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.plot_bubble">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_bubble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">color_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                     <span class="n">hover_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -710,14 +707,14 @@ document.write(`
     <span class="k">else</span><span class="p">:</span>
         <span class="n">cities_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
     
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_bubble_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">color_col</span><span class="p">,</span> 
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">plot_bubble_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">color_col</span><span class="p">,</span> 
                             <span class="n">size</span><span class="p">,</span> <span class="n">hover_name</span><span class="p">,</span> <span class="n">hover_data</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fig</span></div>
 
 
 
 <div class="viewcode-block" id="plot_heatmap">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.plot_heatmap">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.plot_heatmap">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">z_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hover_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    </span>
@@ -726,7 +723,7 @@ document.write(`
         <span class="n">cities_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">max_rows</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">cities_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_heatmap_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">z_col</span><span class="p">,</span> <span class="n">hover_name</span><span class="p">,</span> <span class="n">hover_data</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">tlhop_library</span><span class="o">.</span><span class="n">plot_heatmap_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">z_col</span><span class="p">,</span> <span class="n">hover_name</span><span class="p">,</span> <span class="n">hover_data</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fig</span></div>
 
 
@@ -735,7 +732,7 @@ document.write(`
 <span class="c1"># Miscellaneous Operators</span>
 <span class="c1">#</span>
 <div class="viewcode-block" id="get_ip_mask">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.get_ip_mask">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.get_ip_mask">[docs]</a>
 <span class="k">def</span> <span class="nf">get_ip_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="o">=</span><span class="s2">&quot;ip_str&quot;</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a string IP into a subnet mask format.</span>
@@ -757,7 +754,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="parser_complex_column">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.parser_complex_column">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.parser_complex_column">[docs]</a>
 <span class="k">def</span> <span class="nf">parser_complex_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">output_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Because of their information complexity, some columns saved in string type are actually a JSON information. </span>
@@ -780,14 +777,14 @@ document.write(`
 
 
 <div class="viewcode-block" id="get_softwares_in_data">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.get_softwares_in_data">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.get_softwares_in_data">[docs]</a>
 <span class="k">def</span> <span class="nf">get_softwares_in_data</span><span class="p">():</span>
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
 
 <div class="viewcode-block" id="efficient_join">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.efficient_join">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.efficient_join">[docs]</a>
 <span class="k">def</span> <span class="nf">efficient_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to efficient join using partitioning features of Delta Lake. It assumes that </span>
@@ -813,11 +810,12 @@ document.write(`
 
 
 <div class="viewcode-block" id="find_patterns">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.find_patterns">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.find_patterns">[docs]</a>
 <span class="k">def</span> <span class="nf">find_patterns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s2">&quot;meta_events&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">tlhop.algorithms</span> <span class="kn">import</span> <span class="n">Fingerprints</span>
     
     <span class="n">tmp_df</span> <span class="o">=</span> <span class="bp">self</span>
     
@@ -842,7 +840,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="gen_correlation">
-<a class="viewcode-back" href="../../tlhop.shodan_abstraction.html#tlhop.shodan_library.gen_correlation">[docs]</a>
+<a class="viewcode-back" href="../../tlhop.tlhop_abstraction.html#tlhop.shodan_library.gen_correlation">[docs]</a>
 <span class="k">def</span> <span class="nf">gen_correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features_cols</span><span class="p">):</span>
     
 

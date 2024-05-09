@@ -250,6 +250,7 @@ def parser_cpe(self, input_col="cpe", output_col="cpe_parsed"):
 
     :param input_col: Input CPE field name (default, `cpe`)
     :param output_col: Output column name (default, `cpe_parsed`)
+    
     :return: Spark DataFrame 
     """
     return self.withColumn(output_col, tlhop_library.parser_cpe_udf(col(input_col)))
@@ -261,9 +262,11 @@ def parser_cpe(self, input_col="cpe", output_col="cpe_parsed"):
 def gen_cdf_pdf(self, input_col, to_pandas=True):
     """
     Generate a CDF/PDF that represents a frequency of a elements in a column.
+    
     :param input_col: Target column to generate its frequency;
     :param to_pandas: True to return result as a Pandas DataFrame (default), 
-     otherwise it keeps as Spark DataFrame;
+         otherwise it keeps as Spark DataFrame;
+     
     :return: Spark DataFrame 
     """
     
@@ -275,19 +278,15 @@ def gen_cdf_pdf(self, input_col, to_pandas=True):
                   .groupby(input_col).count()\
                   .orderBy(desc("count"))\
                   .toPandas()
-    
     stats_df.columns = [input_col, "frequency"]
-    # PDF
-    stats_df[pdf_col] = stats_df['frequency'] / builtins.sum(stats_df['frequency'])
-
-    # CDF
-    stats_df[cdf_col] = stats_df[pdf_col].cumsum()
+    stats_df[pdf_col] = stats_df['frequency'] / builtins.sum(stats_df['frequency']) # PDF
+    stats_df[cdf_col] = stats_df[pdf_col].cumsum() # CDF
     result = stats_df.reset_index()
 
     if not to_pandas:
         result = self.sparkSession.createDataFrame(result)
     
-    # Spark approach: We do not use this approach, to avoid Warnings (although is safe)
+    # Spark approach: We do not use this approach, to avoid Warnings (although it is safe)
     #w0 = Window.partitionBy()
     #w = Window.orderBy(desc("count")).rowsBetween(Window.unboundedPreceding, 0)
     # result = (self.filter(col(input_col).isNotNull())
@@ -298,6 +297,7 @@ def gen_cdf_pdf(self, input_col, to_pandas=True):
     #         )
 
     return result
+
 
 def plot_bubble(self, lat_col, lon_col, color_col=None, size=3.0, hover_name=None, 
                     hover_data=None, opacity=0.9, max_rows=10000):

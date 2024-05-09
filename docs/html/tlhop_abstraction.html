@@ -368,8 +368,8 @@ target = [&quot;CVE-2021-26855&quot;, ..., &quot;CVE-2021-26885&quot;]
 tmp = F.array(*[F.lit(c) for c in target])
 df.filter(F.arrays_overlap(“column_name”, tmp))
 
-# using our Shodan Abstraction:
-from tlhop.shodan_abstraction import DataFrame
+# using our abstraction:
+from tlhop.tlhop_abstraction import DataFrame
 
 target = [&quot;CVE-2021-26855&quot;, ..., &quot;CVE-2021-26885&quot;]
 df.shodan_extension.contains_vulnerability(target, mode=&quot;any&quot;)

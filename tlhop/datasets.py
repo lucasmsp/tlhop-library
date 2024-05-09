@@ -264,14 +264,15 @@ class DataSets(object):
                     timestamp = info_release[-1].replace("\n", "")
                     path = path.replace("<>", timestamp) 
                         
-        if not os.path.exists(path):
-            raise Exception(self._ERROR_MESSAGE_004)
-            
         method = getattr(self, self._DATASET_LIST[code]["method"])
 
         if not check_update:
+            if not os.path.exists(path):
+                raise Exception(self._ERROR_MESSAGE_004)
             df = method(path)
         elif code not in ["FIRST_EPSS", "LACNIC_STATISTICS", "NVD_CVE_LIB"]:
+            if not os.path.exists(path):
+                raise Exception(self._ERROR_MESSAGE_004)
             print(self._WARN_MESSAGE_002)
             df = method(path)
         else:

@@ -14,7 +14,7 @@ TLHOP Library is a Python module that we are developing to help researchers and 
 
 | 
 
-All components are exemplified in figure above: Shodan's data about probed devices are transformed and persisted in a more efficient format :doc:`(shodan converter) <shodan_converter>`. Information can be complemented from other databases, made available from :doc:`Crawlers API <datasets_crawlers>` responsible for collecting and archiving. During analyses, data such as those from Shodan can be accessed from a :doc:`data abstraction <shodan_abstraction>` closer to the domain expert and integrated with the external databases. Because our abstraction is based on a Spark-based functional language, it hides implementation complexities, especially aspects of parallel and distributed processing to end-user data, while leveraging Spark's scalability to power increasingly complex analyses.
+All components are exemplified in figure above: Search engine data about probed devices are transformed and persisted in a more efficient format :doc:`(Dataset converter) <dataset_converters>`. Information can be complemented from other databases, made available from :doc:`Crawlers API <datasets_crawlers>` responsible for collecting and archiving. During analyses, data from Shodan or Censys can be accessed from a :doc:`data abstraction <tlhop_abstraction>` closer to the domain expert and integrated with the external databases. Because our abstraction is based on a Spark-based functional language, it hides implementation complexities, especially aspects of parallel and distributed processing to end-user data, while leveraging Spark's scalability to power increasingly complex analyses.
 
 
 About the project

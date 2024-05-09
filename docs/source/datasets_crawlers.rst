@@ -108,7 +108,6 @@ After use an crawler, it required to update the list of available datasets by ru
    >>> from tlhop.datasets import DataSets
 
    >>> ds = DataSets()
-   >>> ds.update_dataset_list() # force Datasets API to find new crawled datasets. 
    >>> ds.list_datasets() # generate a list of all currently available datasets and their codes identification.
    >>> nvd = ds.read_dataset("NVD_CVE_LIB") # read NVD dataset as a Spark DataFrame.
 

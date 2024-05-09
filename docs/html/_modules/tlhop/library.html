@@ -355,7 +355,7 @@ document.write(`
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
                                                                             
-<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
+
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
@@ -376,12 +376,10 @@ document.write(`
 
 
 <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">ArrayType</span><span class="p">,</span> <span class="n">StructType</span><span class="p">,</span><span class="n">IntegerType</span><span class="p">,</span><span class="n">BooleanType</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;bs4&#39;</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">tlhop.schemas</span> <span class="kn">import</span> <span class="n">Schemas</span>
 
 
 <span class="n">_library_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
@@ -450,7 +448,7 @@ document.write(`
         <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">cleaning_org</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">),</span> <span class="n">exclude</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">s</span></div>
 
@@ -943,15 +941,16 @@ document.write(`
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get unique tokens splitted by blanked spaces with length greater than 2.</span>
 
-<span class="sd">    :param 1° - row: DataFrame row with tokens</span>
+<span class="sd">    :param row: DataFrame row with tokens;</span>
 
-<span class="sd">    :returns: Empty List or List with set of tokens</span>
-<span class="sd">    :rtype: ArrayType(StringType)</span>
+<span class="sd">    :returns: Empty List or List with tokens (i.e., ArrayType(StringType))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">]))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span></div>
+
 
     
 <div class="viewcode-block" id="get_sorted_tokens">
@@ -959,20 +958,20 @@ document.write(`
 <span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
 <span class="k">def</span> <span class="nf">get_sorted_tokens</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">min_size</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get all tokens greater than min_size and spllited by blanked spaces.</span>
+<span class="sd">    Get all tokens greater than min_size and spllited by blanked spaces.</span>
 
-<span class="sd">        :param 1° - row: DataFrame row with tokens</span>
-<span class="sd">        :param 2° - min_size: Min size for word length</span>
+<span class="sd">    :param row: DataFrame row with tokens</span>
+<span class="sd">    :param min_size: Min size for word length</span>
 
-<span class="sd">        :returns: Empty List or List with tokens</span>
-<span class="sd">        :rtype:ArrayType(StringType)</span>
+<span class="sd">    :returns: Empty List or List with tokens (i.e., ArrayType(StringType))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_size</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span></div>
 
-    
+
 <span class="c1">##########################</span>
 
 <span class="c1">#stopwords_pt = nltk.corpus.stopwords.words(&#39;portuguese&#39;)</span>
@@ -987,24 +986,23 @@ document.write(`
 <a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.plot_bubble_map">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_bubble_map</span><span class="p">(</span><span class="n">cities_df</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">color_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                     <span class="n">hover_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{}):</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Method that plots a bubble map(Bubble Maps are used to describe qualities associated with</span>
-<span class="sd">        a specific item, person, idea or event.).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method that plots a bubble map in plotly. Bubble Maps are used to describe qualities associated with</span>
+<span class="sd">    a specific item, person, idea or event.</span>
 
-<span class="sd">        :param cities_df: DataFrame with cities</span>
-<span class="sd">        :param lat_col: column with cities latitude</span>
-<span class="sd">        :param lon_col: column with cities longitude</span>
-<span class="sd">        :param color_col: define column color, default(None)</span>
-<span class="sd">        :param size: define the plot size, default(None), if keeps none than size = 3</span>
-<span class="sd">        :param hover_name: name to display when hover, default(None)</span>
-<span class="sd">        :param hover_data: data to display when hover, default(None)</span>
-<span class="sd">        :param opacity: define graph opacity, default(0.9)</span>
-<span class="sd">        :param kwargs: key args, default({})</span>
+<span class="sd">    :param cities_df: DataFrame with cities</span>
+<span class="sd">    :param lat_col: column with cities latitude</span>
+<span class="sd">    :param lon_col: column with cities longitude</span>
+<span class="sd">    :param color_col: define column color, default(None)</span>
+<span class="sd">    :param size: define the plot size, default(None), if keeps none than size = 3</span>
+<span class="sd">    :param hover_name: name to display when hover, default(None)</span>
+<span class="sd">    :param hover_data: data to display when hover, default(None)</span>
+<span class="sd">    :param opacity: define graph opacity, default(0.9)</span>
+<span class="sd">    :param kwargs: key args, default({})</span>
 
-<span class="sd">        :returns: map_box object</span>
-<span class="sd">        :rtype: scatter_mapbox</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :returns: map_box object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">cities_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">])</span>
     <span class="n">cities_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">])</span>
     
@@ -1018,6 +1016,7 @@ document.write(`
         <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">],</span> 
                                             <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.33</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.67</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
                                             <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+        
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cities_df</span><span class="p">[</span><span class="s2">&quot;size_tmp_plot&quot;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         
@@ -1143,8 +1142,17 @@ document.write(`
         
 <span class="c1">################</span>
 
-<span class="n">cpe_schema</span> <span class="o">=</span> <span class="n">Schemas</span><span class="p">()</span><span class="o">.</span><span class="n">get_external_schema_by_column</span><span class="p">(</span><span class="s2">&quot;cpe&quot;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">)</span>
+<span class="c1">#from tlhop.schemas import Schemas</span>
+<span class="c1">#cpe_schema = Schemas().get_external_schema_by_column(&quot;cpe&quot;, &#39;any&#39;)</span>
 
+<span class="n">cpe_schema</span> <span class="o">=</span> <span class="n">ArrayType</span><span class="p">(</span>
+    <span class="n">StructType</span><span class="p">([</span>
+        <span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;cpe_type&#39;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> 
+        <span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;cpe_vendor&#39;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
+        <span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;cpe_product&#39;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>  
+        <span class="n">StructField</span><span class="p">(</span><span class="s1">&#39;cpe_versions&#39;</span><span class="p">,</span> <span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">()),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="p">])</span>
+<span class="p">)</span>
 
 <div class="viewcode-block" id="parser_cpe_udf">
 <a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.parser_cpe_udf">[docs]</a>
@@ -1226,6 +1234,74 @@ document.write(`
 <span class="k">def</span> <span class="nf">gen_ulid</span><span class="p">(</span><span class="n">timestamp</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">ulid</span><span class="o">.</span><span class="n">from_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span></div>
 
+
+<div class="viewcode-block" id="gen_secao_cnae">
+<a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.gen_secao_cnae">[docs]</a>
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">gen_secao_cnae</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">5</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">):</span> <span class="k">return</span> 	<span class="s2">&quot;B - INDÚSTRIAS EXTRATIVAS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">10</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">33</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;C - INDÚSTRIAS DE TRANSFORMAÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">35</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">35</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;D - ELETRICIDADE E GÁS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">36</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">39</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;E - ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">41</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">43</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;F - CONSTRUÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">45</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">47</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">49</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">53</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;H - TRANSPORTE, ARMAZENAGEM E CORREIO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">55</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">56</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;I - ALOJAMENTO E ALIMENTAÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">58</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">63</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;J - INFORMAÇÃO E COMUNICAÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">64</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">66</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;K - ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">68</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">68</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;L - ATIVIDADES IMOBILIÁRIAS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">69</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">75</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">77</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">82</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">84</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">84</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">85</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">85</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;P - EDUCAÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">86</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">88</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">90</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">93</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;R - ARTES, CULTURA, ESPORTE E RECREAÇÃO&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">94</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">96</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;S - OUTRAS ATIVIDADES DE SERVIÇOS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">97</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">97</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;T - SERVIÇOS DOMÉSTICOS&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span> <span class="mi">99</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">99</span><span class="p">):</span> <span class="k">return</span>	<span class="s2">&quot;U - ORGANISMOS INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;DESCONHECIDA&quot;</span></div>
+
+        
+
+<div class="viewcode-block" id="bucket_epss">
+<a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.bucket_epss">[docs]</a>
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span>
+<span class="k">def</span> <span class="nf">bucket_epss</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt; 0.2&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">0.4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt; 0.4&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">0.6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt; 0.6&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt; 0.8&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&gt;= 0.8&quot;</span></div>
+
+
+
+<span class="n">cpe_schema2</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;cpe_product&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;cpe_version&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="viewcode-block" id="match_cpes_simple">
+<a class="viewcode-back" href="../../tlhop.library.html#tlhop.library.match_cpes_simple">[docs]</a>
+<span class="nd">@F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">cpe_schema2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">match_cpes_simple</span><span class="p">(</span><span class="n">shodan_cpes</span><span class="p">,</span> <span class="n">nvd_cpes</span><span class="p">):</span>
+    <span class="n">product</span><span class="p">,</span> <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">cpe</span> <span class="ow">in</span> <span class="n">shodan_cpes</span><span class="p">:</span>
+        <span class="n">cpe_parts</span> <span class="o">=</span> <span class="n">cpe</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpe_parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">cpe_common</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cpe_parts</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">cpe_common</span> <span class="ow">in</span> <span class="n">nvd_cpes</span><span class="p">:</span>
+                <span class="n">product</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cpe_parts</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">version</span> <span class="o">=</span> <span class="n">cpe_parts</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">product</span><span class="p">,</span> <span class="n">version</span>
+    <span class="k">return</span> <span class="n">product</span><span class="p">,</span> <span class="n">version</span></div>
+
+    
 </pre></div>
 
                 </article>

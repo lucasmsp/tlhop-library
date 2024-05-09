@@ -540,32 +540,33 @@ def get_unique_tokens(row):
     """
     Get unique tokens splitted by blanked spaces with length greater than 2.
 
-    :param 1° - row: DataFrame row with tokens
+    :param row: DataFrame row with tokens;
 
-    :returns: Empty List or List with set of tokens
-    :rtype: ArrayType(StringType)
+    :returns: Empty List or List with tokens (i.e., ArrayType(StringType))
     """
+
     if row:
         return list(set([r for r in row.split(" ") if len(r) > 2]))
     else:
         return []
+
     
 @F.udf(returnType=ArrayType(StringType()))
 def get_sorted_tokens(row, min_size):
     """
-        Get all tokens greater than min_size and spllited by blanked spaces.
+    Get all tokens greater than min_size and spllited by blanked spaces.
 
-        :param 1° - row: DataFrame row with tokens
-        :param 2° - min_size: Min size for word length
+    :param row: DataFrame row with tokens
+    :param min_size: Min size for word length
 
-        :returns: Empty List or List with tokens
-        :rtype:ArrayType(StringType)
+    :returns: Empty List or List with tokens (i.e., ArrayType(StringType))
     """
+    
     if row:
         return [r for r in row.split(" ") if len(r) >= min_size]
     else:
         return []
-    
+
 ##########################
 
 #stopwords_pt = nltk.corpus.stopwords.words('portuguese')
@@ -578,24 +579,23 @@ def get_sorted_tokens(row, min_size):
 
 def plot_bubble_map(cities_df, lat_col, lon_col, color_col=None, size=None, hover_name=None, 
                     hover_data=None, opacity=0.9, kwargs={}):
-    
-    '''
-        Method that plots a bubble map(Bubble Maps are used to describe qualities associated with
-        a specific item, person, idea or event.).
+    """
+    Method that plots a bubble map in plotly. Bubble Maps are used to describe qualities associated with
+    a specific item, person, idea or event.
 
-        :param cities_df: DataFrame with cities
-        :param lat_col: column with cities latitude
-        :param lon_col: column with cities longitude
-        :param color_col: define column color, default(None)
-        :param size: define the plot size, default(None), if keeps none than size = 3
-        :param hover_name: name to display when hover, default(None)
-        :param hover_data: data to display when hover, default(None)
-        :param opacity: define graph opacity, default(0.9)
-        :param kwargs: key args, default({})
+    :param cities_df: DataFrame with cities
+    :param lat_col: column with cities latitude
+    :param lon_col: column with cities longitude
+    :param color_col: define column color, default(None)
+    :param size: define the plot size, default(None), if keeps none than size = 3
+    :param hover_name: name to display when hover, default(None)
+    :param hover_data: data to display when hover, default(None)
+    :param opacity: define graph opacity, default(0.9)
+    :param kwargs: key args, default({})
 
-        :returns: map_box object
-        :rtype: scatter_mapbox
-    '''
+    :returns: map_box object.
+    """
+
     cities_df[lat_col] = pd.to_numeric(cities_df[lat_col])
     cities_df[lon_col] = pd.to_numeric(cities_df[lon_col])
     
@@ -609,6 +609,7 @@ def plot_bubble_map(cities_df, lat_col, lon_col, color_col=None, size=None, hove
         cities_df["size_tmp_plot"] = pd.cut(cities_df["size_tmp_plot"], 
                                             bins=[-np.inf, 0, .2, .33, 0.5,  0.67, 0.84, 1], 
                                             labels=False) * 5
+        
         kwargs["size"] = cities_df["size_tmp_plot"]
     else:
         

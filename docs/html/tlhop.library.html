@@ -41,7 +41,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tlhop.library';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="API Reference: TLHOP abstraction" href="tlhop.shodan_abstraction.html" />
+    <link rel="prev" title="API Reference: TLHOP abstraction" href="tlhop.tlhop_abstraction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -313,7 +313,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="tlhop.datasets.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tlhop.shodan_mgr.html">API Reference: Shodan Dataset Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tlhop.censys_mgr.html">API Reference: Censys Dataset Manager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tlhop.shodan_abstraction.html">API Reference: TLHOP abstraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tlhop.tlhop_abstraction.html">API Reference: TLHOP abstraction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Library functions</a></li>
 </ul>
 </div>
@@ -666,13 +666,10 @@ tags, meta, name, content, etc.</p>
 <dd><p>Get unique tokens splitted by blanked spaces with length greater than 2.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>row</strong> (<em>1° -</em>) – DataFrame row with tokens</p>
+<dd class="field-odd"><p><strong>row</strong> – DataFrame row with tokens;</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Empty List or List with set of tokens</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ArrayType(StringType)</p>
+<dd class="field-even"><p>Empty List or List with tokens (i.e., ArrayType(StringType))</p>
 </dd>
 </dl>
 </dd></dl>
@@ -684,22 +681,21 @@ tags, meta, name, content, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>row</strong> (<em>1° -</em>) – DataFrame row with tokens</p></li>
-<li><p><strong>min_size</strong> (<em>2° -</em>) – Min size for word length</p></li>
+<li><p><strong>row</strong> – DataFrame row with tokens</p></li>
+<li><p><strong>min_size</strong> – Min size for word length</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Empty List or List with tokens</p>
+<dd class="field-even"><p>Empty List or List with tokens (i.e., ArrayType(StringType))</p>
 </dd>
 </dl>
-<p>:rtype:ArrayType(StringType)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tlhop.library.plot_bubble_map">
 <span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">plot_bubble_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cities_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#plot_bubble_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.plot_bubble_map" title="Link to this definition">#</a></dt>
-<dd><p>Method that plots a bubble map(Bubble Maps are used to describe qualities associated with
-a specific item, person, idea or event.).</p>
+<dd><p>Method that plots a bubble map in plotly. Bubble Maps are used to describe qualities associated with
+a specific item, person, idea or event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -715,10 +711,7 @@ a specific item, person, idea or event.).</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>map_box object</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>scatter_mapbox</p>
+<dd class="field-even"><p>map_box object.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -791,6 +784,21 @@ that matter most.).</p>
 <span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">gen_ulid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#gen_ulid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.gen_ulid" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.gen_secao_cnae">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">gen_secao_cnae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#gen_secao_cnae"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.gen_secao_cnae" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.bucket_epss">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">bucket_epss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">score</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#bucket_epss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.bucket_epss" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tlhop.library.match_cpes_simple">
+<span class="sig-prename descclassname"><span class="pre">tlhop.library.</span></span><span class="sig-name descname"><span class="pre">match_cpes_simple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shodan_cpes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nvd_cpes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlhop/library.html#match_cpes_simple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlhop.library.match_cpes_simple" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 </section>
 
 
@@ -804,7 +812,7 @@ that matter most.).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tlhop.shodan_abstraction.html"
+       href="tlhop.tlhop_abstraction.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -852,6 +860,9 @@ that matter most.).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.is_valid_uf_code"><code class="docutils literal notranslate"><span class="pre">is_valid_uf_code()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.parser_cpe_udf"><code class="docutils literal notranslate"><span class="pre">parser_cpe_udf()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.gen_ulid"><code class="docutils literal notranslate"><span class="pre">gen_ulid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.gen_secao_cnae"><code class="docutils literal notranslate"><span class="pre">gen_secao_cnae()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.bucket_epss"><code class="docutils literal notranslate"><span class="pre">bucket_epss()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tlhop.library.match_cpes_simple"><code class="docutils literal notranslate"><span class="pre">match_cpes_simple()</span></code></a></li>
 </ul>
   </nav></div>
 

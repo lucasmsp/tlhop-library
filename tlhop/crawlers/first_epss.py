@@ -28,8 +28,6 @@ class FirstEPSS(object):
 
     _ERROR_MESSAGE_000 = "None active Spark session was found. Please start a new Spark session before use DataSets API."
     _ERROR_MESSAGE_001 = "[ERROR] This crawler requires an environment variable 'TLHOP_DATASETS_PATH' containing a folder path to be used as storage to all TLHOP datasets."
-    _ERROR_MESSAGE_002 = ("[ERROR] Destination output already exists ('{}') but RELEASE file is " +
-        "missing. Desconsidering previous files, if they exists.")
     _ERROR_MESSAGE_003 = "[ERROR] Mentioned file '{}' in RELEASE was not found."
     _ERROR_MESSAGE_004 = "[ERROR] File in url '{}' could not be downloaded!"
     
@@ -75,25 +73,28 @@ class FirstEPSS(object):
         elif os.path.exists(self.basepath+"RELEASE"):
             with open(self.basepath+"RELEASE", "r") as f:
                 timestamp = f.read().split("\n")[0]
-                if not os.path.exists(self.basepath+self.expected_schema["outname"]):
-                    raise Exception(self._ERROR_MESSAGE_002.format(self.expected_schema["outname"]))
-                else:
+                if os.path.exists(self.basepath + self.expected_schema["outname"]):
                     self.last_file = {"timestamp": timestamp}
                     print(self._INFO_MESSAGE_001.format(timestamp))
-        else:
-            print(self._ERROR_MESSAGE_002.format(self.basepath))
         
     def _check_for_new_files(self, download_url):
 
         if self.last_file["timestamp"] == self.current_day:
             self.new_version = False
             print(self._INFO_MESSAGE_003)
-        elif urllib.request.urlopen(download_url.replace("YYYY-mm-dd", self.current_day)):
-            print(self._INFO_MESSAGE_002)
-            self.new_version = True
-        else:
-            self.new_version = False
-            print(self._INFO_MESSAGE_003)
+            return 
+
+        try:
+            if urllib.request.urlopen(download_url.replace("YYYY-mm-dd", self.current_day)):
+                print(self._INFO_MESSAGE_002)
+                self.new_version = True
+                return
+        except:
+            pass
+            
+        self.new_version = False
+        print(self._INFO_MESSAGE_003)
+        return
             
     def describe(self):
         """

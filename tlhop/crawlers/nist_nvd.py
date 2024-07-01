@@ -74,6 +74,7 @@ class NISTNVD(object):
             os.mkdir(self.basepath)
             if not os.path.exists(self.basepath+"raw"):
                 os.mkdir(self.basepath+"raw")
+                
         elif os.path.exists(self.basepath+"RELEASE"):
             
             if not os.path.exists(self.basepath + self.expected_schema["outname"]):
@@ -83,9 +84,8 @@ class NISTNVD(object):
                 for line in f.read().split("\n"):
                     url, etag, timestamp = line.split("|")
                     filename = url.split("/")[-1]
-                    if not os.path.exists(self.basepath + "raw/" + filename):
-                        raise Exception(self._ERROR_MESSAGE_001.format(filename))
-                    self.last_file[url] = {"etag": etag, "timestamp": timestamp}
+                    if os.path.exists(self.basepath + "raw/" + filename):
+                        self.last_file[url] = {"etag": etag, "timestamp": timestamp}
                 print(self._INFO_MESSAGE_001.format(timestamp))
         else:
             print(self._ERROR_MESSAGE_001.format(self.basepath))

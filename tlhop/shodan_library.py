@@ -395,31 +395,32 @@ def efficient_join(self, df2):
 
     return result
 
-def find_patterns(self, labels, target_col="meta_events"):
-    """
+# REMOVED. It nows exposed as an algorithm
+# def find_patterns(self, labels, target_col="meta_events"):
+#     """
 
-    """
-    from tlhop.algorithms import Fingerprints
+#     """
+#     from tlhop.algorithms import Fingerprints
     
-    tmp_df = self
+#     tmp_df = self
     
-    fp = Fingerprints()
-    to_remove = []
-    for label in fp.fingerprints:
-        if not any([True  for l in labels if l in label]):
-            to_remove.append(label)
+#     fp = Fingerprints()
+#     to_remove = []
+#     for label in fp.fingerprints:
+#         if not any([True  for l in labels if l in label]):
+#             to_remove.append(label)
 
-    for label in to_remove:
-        del fp.fingerprints[label]
+#     for label in to_remove:
+#         del fp.fingerprints[label]
             
-    if len(fp.fingerprints) == 0:
-        print("Fingerprints not found")
-        return tmp_df
+#     if len(fp.fingerprints) == 0:
+#         print("Fingerprints not found")
+#         return tmp_df
     
-    fp._find_all_fingerprints(tmp_df, output_col="meta_events")
-    result = fp.output
+#     fp._find_all_fingerprints(tmp_df, output_col="meta_events")
+#     result = fp.output
     
-    return result
+#     return result
 
 
 def gen_correlation(self, features_cols):

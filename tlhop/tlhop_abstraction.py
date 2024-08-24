@@ -122,9 +122,10 @@ def tlhop_extension(self):
     def get_ip_mask(input_col="ip_str", output_col=None, level=3):
         return shodan_lib.get_ip_mask(self, input_col=input_col, output_col=output_col, level=level)
 
-    @add_attr(tlhop_extension)
-    def find_patterns(labels, target_col="meta_events"):
-        return shodan_lib.find_patterns(self, labels, target_col)
+    # REMOVED. It nows exposed as an algorithm
+    # @add_attr(tlhop_extension)
+    # def find_patterns(labels, target_col="meta_events"):
+    #     return shodan_lib.find_patterns(self, labels, target_col)
 
     @add_attr(tlhop_extension)
     def gen_correlation(features_cols):

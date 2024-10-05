@@ -417,6 +417,7 @@ class ShodanDatasetManager(object):
                 .add("ip", LongType(), True)\
                 .add("hash", LongType(), True)\
                 .add("ip_str", StringType(), True)\
+                .add("ipv6", StringType(), True)\
                 .add("isp", StringType(), True)\
                 .add("info", StringType(), True)\
                 .add("data", StringType(), True)\
@@ -488,9 +489,11 @@ class ShodanDatasetManager(object):
         df = self._read_json(input_filepath, fast_mode)
         
         df = self._extracting_complex_json_columns(df, fast_mode)
-        df = self._force_casting(df)
-        df = self._fixing_http_html_columns(df)
+        df = self._force_casting(df)\
+            .withColumnRenamed("ip", "ip_int")\
+            .withColumn("ip", F.when(F.col("ipv6").isNotNull(), F.col("ipv6")).otherwise(F.col("ip_str")))
         
+        df = self._fixing_http_html_columns(df)
         df = self._cleaning_location(df)
         df = self._changing_vulns_layout(df, fast_mode)
         df = self._cleaning_empty_columns(df)

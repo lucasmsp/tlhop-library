@@ -270,7 +270,7 @@ class DataSets(object):
             if not os.path.exists(path):
                 raise Exception(self._ERROR_MESSAGE_004)
             df = method(path)
-        elif code not in ["FIRST_EPSS", "LACNIC_STATISTICS", "NVD_CVE_LIB"]:
+        elif code not in ["FIRST_EPSS", "LACNIC_STATISTICS", "NVD_CVE_LIB", "CISA_EXPLOITS", "AS_RANK_FILE"]:
             if not os.path.exists(path):
                 raise Exception(self._ERROR_MESSAGE_004)
             print(self._WARN_MESSAGE_002)
@@ -291,9 +291,13 @@ class DataSets(object):
         
         return cve_lib
     
-    def _read_cisa_known_exploits(self, path):
+    def _read_cisa_known_exploits(self, path, check_update=False):
+
+        if check_update:
+            crawler = crawlers.CISAKnownExploits()
+            crawler.download()
+
         cisa_lib = self.spark_session.read.csv(path, sep=";", header=True)\
-            .withColumnRenamed("cveID", "cve_id")\
             .persist()
         
         return cisa_lib
@@ -308,10 +312,16 @@ class DataSets(object):
             .persist()
         return mapping_utf8
     
-    def _read_as_rank(self, path):
+    def _read_as_rank(self, path,  check_update=False):
+        if check_update:
+            crawler = crawlers.ASRank()
+            crawler.download()
+            
         as_rank = self.spark_session.read.csv(path, sep=";", header=True)\
             .withColumn("asn", F.concat(F.lit("AS"), F.col("asn")))\
             .withColumn("rank", F.col("rank").cast("int"))\
+            .withColumn("rank", F.col("announcing_prefixes").cast("int"))\
+            .withColumn("rank", F.col("announcing_addresses").cast("int"))\
             .persist()
         return as_rank
     

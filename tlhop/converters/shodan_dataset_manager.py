@@ -519,6 +519,9 @@ class ShodanDatasetManager(object):
               .option("mergeSchema", "true")\
               .partitionBy("year", "date", "meta_module")\
               .save(output_filepath)
+
+            df.unpersist()
+            df = self.spark_session.read.format("delta").load(output_filepath)
             
         return df
 

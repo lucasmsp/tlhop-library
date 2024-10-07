@@ -181,7 +181,7 @@ class ASRank(object):
 
         df["organization"] = df["organization"].apply(lambda x: {} if pd.isna(x) else x)
         organization = pd.json_normalize(df["organization"])
-        organization.columns = ["org_id", "org_name", "org_contry_iso", "org_country_name"]
+        organization.columns = ["org_id", "org_name", "org_country_iso", "org_country_name"]
         
         country = pd.json_normalize(df["country"])
         country.columns = ["as_country_iso", "as_country_name"]
@@ -193,13 +193,13 @@ class ASRank(object):
         df = df[["asn", "asnName", "as_country_iso", "as_country_name", "longitude", "latitude",
                  "rank", "cliqueMember", "seen", 
                  "degree_provider","degree_peer","degree_customer", "degree_total", 
-                 "org_id", "org_name", "org_contry_iso", "org_country_name",
+                 "org_id", "org_name", "org_country_iso", "org_country_name",
                  "announcing_prefixes", "announcing_addresses"]]
         
         df.columns = [["asn", "as_name", "as_country_iso", "as_country_name", "longitude", "latitude",
                        "rank", "clique", "seen",
                        "degree_provider","degree_peer","degree_customer", "degree_total", 
-                       "org_id", "org_name", "org_contry_iso", "org_country_name",
+                       "org_id", "org_name", "org_country_iso", "org_country_name",
                        "announcing_prefixes", "announcing_addresses"]]
         
         df.to_csv(outfile, index=False, header=True, sep=";")

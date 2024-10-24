@@ -59,6 +59,7 @@ class ASRank(object):
     
         if not os.path.exists(self.basepath):
             os.mkdir(self.basepath)
+            
         elif os.path.exists(self.basepath+"RELEASE"):
             with open(self.basepath+"RELEASE", "r") as f:
                 timestamp, filename = f.read().split("\n")[0].split("|")
@@ -80,7 +81,7 @@ class ASRank(object):
             now = response.json()['data'][0]['modified_at'][:-7]
             
         self.now = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
-        latest = datetime.strptime(self.last_file['timestamp'], "%Y%m%d_%H%M%S")
+        latest = datetime.strptime(self.last_file.get('timestamp', '19910615_000000'), "%Y%m%d_%H%M%S")
 
         if abs(self.now - latest).days > 1:
             print(self._INFO_MESSAGE_004)

@@ -388,6 +388,7 @@ class ShodanDatasetManager(object):
         if fast_mode:
             schema = StructType()\
                 .add("_shodan", StructType([
+                    StructField('id', StringType(), True),  
                     StructField('crawler', StringType(), True),  
                     StructField('module', StringType(), True), 
                     StructField('options', StringType(), True), 

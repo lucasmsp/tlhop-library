@@ -863,13 +863,14 @@ cpe_schema2 = StructType()\
 @F.udf(returnType=cpe_schema2)
 def match_cpes_simple(shodan_cpes, nvd_cpes):
     product, version = None, None
-    for cpe in shodan_cpes:
-        cpe_parts = cpe.split(":")
-        if len(cpe_parts) >= 6:
-            cpe_common = ":".join(cpe_parts[3:5])
-            if cpe_common in nvd_cpes:
-                product = ":".join(cpe_parts[3:5])
-                version = cpe_parts[5]
-                return product, version
+    if shodan_cpes:
+        for cpe in shodan_cpes:
+            cpe_parts = cpe.split(":")
+            if len(cpe_parts) >= 6:
+                cpe_common = ":".join(cpe_parts[3:5])
+                if cpe_common in nvd_cpes:
+                    product = ":".join(cpe_parts[3:5])
+                    version = cpe_parts[5]
+                    return product, version
     return product, version
     

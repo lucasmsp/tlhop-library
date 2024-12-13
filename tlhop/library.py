@@ -844,17 +844,20 @@ def gen_secao_cnae(x):
 
 @F.udf
 def bucket_epss(score):
+    """
+    EPSS Score, 0 to 100%.
+    """
 
-    if score < 0.2:
-        return "< 0.2"
-    elif score < 0.4:
-        return "< 0.4"
-    elif score < 0.6:
-        return "< 0.6"
-    elif score < 0.8:
-        return "< 0.8"
+    if score < 20:
+        return "< 20"
+    elif score < 40:
+        return "< 40"
+    elif score < 60:
+        return "< 60"
+    elif score < 80:
+        return "< 80"
     else:
-        return ">= 0.8"
+        return ">= 80"
 
 
 cpe_schema2 = StructType()\

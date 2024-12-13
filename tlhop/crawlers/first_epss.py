@@ -115,7 +115,7 @@ class FirstEPSS(object):
         
         while retry > 0:
             try:
-                tmp_df = pd.read_csv(url)
+                tmp_df = pd.read_csv(url, low_memory=False)
                 time.sleep(3)
                 break
             except:
@@ -164,12 +164,12 @@ class FirstEPSS(object):
             if  day < datetime.strptime("2022-02-03", self.date_format):
                 tmp_df = tmp_df.rename(columns={'cve': 'cve_id'}) 
                 tmp_df["model_version"] =  "v2021-04-14"
-                tmp_df['epss'] = tmp_df['epss'].astype(float)
+                tmp_df['epss'] = round(tmp_df['epss'].astype(float) * 100, 2)
                 
                 cols = ["cve_id", "score_date", "year", "model_version", "epss"]
                 if "percentile" in tmp_df.columns:
                     cols += ["percentile"]
-                    tmp_df['percentile'] = tmp_df['percentile'].astype(float)
+                    tmp_df['percentile'] = round(tmp_df['percentile'].astype(float) * 100, 2)
 
                 tmp_df["score_date"] =  day   
                 tmp_df['year'] = tmp_df['score_date'].dt.year
@@ -185,8 +185,8 @@ class FirstEPSS(object):
                 tmp_df.columns = ["cve_id", "epss", "percentile"]
                 
                 tmp_df["model_version"] =  info[0][15:]
-                tmp_df['epss'] = tmp_df['epss'].astype(float)
-                tmp_df['percentile'] = tmp_df['percentile'].astype(float)
+                tmp_df['epss'] = round(tmp_df['epss'].astype(float) * 100, 2)
+                tmp_df['percentile'] = round(tmp_df['percentile'].astype(float) * 100, 2)
                 
                 tmp_df["score_date"] =  datetime.strptime(info[1][11:-14], self.date_format)
                 tmp_df['year'] = tmp_df['score_date'].dt.year

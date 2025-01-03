@@ -20,6 +20,9 @@ import plotly.graph_objects as go
 import plotly.express as px
 from bs4 import BeautifulSoup
 
+from cpe.cpe2_3_fs import CPE2_3_FS
+from cpe.cpelang2_3 import CPELanguage2_3
+from cpe.cpeset2_3 import CPESet2_3
 
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
@@ -865,15 +868,55 @@ cpe_schema2 = StructType()\
     .add("cpe_version", StringType(), True, None)
 @F.udf(returnType=cpe_schema2)
 def match_cpes_simple(shodan_cpes, nvd_cpes):
-    product, version = None, None
-    if shodan_cpes:
-        for cpe in shodan_cpes:
-            cpe_parts = cpe.split(":")
-            if len(cpe_parts) >= 6:
-                cpe_common = ":".join(cpe_parts[3:5])
-                if cpe_common in nvd_cpes:
-                    product = ":".join(cpe_parts[3:5])
-                    version = cpe_parts[5]
-                    return product, version
-    return product, version
+    """
+    Método para descobrir qual CPE identificado no Shodan está relacionado a um conjunto de CPEs de um CVE.
+    Esse método utiliza uma abordagem simples baseada apenas no vendor e product name.
+    """
+    if not shodan_cpes:
+        shodan_cpes = []
     
+    product, version = None, None
+    
+    nvds = set()
+    for cpe in re.findall('cpe:2\.3:[0-9a-z_:\*\.]+', nvd_cpes):
+        first_part = ":".join(cpe.split(":")[:5])
+        nvds.add(first_part)
+
+    for cpe in shodan_cpes:
+        first_part = ":".join(cpe.split(":")[:5])
+        for nvd_cpe in nvds:
+            if (nvd_cpe in first_part) or (first_part in nvd_cpe):
+                cpe = cpe.split(":")
+                product = cpe[3] + ":" + cpe[4] 
+                if len(cpe) > 5:
+                    version = cpe[5] 
+                break
+                            
+    return product, version
+
+
+cpe_schema3 = StructType()\
+    .add("cpe_product", StringType(), True, None)\
+    .add("cpe_version", StringType(), True, None)
+@F.udf(returnType=cpe_schema3)
+def match_cpes_exact(shodan_cpes, nvd_cpes):
+    """
+
+    """
+    product, version = None, None
+    nvd_cpes = nvd_cpes.replace(":-", ":*")\
+            .replace(":ltr:", ":*:")
+            
+    cpes_list = CPELanguage2_3(nvd_cpes, isFile=False, isJSON=True)
+    if shodan_cpes:
+        for cpe in shodan_cpes: 
+            cpe += ":*".join(["" for i in range(13 - cpe.count(":"))])
+            cpe = CPE2_3_FS(cpe)
+            s = CPESet2_3()
+            s.append(cpe)
+            
+            if cpes_list.language_match(s):
+                product = cpe.get_vendor()[0] + ":" + cpe.get_product()[0]
+                version = cpe.get_version()[0]
+                return product, version
+    return product, version

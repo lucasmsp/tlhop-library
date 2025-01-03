@@ -18,3 +18,4 @@ ipython
 hyperscan
 cydifflib
 google-re2
+cpe>=1.3.1

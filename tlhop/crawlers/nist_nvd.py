@@ -23,7 +23,7 @@ class NISTNVD(object):
     The National Vulnerability Database (NVD) is the U.S. government 
     repository of standards based vulnerability management data.
     
-    Reference: https://nvd.nist.gov/
+    Reference: https://nvd.nist.gov/vuln/data-feeds#JSON_FEED
     """
 
     _ERROR_MESSAGE_000 = "[ERROR] This crawler requires an environment variable 'TLHOP_DATASETS_PATH' containing a folder path to be used as storage to all TLHOP datasets."

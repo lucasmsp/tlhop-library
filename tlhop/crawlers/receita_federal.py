@@ -9,6 +9,7 @@ import glob
 from datetime import datetime
 import urllib.request
 import zipfile
+from dateutil.relativedelta import relativedelta
 
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
@@ -66,7 +67,7 @@ class BrazilianFR(object):
         session is already created.
         """
 
-        self.download_url = "http://200.152.38.155/CNPJ/"
+        self.download_url = "https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/"
         self.path = "brazilian-rf/"
         self.expected_schema = {
             "outname": "brazilian-rf-consolidated.gz.delta", 
@@ -112,8 +113,9 @@ class BrazilianFR(object):
                     if len(line) > 1:
                         url, etag, timestamp, raw_version = line.split("|")
                         filename = url.split("/")[-1]
-                        if not os.path.exists(self.basepath + raw_version + "/" + filename):
-                            raise Exception(self._ERROR_MESSAGE_002.format(filename))
+                        filepath = raw_version + "/" + filename
+                        if not os.path.exists(filepath):
+                            raise Exception(self._ERROR_MESSAGE_002.format(filepath))
 
                         self.last_file[url] = {"etag": etag, "timestamp": timestamp}
                 print(self._INFO_MESSAGE_001.format(timestamp))
@@ -122,14 +124,20 @@ class BrazilianFR(object):
 
 
     def _check_for_new_files(self, download_url):
-        response = requests.get(download_url)
-        if response.ok:
-            response_text = response.text
-        else:
-            return response.raise_for_status()
+
+        date = self.now
+        while True:
+            date_str = "{}-{:02d}".format(date.year, date.month)
+            print(f"[INFO] Checking if has a dataset in '{date_str}'") 
+            response = requests.get(download_url+date_str+"/")
+            if response.ok:
+                response_text = response.text
+                break
+            date -=  relativedelta(months=1)
+            
         
         soup = BeautifulSoup(response_text, 'html.parser')
-        files = sorted([download_url + node.get('href') 
+        files = sorted([download_url+date_str+"/" + node.get('href') 
                         for node in soup.find_all('a') 
                         if any([ True 
                                 for x in self.expected_schema["files"] 
@@ -139,18 +147,21 @@ class BrazilianFR(object):
         found_update = False
         for url in files:
             info = urllib.request.urlopen(url)
+            filename = url.split("/")[-1]
             etag = info.info()["ETag"]
             
-            if url not in self.last_file:
-                self.last_file[url] = {"etag": None}
+            if filename not in self.last_file:
+                self.last_file[filename] = {"etag": None, "url": url}
                 
-            if etag != self.last_file[url]["etag"]:
+            if etag != self.last_file[filename]["etag"]:
                 found_update = True
-                self.last_file[url]["download"] = True
-                self.last_file[url]["etag"] = etag
-                self.last_file[url]["timestamp"] = self.now
+                self.last_file[filename]["download"] = True
+                self.last_file[filename]["etag"] = etag
+                self.last_file[filename]["url"] = url
+                self.last_file[filename]["timestamp"] = self.now
             else:
-                self.last_file[url]["download"] = False
+                self.last_file[filename]["download"] = False
+                self.last_file[filename]["url"] = url
         
         if found_update:
             print(self._INFO_MESSAGE_002)
@@ -206,20 +217,19 @@ class BrazilianFR(object):
             if not os.path.exists(raw_directory):
                 os.mkdir(raw_directory)
             
-            for url in self.last_file:
-                filename = url.split("/")[-1] 
+            for filename in self.last_file:
+                url = self.last_file[filename]['url']
                 filepath = raw_directory +"/"+ filename
 
-                if self.last_file[url]["download"]:
+                if self.last_file[filename]["download"]:
                     print(self._INFO_MESSAGE_005.format(filename))
-                    fin = requests.get(url, allow_redirects=True)
-                    fout = open(filepath, 'wb')
-                    fout.write(fin.content)
-                    fout.close()
-                    fin.close()
+                    with requests.get(url, stream=True) as resposta:
+                        resposta.raise_for_status()  # Verifica erros na resposta
+                        with open(filepath, "wb") as arquivo:
+                            for chunk in resposta.iter_content(chunk_size=8192):  # Baixa em partes de 8 KB
+                                arquivo.write(chunk)
         
-        for url in self.last_file:
-            filename = url.split("/")[-1] 
+        for filename in self.last_file:
             filepath = raw_directory +"/"+ filename
             with zipfile.ZipFile(filepath, 'r') as zip_ref:
                 # zip_ref.infolist()[0].date_time
@@ -347,25 +357,13 @@ class BrazilianFR(object):
             .join(empresas, "cnpj_basico")\
             .withColumn("cnpj", F.concat_ws("", F.col("cnpj_basico"), F.col("cnpj_ordem"), F.col("cnpj_dv")))\
             .drop("cnpj_ordem", "cnpj_dv")\
-            .withColumn("dump_data", lit(self.now.strftime("%Y-%m-%d")).cast("date"))
+            .withColumn("dump_data", F.lit(self.now.strftime("%Y-%m-%d")).cast("date"))
         
-        if os.path.exists(outfile):
-            deltaTable = DeltaTable.forPath(self.spark_session, outfile)
-            deltaTable.alias("old").merge(
-                df_consolidado.alias("new"),
-                (col("old.cnpj") == col("new.cnpj")) & (col("old.razao_social") == col("new.razao_social")) & 
-                (
-                     (col("old.nome_fantasia").isNull() & col("new.nome_fantasia").isNull()) |
-                     (col("old.nome_fantasia").isNotNull() & col("new.nome_fantasia").isNotNull() & (col("old.nome_fantasia") == col("new.nome_fantasia")))
-                )
-            )\
-            .whenNotMatchedInsertAll()\
-            .execute()
 
-            deltaTable.optimize().executeCompaction()
-            deltaTable.vacuum(0)
-        else:
-            df_consolidado.write.format("delta").save(outfile)
+        df_consolidado.write.format("delta").save(outfile)
+
+        deltaTable = DeltaTable.forPath(self.spark_session, outfile)
+        deltaTable.vacuum(0)
 
         estabelecimentos.unpersist()
         empresas.unpersist()

@@ -122,7 +122,7 @@ class ShodanDatasetManager(object):
         deltaTable = DeltaTable.forPath(self.spark_session, dataset_folder)
         t1 = time.time()
         self._logger(f"[INFO] Starting to optimize delta table `{dataset_folder}`")
-        deltaTable.optimize().executeCompaction()
+        deltaTable.optimize().executeZOrderBy("meta_id")
         t2 = time.time()
         elapsed_time = int(t2-t1)
         self._logger(f"[INFO] Optimization finished in {elapsed_time} seconds.")
@@ -492,36 +492,46 @@ class ShodanDatasetManager(object):
         df = self._extracting_complex_json_columns(df, fast_mode)
         df = self._force_casting(df)\
             .withColumnRenamed("ip", "ip_int")\
-            .withColumn("ip", F.when(F.col("ipv6").isNotNull(), F.col("ipv6")).otherwise(F.col("ip_str")))
+            .withColumn("ip", F.when(F.col("ipv6").isNotNull(), F.col("ipv6")).otherwise(F.col("ip_str")))\
+            .withColumn("ip_info", F.struct(F.col("ip_int"), F.col("ip_str"), F.col("ipv6")))\
+            .drop("ip_int", 'ip_str', 'ipv6')
+                            
         
         df = self._fixing_http_html_columns(df)
         df = self._cleaning_location(df)
         df = self._changing_vulns_layout(df, fast_mode)
         df = self._cleaning_empty_columns(df)
 
-        df = df.withColumn("meta_id", gen_ulid("timestamp"))\
-                .withColumn("date", F.to_date("timestamp"))\
-                .withColumn("year", F.year("timestamp"))\
-                .withColumn("meta_module", F.when(F.col("shodan.module").isin(["https", "http", "http-simple-new", "https-simple-new", "auto", "rdp"]), 
-                                                  F.col("shodan.module"))
-                            .otherwise(F.lit("mixed-modules")))\
-            .drop("_id", 'cpe')
+        df = df.drop("_id", 'cpe')\
+            .filter(F.col("timestamp").isNotNull())\
+            .withColumn("meta_id", gen_ulid(F.col("timestamp")))\
+            .withColumn("date", F.to_date("timestamp"))\
+            .withColumn("year", F.year("timestamp"))
+
         
         if self.org_refinement:
             df = df.tlhop_extension.cleaning_org(input_col="org", output_col="org_clean")
 
+        first_order = ['year', 'date', 'timestamp', 'meta_id', 'org', 'org_clean', 'isp', 'ip', 'ip_info', 'asn', 'shodan', 'device', 
+                       'devicetype', 'domains', 'hostnames', 'info', 'location', 'mac', 'opts',  'os', 'platform','port','transport', 
+                       'product', 'cpe23', 'tags', 'version', 'vulns_cve', 'vulns_verified']
+
+        columns = [c for c in first_order if c in df.columns]
+        columns += [c for c in df.columns if c not in first_order]
+        df = df.select(*columns)
         columns = df.columns
         self._logger("[INFO] {} columns: {}".format(len(columns), columns))  
         
-        if persist:
+        if persist:            
             df.write\
               .format("delta")\
               .mode("append")\
               .option("mergeSchema", "true")\
-              .partitionBy("year", "date", "meta_module")\
+              .option("delta.enableChangeDataFeed", "true")\
+              .partitionBy("year", "date")\
               .save(output_filepath)
-
-            df.unpersist()
+            
+            self.spark_session.catalog.clearCache()
             df = self.spark_session.read.format("delta").load(output_filepath)
             
         return df

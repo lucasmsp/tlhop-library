@@ -469,11 +469,11 @@ def process_lang(s):
 
     s = s.lower()\
         .replace("lang=", "")\
-        .replace("\"", "")\
-        .replace("'", "")\
-        .replace("\_", "-")
+        .replace(r"\"", "")\
+        .replace(r"'", "")\
+        .replace(r"\_", "-")
 
-    s = re.sub("\s+", "", s).strip()
+    s = re.sub(r"\s+", "", s).strip()
 
     if (len(s) < 2) or (s[0] == "-"):
         s = None
@@ -514,7 +514,7 @@ def parser_html_code_udf(raw):
         else:
             body = ""
 
-        code_size = re.sub("(\s+|\n+)", " ", raw)
+        code_size = re.sub(r"(\s+|\n+)", " ", raw)
         info = [body, len(code_size), len(body), "", ""]
 
         for tag in page.find_all("meta"):
@@ -879,7 +879,7 @@ def match_cpes_simple(shodan_cpes, nvd_cpes):
     product, version = None, None
     
     nvds = set()
-    for cpe in re.findall('cpe:2\.3:[0-9a-z_:\*\.]+', nvd_cpes):
+    for cpe in re.findall(r'cpe:2\.3:[0-9a-z_:\*\.]+', nvd_cpes):
         first_part = ":".join(cpe.split(":")[:5])
         nvds.add(first_part)
 

@@ -343,7 +343,7 @@ def get_ip_mask(self, input_col="ip_str", output_col=None, level=3):
     if not output_col:
         output_col = "mask_{}".format(level)
 
-    result = self.withColumn("octet_parts", split(input_col, "\."))\
+    result = self.withColumn("octet_parts", split(input_col, r"\."))\
             .withColumn(output_col, concat_ws(".", *[col("octet_parts").getItem(i) for i in range(level)]))\
             .drop("octet_parts")
     return result

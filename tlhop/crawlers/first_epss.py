@@ -188,7 +188,7 @@ class FirstEPSS(object):
                 tmp_df['epss'] = round(tmp_df['epss'].astype(float) * 100, 2)
                 tmp_df['percentile'] = round(tmp_df['percentile'].astype(float) * 100, 2)
                 
-                tmp_df["score_date"] =  datetime.strptime(re.findall("\d\d\d\d-\d\d-\d\d", info[1])[0], self.date_format)
+                tmp_df["score_date"] =  datetime.strptime(re.findall(r"\d\d\d\d-\d\d-\d\d", info[1])[0], self.date_format)
                 tmp_df['year'] = tmp_df['score_date'].dt.year
                 tmp_df['score_date'] = pd.to_datetime(tmp_df['score_date']).dt.date
                 tmp_df['year'] = tmp_df['year'].astype('int32')

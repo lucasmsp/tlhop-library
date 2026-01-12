@@ -248,7 +248,7 @@ class RDAP(object):
 
                     if not found: 
                         ip_str = str(ipaddress.ip_address(ip_int))
-                        current_mask3 = re.sub("\.\d+$", "", ip_str)
+                        current_mask3 = re.sub(r"\.\d+$", "", ip_str)
 
                         if mask3 != current_mask3:
                             data = self._request_rdap(ip_str, browser, timeout=timeout, use_selenium=use_selenium)

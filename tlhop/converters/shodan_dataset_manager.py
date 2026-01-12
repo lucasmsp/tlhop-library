@@ -58,7 +58,7 @@ class ShodanDatasetManager(object):
         self.spark_session.conf.set("spark.sql.caseSensitive", "true")
         self.spark_session.conf.set("spark.sql.parquet.compression.codec", "gzip")
         self.n_cores = self.spark_session._sc.defaultParallelism
-        self.spark_session.conf.set("spark.sql.files.minPartitionNum", self.n_cores * 3)
+        self.spark_session.conf.set("spark.sql.files.minPartitionNum", self.n_cores * 6)
         
         # Setting Delta configurations
         minFileSize = 200 * 1024 * 1024
@@ -374,7 +374,19 @@ class ShodanDatasetManager(object):
             df = df.withColumn('vulns', F.from_json(F.to_json("vulns"), f'map<string,{dtype}>'))
         
         df = df.withColumn('vulns_cve', F.map_values(F.transform_values('vulns',  lambda k, v: k)))\
-            .withColumn('vulns_verified', F.map_values(F.transform_values("vulns", lambda k, v: F.when(v.getField("verified") == "true", F.lit(k)))))\
+            .withColumn(
+                        "vulns_verified",
+                        F.map_values(
+                            F.map_filter(
+                                F.transform_values(
+                                    "vulns",
+                                    lambda k, v: F.when(v.getField("verified") == "true", F.lit(k))
+                                ),
+                                lambda k, v: v.isNotNull()
+                            )
+                        )
+                    )\
+            .withColumn("vulns_verified", F.when(F.size("vulns_verified") == 0, F.lit(None)).otherwise(F.col("vulns_verified")))\
             .drop("vulns")
                 
         return df
@@ -490,6 +502,9 @@ class ShodanDatasetManager(object):
         df = self._read_json(input_filepath, fast_mode)
         
         df = self._extracting_complex_json_columns(df, fast_mode)
+        if "ipv6" not in df.columns:
+            df = df.withColumn("ipv6", F.lit(None))
+    
         df = self._force_casting(df)\
             .withColumnRenamed("ip", "ip_int")\
             .withColumn("ip", F.when(F.col("ipv6").isNotNull(), F.col("ipv6")).otherwise(F.col("ip_str")))\
@@ -528,6 +543,7 @@ class ShodanDatasetManager(object):
               .mode("append")\
               .option("mergeSchema", "true")\
               .option("delta.enableChangeDataFeed", "true")\
+              .option("userMetadata", input_filepath)\
               .partitionBy("year", "date")\
               .save(output_filepath)
             

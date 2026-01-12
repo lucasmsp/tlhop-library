@@ -13,7 +13,6 @@ import ulid
 from pyspark.sql.types import *
 import pyspark.sql.functions as F
 
-from delta.tables import DeltaTable
 from delta.tables import *
 
 from tlhop.datasets import DataSets
@@ -76,10 +75,10 @@ class CensysDatasetManager(object):
         """
         
         filename = os.path.basename(snapshot_input_folder)
-        self._logger("[INFO] Reading {} and saving as {}".format(filename, self.OUTPUT_FOLDER))
+        self._logger("[INFO] Reading {} and saving as {}".format(filename, output_folder))
 
         t1 = time.time()
-        self._convert(snapshot_input_folder, persist=True, output_folder=self.OUTPUT_FOLDER)
+        self._convert(snapshot_input_folder, persist=True, output_folder=output_folder)
         t2 = time.time()
         
         elapsed_time = int(t2-t1)
@@ -96,7 +95,7 @@ class CensysDatasetManager(object):
         deltaTable = DeltaTable.forPath(self.spark_session, dataset_folder)
         t1 = time.time()
         self._logger(f"[INFO] Starting to optimize delta table `{dataset_folder}`")
-        deltaTable.optimize().executeCompaction()
+        deltaTable.optimize().executeZOrderBy("meta_id")
         t2 = time.time()
         elapsed_time = int(t2-t1)
         self._logger(f"[INFO] Optimization finished in {elapsed_time} seconds.")
@@ -142,42 +141,90 @@ class CensysDatasetManager(object):
             
         self._logger(f"[INFO] Schema inferred to all columns. Starting conversion.")
 
-        if filter_by_contry:
-            df = df.filter(F.col("location.country") == filter_by_contry)
+        if self.filter_by_contry:
+            df = df.filter(F.col("location.country") == self.filter_by_contry)
         
         censys = df.withColumn("location", F.col("location").dropFields("registered_country").dropFields("registered_country_code").dropFields("postal_code").dropFields("timezone").dropFields("continent"))\
-            .withColumn("autonomous_system", F.col("autonomous_system").dropFields("organization").dropFields("description"))\
-            .withColumn("services", F.explode("services"))\
-            .select(F.col("host_identifier.ipv4").alias("ip_str"), 
-                    F.col("ipv4_int").alias("ip"), 
-                    "location", 
-                    "autonomous_system",
-                    F.col("operating_system").alias("ip_operating_system"),
-                    "services.*")\
-            .withColumn("banner", F.base64("banner"))\
-            .withColumn("banner_hashes", F.col("banner_hashes").getField(0))\
-            .withColumnRenamed("observed_at", "timestamp")\
-            .withColumnRenamed("labels", "banner_labels")\
-            .withColumnRenamed("parsed_json", "data")\
-            .withColumnRenamed("banner_hashes", "banner_hash")\
-            .withColumn("year", F.year("timestamp"))\
-            .withColumn("date", F.col("timestamp").cast("date"))\
-            .withColumn("meta_id", gen_ulid("timestamp"))
+        .withColumn("autonomous_system", F.col("autonomous_system").dropFields("description"))\
+        .withColumn("services", F.explode("services"))\
+        .select(F.col("host_identifier.ipv4").alias("ip_str"),
+                F.col("host_identifier.ipv6").alias("ipv6"),
+                F.col("ipv4_int").alias("ip_int"), 
+                "location", 
+                "autonomous_system",
+                F.col("operating_system").alias("ip_operating_system"),
+                "services.*",
+                F.col("snapshot_date").alias("snapshot_timestamp")
+               )\
+        .withColumn("ip", F.when(F.col("ip_str").isNotNull(), F.col("ip_str")).otherwise(F.col("ipv6")))\
+        .withColumn("ip_info", F.struct("ip_int", "ip_str", "ipv6"))\
+        .drop("ip_int", 'ip_str', "ipv6")\
+        .withColumn("banner", F.decode("banner", "utf-8") )\
+        .withColumn("banner_hashes", F.col("banner_hashes").getField(0))\
+        .withColumnRenamed("observed_at", "timestamp")\
+        .withColumnRenamed("labels", "tags")\
+        .withColumnRenamed("parsed_json", "data")\
+        .withColumnRenamed("banner_hashes", "banner_hash")\
+        .withColumn("censys", F.struct("snapshot_timestamp", "perspective", "source_ip", "discovery_method"))\
+        .drop("snapshot_timestamp", "perspective", "source_ip", "discovery_method")\
+        .withColumn("year", F.year("timestamp"))\
+        .withColumn("date", F.col("timestamp").cast("date"))\
+        .withColumn("meta_id", gen_ulid("timestamp"))
+
+
+        def decode_and_replace_binary(df, schema, prefix=""):
+            new_cols = []
+            for field in schema.fields:
+                field_name = f"{prefix}.{field.name}" if prefix else field.name
+                if isinstance(field.dataType, BinaryType):
+                    # Substitui campo binário por texto decodificado
+                    # print(f"Substituindo {field_name} por {field.name} (bruto)")
+                    new_cols.append(F.decode(F.col(field_name), "utf-8").alias(field.name))
+                elif isinstance(field.dataType, ArrayType) and isinstance(field.dataType.elementType, BinaryType):
+                    # Aplica decode a cada elemento do array de binários
+                    # print(f"Substituindo {field_name} por {field.name} (array)")
+                    new_cols.append(F.transform(F.col(field_name), lambda x: F.decode(x, "utf-8")).alias(field.name))
+                elif isinstance(field.dataType, StructType):
+                    # Recria struct com campos internos processados
+                    nested_cols = decode_and_replace_binary(df, field.dataType, field_name)
+                    new_cols.append(F.struct(*nested_cols).alias(field.name))
+                else:
+                    new_cols.append(F.col(field_name))
+            return new_cols
+        
+        new_columns = decode_and_replace_binary(censys, censys.schema)
+        censys = censys.select(*new_columns)
+        
+        cols_to_json = ["http"]
+        for c in cols_to_json:
+            censys = censys.withColumn("http", F.when(F.col("http").isNotNull(), F.to_json("http")))
+        
+        censys = censys.withColumn("http", F.when(F.col("http") == '{"request":{},"response":{}}', F.lit(None)).otherwise(F.col("http")))
+        
+        
+        first_order = ['year', 'date', 'timestamp', 'meta_id', 'ip', 'ip_info', "service_name", "extended_service_name", 'autonomous_system', 'censys',
+                       'tags', 'location', 'ip_operating_system', 'port', 'transport', "banner", "data"]
+        
+        columns = [c for c in first_order if c in censys.columns]
+        columns += [c for c in censys.columns if c not in first_order]
+        censys = censys.select(*columns)
 
         if persist:
             if not os.path.exists(output_folder):
                 censys.repartition(self.n_cores * 3, "year", "date")\
                     .write.format("delta")\
                       .mode("append")\
+                      .option("userMetadata", input_filepath) \
                       .option("mergeSchema", "true")\
                       .partitionBy("year", "date")\
                       .save(output_folder)  
             else:
-        
-                deltaTable = DeltaTable.forPath(self.spark_session, output_folder)
+                self.spark_session.conf.set("spark.databricks.delta.commitInfo.userMetadata", input_filepath)
+                deltaTable = DeltaTable.forPath(spark, output_folder)
                 deltaTable.alias('old')\
                   .merge(censys.alias('new'),
-                         'old.ip = new.ip AND old.timestamp = new.timestamp AND old.source_ip = new.source_ip')\
+                         'old.year = new.year AND old.date = new.date AND old.ip = new.ip AND old.timestamp = new.timestamp'
+                        )\
                   .whenNotMatchedInsertAll()\
                   .execute()
     

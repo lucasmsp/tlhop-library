@@ -43,7 +43,13 @@ class LACNICStatistics(object):
         It also will check on the Internet if an new dataset version is available to download in case 
         of a previous download was found during folder lookup.
         """
-        self.download_url = "https://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-{date}"
+        self.download_url = [
+            "https://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-extended-{date}",
+            #"https://ftp.lacnic.net/pub/stats/afrinic/{year}/delegated-afrinic-extended-{date}",
+            #"https://ftp.lacnic.net/pub/stats/apnic/{year}/delegated-apnic-extended-{date}",
+            #"https://ftp.lacnic.net/pub/stats/arin/delegated-arin-extended-{date}",
+            #"https://ftp.lacnic.net/pub/stats/ripencc/delegated-ripencc-extended-{date}.bz2"
+        ]
         self.path = "rir_statistics/"
         self.expected_schema = {"outname": "rir_statistcs.delta"}
         self.new_version = False
@@ -106,35 +112,41 @@ class LACNICStatistics(object):
         - Download link: {}
         """.format(self.download_url))
 
-    def download(self):
+    def download(self, date="all"):
         """
         Downloads a new dataset version available in its source link. 
         """
         if self.new_version:
             print(self._INFO_MESSAGE_005)
-            previous_date = datetime.strptime(self.last_file['date'], "%Y%m%d")
             output_path = self.basepath + self.expected_schema['outname']
             
-            def convert_begining_legth_to_range(t, start_ip_str, n_ips):
-                start_ip_int, end_ip_int = None, None
-                if t == 'ipv4':
-                    start_ip_int = int(ipaddress.IPv4Network(start_ip_str)[0])
-                    end_ip_int = start_ip_int + n_ips - 1
-                return start_ip_int, end_ip_int
+            if date == "all":
+                previous_date = datetime.strptime(self.last_file['date'], "%Y%m%d")
+                final_date = self.now - timedelta(days=1)
+            else:
+                try:
+                    previous_date = datetime.strptime(date, "%Y%m%d")
+                    final_date = datetime.strptime(date, "%Y%m%d")
+                except Exception as e:
+                    print("Insert a date in format '%Y%m%d'")
+                    raise Exception(e)
                 
-            
-            for day in pd.date_range(previous_date, self.now - timedelta(days=1), freq='d'):
+            for day in pd.date_range(previous_date, final_date, freq='d'):
                 day_str = day.strftime("%Y%m%d")
-                df = pd.read_csv(self.download_url.format(date=day_str), 
-                                 sep='|', skiprows=3, header=0, names=['registry', "country", "type", 'mask', "n_ips", "date", "status"])
-                df[['start_ip_int', 'end_ip_int']] = df.apply(lambda x: convert_begining_legth_to_range(x['type'], x['mask'], x['n_ips']), axis=1, result_type='expand')
-                df['crawler_date'] = day.date()
-                df['crawler_year'] = day.date().year
-
-                write_deltalake(output_path, df, mode='append', partition_by=['crawler_year'])
+                for url in self.download_url:
+                    df = pd.read_csv(url.format(date=day_str), 
+                                     sep='|', skiprows=3, header=0, names=['registry', "country", "type", 'mask', "n_ips", "date", "status",'extension'])
+                    df[['start_ip_int', 'end_ip_int']] = df.apply(lambda x: convert_begining_legth_to_range(x['type'], x['mask'], x['n_ips']), axis=1, result_type='expand')
+                    df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
+                    df['crawler_date'] = day.date()
+                    df['crawler_year'] = day.date().year
     
-                self._gen_release(day_str)
-                
+                    write_deltalake(output_path, 
+                                    df,
+                                    mode='append', 
+                                    partition_by=['crawler_year'])
+        
+            self._gen_release(day_str)
             self._optimize_delta(output_path)
             print(self._INFO_MESSAGE_004)
         else:
@@ -151,3 +163,11 @@ class LACNICStatistics(object):
         dt = DeltaTable(output_path)
         dt.optimize.compact(max_concurrent_tasks=10)
         dt.vacuum(retention_hours=0, dry_run=False, enforce_retention_duration=False)
+
+
+def convert_begining_legth_to_range(t, start_ip_str, n_ips):
+    start_ip_int, end_ip_int = None, None
+    if t == 'ipv4':
+        start_ip_int = int(ipaddress.IPv4Network(start_ip_str)[0])
+        end_ip_int = start_ip_int + n_ips - 1
+    return start_ip_int, end_ip_int
